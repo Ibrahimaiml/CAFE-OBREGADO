@@ -1,0 +1,3376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Obregado | Specialty Coffee & House-Made Goan Poee — Thane West</title>
+    <meta name="description" content="Café Obregado in Hiranandani Estate, Thane West. Specialty Arabica brews, authentic Goan poee pockets, rich coastal curries, and unhurried luxury coffee culture.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="CAFE LOGO.jpeg">
+
+    <!-- External Icons & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           BRAND DESIGN SYSTEM & CSS VARIABLES
+           ========================================================================== */
+        :root {
+            --bg-cream: #F7F3EE;
+            --bg-cream-soft: #F1ECE5;
+            --bg-cream-dark: #E8E0D5;
+            --bg-dark: #110E0C;
+            --bg-dark-surface: #181412;
+            --bg-dark-card: #201B18;
+            --accent-gold: #C89D54;
+            --accent-gold-light: #DFC18A;
+            --accent-gold-glow: rgba(200, 157, 84, 0.35);
+            --text-dark: #231F20;
+            --text-dark-secondary: #4A4441;
+            --text-muted: #726A64;
+            --text-light: #FBF8F5;
+            --text-light-muted: rgba(255, 255, 255, 0.72);
+            --card-bg: #EFE8E1;
+            --card-border: rgba(35, 31, 32, 0.08);
+            --glass-dark: rgba(17, 14, 12, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --transition-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+            --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.04);
+            --shadow-elevated: 0 20px 45px rgba(0, 0, 0, 0.08);
+            --shadow-modal: 0 35px 80px rgba(0, 0, 0, 0.35);
+        }
+
+        /* --- GLOBAL RESETS --- */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        ::selection {
+            background: var(--accent-gold);
+            color: #110E0C;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img, video {
+            max-width: 100%;
+            display: block;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            outline: none;
+        }
+
+        /* ==========================================================================
+           1. PRELOADER WITH DIRECT-SYNC FLYING OWL
+           ========================================================================== */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--bg-dark);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.85s var(--transition-smooth), visibility 0.85s var(--transition-smooth);
+            pointer-events: all;
+        }
+
+        #preloader.loaded {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .preloader-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: min(90vw, 420px);
+            text-align: center;
+        }
+
+        .preloader-brand {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            letter-spacing: 5px;
+            color: var(--accent-gold-light);
+            text-transform: uppercase;
+            margin-bottom: 2.8rem;
+            opacity: 0.9;
+        }
+
+        .flight-track-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            align-items: center;
+        }
+
+        .flight-track {
+            position: relative;
+            width: 100%;
+            height: 80px;
+        }
+
+        /* Direct Synced Flying Owl */
+        .flying-owl {
+            position: absolute;
+            top: 6px;
+            left: 0%;
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-gold);
+            box-shadow: 0 0 30px var(--accent-gold-glow), 0 8px 20px rgba(0, 0, 0, 0.6);
+            transform: translateX(-50%);
+            will-change: left, transform;
+            z-index: 2;
+            background-color: var(--bg-dark);
+        }
+
+        .flight-path-guide {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(200, 157, 84, 0.1), rgba(200, 157, 84, 0.4), rgba(200, 157, 84, 0.1));
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .loader-bar-bg {
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 1.5rem;
+            position: relative;
+        }
+
+        .loader-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-gold), #F3D08A);
+            will-change: width;
+            border-radius: 3px;
+            box-shadow: 0 0 12px var(--accent-gold-glow);
+        }
+
+        .loader-status-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            width: 100%;
+            margin-top: 1.2rem;
+        }
+
+        .loader-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 500;
+        }
+
+        .loader-counter {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+        }
+
+        /* ==========================================================================
+           2. NAVBAR (GLASSMORPHIC FIXED HEADER)
+           ========================================================================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.1rem 4.5rem;
+            z-index: 1000;
+            background: var(--glass-dark);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--glass-border);
+            transition: padding 0.35s ease, background-color 0.35s ease, border-color 0.35s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.85rem 4.5rem;
+            background: rgba(17, 14, 12, 0.88);
+            border-bottom-color: rgba(200, 157, 84, 0.2);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: #FFFFFF;
+        }
+
+        .nav-logo-badge {
+            position: relative;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1.5px solid var(--accent-gold);
+            box-shadow: 0 0 16px rgba(200, 157, 84, 0.25);
+            flex-shrink: 0;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .nav-brand:hover .nav-logo-badge {
+            transform: rotate(8deg) scale(1.05);
+            box-shadow: 0 0 22px rgba(200, 157, 84, 0.45);
+        }
+
+        .nav-logo-badge img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .nav-title-block {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-brand-title {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            line-height: 1.1;
+            color: #FFFFFF;
+        }
+
+        .nav-brand-sub {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: var(--accent-gold-light);
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.4rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding: 4px 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: var(--accent-gold);
+            transition: width 0.3s var(--transition-smooth);
+        }
+
+        .nav-links a:hover {
+            color: #FFFFFF;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.1rem;
+        }
+
+        /* Interactive Call Header Button */
+        .btn-call-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.65rem 1.25rem;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
+            font-size: 0.86rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        .btn-call-nav i {
+            color: var(--accent-gold-light);
+            font-size: 0.82rem;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-call-nav:hover {
+            background: rgba(200, 157, 84, 0.18);
+            border-color: var(--accent-gold);
+            color: #FFFFFF;
+            transform: translateY(-1px);
+        }
+
+        .btn-call-nav:hover i {
+            transform: rotate(15deg) scale(1.15);
+        }
+
+        /* High-Contrast Reservation Pill CTA */
+        .btn-reservation-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-cream);
+            color: var(--text-dark);
+            padding: 0.7rem 1.65rem;
+            border-radius: 30px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .btn-reservation-nav:hover {
+            background: #FFFFFF;
+            color: #110E0C;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.25);
+        }
+
+        /* Mobile Hamburger Toggle */
+        .mobile-menu-btn {
+            display: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #FFFFFF;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(255, 255, 255, 0.16);
+        }
+
+        /* Mobile Nav Drawer */
+        .mobile-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: min(85vw, 360px);
+            height: 100vh;
+            background: var(--bg-dark-surface);
+            z-index: 1001;
+            padding: 2.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: -15px 0 40px rgba(0, 0, 0, 0.6);
+            transition: right 0.4s var(--transition-smooth);
+            border-left: 1px solid rgba(200, 157, 84, 0.2);
+        }
+
+        .mobile-drawer.active {
+            right: 0;
+        }
+
+        .mobile-drawer-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .mobile-drawer-backdrop.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .mobile-drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-drawer-close {
+            background: none;
+            color: #FFFFFF;
+            font-size: 1.6rem;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.6rem;
+            margin-top: 2rem;
+        }
+
+        .mobile-nav-links a {
+            color: rgba(255, 255, 255, 0.9);
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        .mobile-drawer-bottom {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* ==========================================================================
+           3. HERO SECTION WITH FULLSCREEN BACKGROUND VIDEO
+           ========================================================================== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: flex-end;
+            padding: 8rem 4.5rem 5.5rem 4.5rem;
+            overflow: hidden;
+            background-color: var(--bg-dark);
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 1;
+            filter: brightness(0.85);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(17, 14, 12, 0.4) 0%,
+                rgba(17, 14, 12, 0.65) 50%,
+                rgba(17, 14, 12, 0.92) 100%
+            );
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            color: #FFFFFF;
+            max-width: 820px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.45rem 1.15rem;
+            border-radius: 30px;
+            background: rgba(200, 157, 84, 0.16);
+            border: 1px solid rgba(200, 157, 84, 0.35);
+            backdrop-filter: blur(8px);
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-gold-light);
+            font-weight: 600;
+            margin-bottom: 1.8rem;
+        }
+
+        .hero-badge i {
+            font-size: 0.7rem;
+        }
+
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.8rem, 5.8vw, 5.2rem);
+            line-height: 1.08;
+            margin-bottom: 1.6rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            text-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-title .title-accent {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--accent-gold-light);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.02rem, 1.3vw, 1.18rem);
+            line-height: 1.75;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2.6rem;
+            font-weight: 300;
+            max-width: 640px;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.3rem;
+        }
+
+        .btn-hero-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            background: var(--bg-cream);
+            color: var(--text-dark);
+            padding: 0.95rem 2.4rem;
+            border-radius: 35px;
+            font-weight: 600;
+            font-size: 0.92rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-hero-primary:hover {
+            background: #FFFFFF;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.25);
+        }
+
+        .btn-hero-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            background: rgba(255, 255, 255, 0.08);
+            color: #FFFFFF;
+            padding: 0.95rem 2.2rem;
+            border-radius: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            backdrop-filter: blur(10px);
+            font-weight: 500;
+            font-size: 0.92rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-hero-secondary:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: #FFFFFF;
+            transform: translateY(-3px);
+        }
+
+        .hero-meta-row {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            margin-top: 3.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.14);
+            flex-wrap: wrap;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .hero-meta-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(200, 157, 84, 0.15);
+            border: 1px solid rgba(200, 157, 84, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-gold-light);
+            font-size: 0.85rem;
+        }
+
+        .hero-meta-text {
+            font-size: 0.85rem;
+            line-height: 1.35;
+        }
+
+        .hero-meta-text strong {
+            display: block;
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+
+        .hero-meta-text span {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* ==========================================================================
+           SECTION COMMON STYLES
+           ========================================================================== */
+        section {
+            padding: 7.5rem 4.5rem;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 3.8rem;
+        }
+
+        .section-header.center {
+            text-align: center;
+            max-width: 680px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: var(--accent-gold);
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .section-tag::before, .section-tag::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 1px;
+            background: var(--accent-gold);
+            opacity: 0.5;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.2rem, 3.8vw, 3.3rem);
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.15;
+            letter-spacing: -0.3px;
+        }
+
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-top: 0.9rem;
+            line-height: 1.7;
+        }
+
+        /* ==========================================================================
+           4. ABOUT US SECTION
+           ========================================================================== */
+        .about-section {
+            background-color: var(--bg-cream);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.05fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-image-composition {
+            position: relative;
+        }
+
+        .about-main-img-wrap {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-elevated);
+        }
+
+        .about-main-img-wrap img {
+            width: 100%;
+            height: 560px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s var(--transition-smooth);
+        }
+
+        .about-main-img-wrap:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Floating Accent Badge */
+        .about-floating-badge {
+            position: absolute;
+            bottom: -25px;
+            right: -25px;
+            background: var(--bg-dark);
+            color: #FFFFFF;
+            padding: 1.6rem 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(200, 157, 84, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            max-width: 260px;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .badge-icon {
+            font-size: 2rem;
+            color: var(--accent-gold);
+        }
+
+        .badge-text strong {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            color: #FFFFFF;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-text span {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.5px;
+        }
+
+        .about-text p {
+            font-size: 1.08rem;
+            line-height: 1.85;
+            color: var(--text-dark-secondary);
+            margin-bottom: 1.6rem;
+        }
+
+        .about-text .lead-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .about-highlights {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.6rem;
+            margin-top: 2.6rem;
+        }
+
+        .highlight-card {
+            background: var(--card-bg);
+            padding: 1.8rem;
+            border-radius: 18px;
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-soft);
+            border-color: rgba(200, 157, 84, 0.4);
+        }
+
+        .highlight-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            background: rgba(200, 157, 84, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-gold);
+            font-size: 1.15rem;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-card h4 {
+            font-family: var(--font-heading);
+            margin-bottom: 0.45rem;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .highlight-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.55;
+            margin-bottom: 0;
+        }
+
+        /* ==========================================================================
+           5. MENU SECTION (STICKY TWO-COLUMN EDITORIAL)
+           ========================================================================== */
+        .menu-section {
+            background-color: var(--bg-cream-soft);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .menu-layout {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        .menu-sticky-col {
+            position: sticky;
+            top: 120px;
+        }
+
+        .menu-sticky-img-card {
+            position: relative;
+            height: 590px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-elevated);
+        }
+
+        .menu-sticky-img-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .menu-sticky-img-card:hover img {
+            transform: scale(1.04);
+        }
+
+        .menu-img-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 2.2rem;
+            background: linear-gradient(180deg, transparent 0%, rgba(17, 14, 12, 0.85) 100%);
+            color: #FFFFFF;
+        }
+
+        .menu-img-caption h3 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+        }
+
+        .menu-img-caption p {
+            font-size: 0.86rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .menu-categories {
+            display: flex;
+            flex-direction: column;
+            gap: 3.6rem;
+        }
+
+        .menu-cat-group {
+            background: var(--bg-cream);
+            padding: 2.4rem;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .menu-cat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.8rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding-bottom: 0.9rem;
+        }
+
+        .menu-cat-title {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .menu-cat-title i {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+        }
+
+        .menu-cat-tag {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-gold);
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            background: rgba(200, 157, 84, 0.12);
+            border-radius: 20px;
+        }
+
+        .menu-items-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.6rem;
+        }
+
+        .menu-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+            transition: transform 0.25s ease;
+        }
+
+        .menu-item:last-child {
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .menu-item:hover {
+            transform: translateX(4px);
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 1rem;
+        }
+
+        .menu-item-name {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .item-badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.2rem 0.55rem;
+            border-radius: 12px;
+        }
+
+        .item-badge.bestseller {
+            background: rgba(200, 157, 84, 0.2);
+            color: #9C722D;
+            border: 1px solid rgba(200, 157, 84, 0.4);
+        }
+
+        .menu-item-price {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.18rem;
+            color: var(--text-dark);
+            flex-shrink: 0;
+        }
+
+        .menu-item-desc {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* ==========================================================================
+           6. EDITORIAL SHOWCASE GALLERY (CAFE 6, CAFE 7, CAFE 8)
+           ========================================================================== */
+        .showcase-section {
+            background-color: var(--bg-dark);
+            color: #FFFFFF;
+            padding: 7rem 4.5rem;
+        }
+
+        .showcase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 3.5rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .showcase-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.2rem, 3.6vw, 3.2rem);
+            color: #FFFFFF;
+            line-height: 1.15;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .showcase-card {
+            position: relative;
+            height: 440px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            group: cursor;
+        }
+
+        .showcase-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.65s var(--transition-smooth);
+        }
+
+        .showcase-card:hover img {
+            transform: scale(1.06);
+        }
+
+        .showcase-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(17, 14, 12, 0.92) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2.2rem;
+            z-index: 2;
+        }
+
+        .showcase-card-tag {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-gold-light);
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .showcase-card-title {
+            font-family: var(--font-heading);
+            font-size: 1.45rem;
+            font-weight: 600;
+            color: #FFFFFF;
+            margin-bottom: 0.4rem;
+        }
+
+        .showcase-card-desc {
+            font-size: 0.86rem;
+            color: rgba(255, 255, 255, 0.72);
+            line-height: 1.5;
+        }
+
+        /* ==========================================================================
+           7. REVIEWS SECTION (CONTINUOUS AUTO-MOVING CAROUSEL WITH PAUSE-ON-HOVER)
+           ========================================================================== */
+        .reviews-section {
+            background-color: var(--bg-cream-soft);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .reviews-header-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 3.2rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .reviews-stats-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: #FFFFFF;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-top: 0.6rem;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .reviews-stats-pill i {
+            color: var(--accent-gold);
+        }
+
+        .carousel-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .carousel-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid rgba(35, 31, 32, 0.2);
+            background: #FFFFFF;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+            transition: all 0.28s ease;
+        }
+
+        .carousel-btn:hover {
+            background: var(--text-dark);
+            color: #FFFFFF;
+            border-color: var(--text-dark);
+            transform: scale(1.05);
+        }
+
+        /* Continuous Smooth Carousel Window */
+        .carousel-window {
+            width: 100%;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            position: relative;
+            cursor: grab;
+            user-select: none;
+            -webkit-overflow-scrolling: touch;
+            padding: 1rem 0;
+        }
+
+        .carousel-window:active {
+            cursor: grabbing;
+        }
+
+        .carousel-window::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-window {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .reviews-track {
+            display: flex;
+            gap: 2rem;
+            width: max-content;
+            will-change: transform;
+        }
+
+        .review-card {
+            width: 410px;
+            flex-shrink: 0;
+            background: #FFFFFF;
+            padding: 2.8rem;
+            border-radius: 22px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-elevated);
+            border-color: rgba(200, 157, 84, 0.4);
+        }
+
+        .review-stars {
+            color: var(--accent-gold);
+            font-size: 0.95rem;
+            margin-bottom: 1.4rem;
+            display: flex;
+            gap: 4px;
+        }
+
+        .review-text {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .review-author-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1.4rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .author-name {
+            font-weight: 700;
+            font-size: 0.92rem;
+            color: var(--text-dark);
+        }
+
+        .author-source {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .author-source i {
+            color: var(--accent-gold);
+        }
+
+        /* ==========================================================================
+           8. LOCATION & CONTACT SECTION
+           ========================================================================== */
+        .contact-section {
+            background-color: var(--bg-cream);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5.5rem;
+            align-items: center;
+        }
+
+        .contact-info-list {
+            list-style: none;
+            margin-top: 2.4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.4rem;
+        }
+
+        .contact-info-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: var(--bg-cream-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info-item:hover .contact-info-icon {
+            background: var(--accent-gold);
+            color: #110E0C;
+            transform: scale(1.08);
+        }
+
+        .contact-info-content strong {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-info-content p, .contact-info-content a {
+            font-size: 1.02rem;
+            line-height: 1.6;
+            color: var(--text-dark-secondary);
+        }
+
+        .contact-phone-link {
+            font-weight: 600;
+            color: var(--text-dark) !important;
+            transition: color 0.25s ease;
+        }
+
+        .contact-phone-link:hover {
+            color: var(--accent-gold) !important;
+        }
+
+        .contact-actions {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-top: 2.8rem;
+        }
+
+        .btn-call-direct {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--text-dark);
+            color: #FFFFFF;
+            padding: 0.95rem 2rem;
+            border-radius: 35px;
+            font-weight: 600;
+            font-size: 0.92rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-call-direct:hover {
+            background: #000000;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-instagram {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: transparent;
+            color: var(--text-dark);
+            padding: 0.95rem 2rem;
+            border-radius: 35px;
+            border: 1px solid rgba(35, 31, 32, 0.25);
+            font-weight: 600;
+            font-size: 0.92rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-instagram:hover {
+            border-color: var(--text-dark);
+            background: rgba(0, 0, 0, 0.04);
+            transform: translateY(-2px);
+        }
+
+        .contact-image-wrap {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            height: 520px;
+            box-shadow: var(--shadow-elevated);
+        }
+
+        .contact-image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .contact-image-wrap:hover img {
+            transform: scale(1.03);
+        }
+
+        /* ==========================================================================
+           9. RESERVATION MODAL (POP-UP WITH SIDE PANEL & WHATSAPP REDIRECT)
+           ========================================================================== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(17, 14, 12, 0.78);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 3000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.38s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-card {
+            background: var(--bg-cream);
+            width: 100%;
+            max-width: 960px;
+            border-radius: 28px;
+            display: grid;
+            grid-template-columns: 0.82fr 1.18fr;
+            overflow: hidden;
+            box-shadow: var(--shadow-modal);
+            transform: translateY(30px) scale(0.98);
+            transition: transform 0.4s var(--transition-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            max-height: 92vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-sidebar {
+            position: relative;
+            background-image: url('CAFE 3.jpeg');
+            background-size: cover;
+            background-position: center;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2.8rem 2.2rem;
+            color: #FFFFFF;
+        }
+
+        .modal-sidebar-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(17, 14, 12, 0.2) 0%, rgba(17, 14, 12, 0.88) 100%);
+            z-index: 1;
+        }
+
+        .modal-sidebar-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .modal-sidebar-tag {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-gold-light);
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+        }
+
+        .modal-sidebar-title {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 0.8rem;
+        }
+
+        .modal-sidebar-desc {
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.82);
+            line-height: 1.55;
+        }
+
+        .modal-form-container {
+            padding: 3.5rem 3rem;
+            position: relative;
+            background: var(--bg-cream);
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 1.8rem;
+            right: 1.8rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.05);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .modal-close-btn:hover {
+            background: var(--text-dark);
+            color: #FFFFFF;
+            transform: rotate(90deg);
+        }
+
+        .modal-heading {
+            font-family: var(--font-heading);
+            font-size: 2.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.35rem;
+            line-height: 1.2;
+        }
+
+        .modal-subheading {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.3rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-dark);
+            margin-bottom: 0.45rem;
+        }
+
+        .form-input-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-input-wrap i {
+            position: absolute;
+            left: 1.1rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            pointer-events: none;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.85rem 1rem 0.85rem 2.8rem;
+            border: 1px solid rgba(35, 31, 32, 0.15);
+            background: #FFFFFF;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.92rem;
+            color: var(--text-dark);
+            outline: none;
+            transition: all 0.25s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 3px rgba(200, 157, 84, 0.18);
+        }
+
+        .form-control::placeholder {
+            color: #A39B95;
+            font-size: 0.88rem;
+        }
+
+        /* Submit Button (Triggers WhatsApp) */
+        .btn-modal-submit {
+            width: 100%;
+            background: #25D366;
+            color: #FFFFFF;
+            padding: 1.05rem;
+            border: none;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 1.4rem;
+        }
+
+        .btn-modal-submit:hover {
+            background: #20BA5A;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-modal-submit i {
+            font-size: 1.25rem;
+        }
+
+        /* Instant Direct Call Option inside Modal */
+        .modal-call-divider {
+            display: flex;
+            align-items: center;
+            margin: 1.4rem 0;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .modal-call-divider::before, .modal-call-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-call-divider span {
+            padding: 0 1rem;
+        }
+
+        .btn-modal-call {
+            width: 100%;
+            background: transparent;
+            color: var(--text-dark);
+            border: 1px solid rgba(35, 31, 32, 0.2);
+            padding: 0.85rem;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.65rem;
+            transition: all 0.25s ease;
+        }
+
+        .btn-modal-call:hover {
+            background: var(--text-dark);
+            color: #FFFFFF;
+            border-color: var(--text-dark);
+        }
+
+        /* ==========================================================================
+           10. IRISH CAFÉ REFERENCE FOOTER (GIANT CONTINUOUS WATERMARK MARQUEE & PILLS)
+           ========================================================================== */
+        .irish-footer {
+            background-color: var(--bg-cream);
+            padding: 5.5rem 4.5rem 2.5rem 4.5rem;
+            border-top: 1px solid rgba(35, 31, 32, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-pill-nav {
+            display: flex;
+            gap: 0.9rem;
+            flex-wrap: wrap;
+        }
+
+        /* Irish Café Style Pill Links */
+        .pill-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.75rem 1.6rem;
+            border: 1px solid rgba(35, 31, 32, 0.2);
+            border-radius: 35px;
+            background: #FFFFFF;
+            color: var(--text-dark);
+            font-size: 0.92rem;
+            font-weight: 600;
+            letter-spacing: 0.4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            transition: all 0.28s var(--transition-smooth);
+        }
+
+        .pill-link i {
+            font-size: 0.78rem;
+            transition: transform 0.25s ease;
+        }
+
+        .pill-link:hover {
+            border-color: var(--text-dark);
+            background: var(--text-dark);
+            color: #FFFFFF;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .pill-link:hover i {
+            transform: translateX(4px);
+        }
+
+        .footer-actions-group {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+        }
+
+        /* Direct Call Pill Button in Footer */
+        .footer-call-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 0.75rem 1.4rem;
+            border-radius: 35px;
+            background: var(--accent-gold);
+            color: #110E0C;
+            font-size: 0.88rem;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            transition: all 0.25s ease;
+        }
+
+        .footer-call-pill:hover {
+            background: #B88D44;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(200, 157, 84, 0.35);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .social-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 1px solid rgba(35, 31, 32, 0.2);
+            background: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+            font-size: 1.05rem;
+            transition: all 0.25s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--text-dark);
+            color: #FFFFFF;
+            border-color: var(--text-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ==========================================================================
+           1. CONTINUOUS HORIZONTAL WATERMARK MARQUEE (INFINITE GLIDE)
+           ========================================================================== */
+        .footer-watermark-marquee {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            margin-top: 3.5rem;
+            margin-bottom: 2rem;
+            user-select: none;
+            pointer-events: none;
+            display: flex;
+            mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+        }
+
+        .watermark-track {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            white-space: nowrap;
+            will-change: transform;
+            animation: watermarkMarqueeScroll 40s linear infinite;
+        }
+
+        @keyframes watermarkMarqueeScroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .watermark-item {
+            font-family: var(--font-heading);
+            font-size: clamp(3.8rem, 13vw, 12.5rem);
+            line-height: 0.82;
+            color: rgba(35, 31, 32, 0.08);
+            font-weight: 700;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            padding: 0 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 2rem;
+            transition: color 0.4s ease;
+        }
+
+        .watermark-dot {
+            font-size: clamp(1.8rem, 5vw, 4rem);
+            color: var(--accent-gold);
+            opacity: 0.35;
+        }
+
+        .irish-footer:hover .watermark-item {
+            color: rgba(35, 31, 32, 0.12);
+        }
+
+        .footer-bottom-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(35, 31, 32, 0.07);
+            font-size: 0.86rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-bottom-bar a {
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .footer-bottom-bar a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Floating Quick WhatsApp & Call Bubble (Mobile Sticky) */
+        .floating-action-bubble {
+            display: none;
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .bubble-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 1.35rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            transition: transform 0.25s ease;
+        }
+
+        .bubble-btn.whatsapp {
+            background-color: #25D366;
+        }
+
+        .bubble-btn.phone {
+            background-color: var(--bg-dark);
+            border: 1.5px solid var(--accent-gold);
+        }
+
+        .bubble-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* ==========================================================================
+           RESPONSIVE BREAKPOINTS
+           ========================================================================== */
+        @media (max-width: 1200px) {
+            .navbar {
+                padding: 1.1rem 2.5rem;
+            }
+
+            .navbar.scrolled {
+                padding: 0.85rem 2.5rem;
+            }
+
+            section {
+                padding: 6rem 2.5rem;
+            }
+
+            .hero {
+                padding: 7rem 2.5rem 4.5rem 2.5rem;
+            }
+
+            .about-grid, .menu-layout, .contact-grid {
+                gap: 3.5rem;
+            }
+
+            .irish-footer {
+                padding: 4.5rem 2.5rem 2rem 2.5rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .navbar {
+                padding: 1rem 1.8rem;
+            }
+
+            .navbar.scrolled {
+                padding: 0.8rem 1.8rem;
+            }
+
+            .nav-links, .nav-actions .btn-call-nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .hero {
+                min-height: 90vh;
+                padding: 6.5rem 1.8rem 4rem 1.8rem;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            section {
+                padding: 5rem 1.8rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3.5rem;
+            }
+
+            .about-floating-badge {
+                right: 15px;
+                bottom: -20px;
+                padding: 1.2rem 1.6rem;
+            }
+
+            .menu-layout {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .menu-sticky-col {
+                position: relative;
+                top: 0;
+            }
+
+            .menu-sticky-img-card {
+                height: 340px;
+            }
+
+            .showcase-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .showcase-card {
+                height: 360px;
+            }
+
+            .review-card {
+                width: 340px;
+                padding: 2.2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .contact-image-wrap {
+                height: 360px;
+            }
+
+            .modal-card {
+                grid-template-columns: 1fr;
+                max-width: 580px;
+            }
+
+            .modal-sidebar {
+                display: none;
+            }
+
+            .modal-form-container {
+                padding: 2.5rem 1.8rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .footer-top-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.8rem;
+            }
+
+            .footer-actions-group {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .floating-action-bubble {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar {
+                padding: 0.9rem 1.2rem;
+            }
+
+            .nav-brand-title {
+                font-size: 1.05rem;
+                letter-spacing: 1.5px;
+            }
+
+            .btn-reservation-nav {
+                padding: 0.55rem 1.15rem;
+                font-size: 0.78rem;
+            }
+
+            .hero {
+                padding: 5.5rem 1.2rem 3rem 1.2rem;
+            }
+
+            .hero-title {
+                font-size: 2.35rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.98rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-hero-primary, .btn-hero-secondary {
+                justify-content: center;
+            }
+
+            .hero-meta-row {
+                gap: 1.2rem;
+                margin-top: 2.2rem;
+            }
+
+            section {
+                padding: 4rem 1.2rem;
+            }
+
+            .about-main-img-wrap img {
+                height: 380px;
+            }
+
+            .about-highlights {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .highlight-card {
+                padding: 1.4rem;
+            }
+
+            .menu-cat-group {
+                padding: 1.6rem 1.2rem;
+            }
+
+            .review-card {
+                width: 290px;
+                padding: 1.8rem;
+            }
+
+            .contact-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-call-direct, .btn-instagram {
+                justify-content: center;
+            }
+
+            .pill-link {
+                padding: 0.65rem 1.2rem;
+                font-size: 0.85rem;
+            }
+
+            .footer-bottom-bar {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==========================================================================
+         1. PRELOADER WITH DIRECT-SYNC FLYING OWL
+         ========================================================================== -->
+    <div id="preloader" aria-label="Loading Café Obregado Experience">
+        <div class="preloader-inner">
+            <div class="preloader-brand">Café Obregado</div>
+
+            <div class="flight-track-wrapper">
+                <div class="flight-track">
+                    <div class="flight-path-guide"></div>
+                    <img src="CAFE LOGO.jpeg" alt="Café Obregado Flying Owl" class="flying-owl" id="flyingOwl">
+                </div>
+            </div>
+
+            <div class="loader-bar-bg">
+                <div class="loader-bar-fill" id="loaderBar"></div>
+            </div>
+
+            <div class="loader-status-row">
+                <span class="loader-label">Brewing Your Experience</span>
+                <div class="loader-counter"><span id="loaderPercent">0</span>%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         2. NAVBAR (GLASSMORPHIC HEADER)
+         ========================================================================== -->
+    <nav class="navbar" id="mainNavbar">
+        <a href="#" class="nav-brand">
+            <div class="nav-logo-badge">
+                <img src="CAFE LOGO.jpeg" alt="Café Obregado Emblem">
+            </div>
+            <div class="nav-title-block">
+                <span class="nav-brand-title">CAFÉ OBREGADO</span>
+                <span class="nav-brand-sub">Specialty Coffee & Poee</span>
+            </div>
+        </a>
+
+        <div class="nav-center">
+            <ul class="nav-links">
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#experience">Ambiance</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-actions">
+            <!-- Direct Phone Call Link -->
+            <a href="tel:09819544999" class="btn-call-nav" title="Call Café Obregado">
+                <i class="fa-solid fa-phone"></i>
+                <span>098195 44999</span>
+            </a>
+
+            <!-- Reservation Modal Trigger -->
+            <button type="button" class="btn-reservation-nav" onclick="openReservationModal()">
+                <span>Make a Reservation</span>
+            </button>
+
+            <!-- Mobile Hamburger Button -->
+            <button type="button" class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle Navigation Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Drawer & Backdrop -->
+    <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop" onclick="closeMobileMenu()"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div>
+            <div class="mobile-drawer-header">
+                <div class="nav-brand">
+                    <div class="nav-logo-badge" style="width:36px; height:36px;">
+                        <img src="CAFE LOGO.jpeg" alt="Café Obregado">
+                    </div>
+                    <span class="nav-brand-title" style="font-size:1.05rem;">CAFÉ OBREGADO</span>
+                </div>
+                <button type="button" class="mobile-drawer-close" onclick="closeMobileMenu()" aria-label="Close menu">&times;</button>
+            </div>
+
+            <ul class="mobile-nav-links">
+                <li><a href="#about" onclick="closeMobileMenu()">About Us <i class="fa-solid fa-chevron-right" style="font-size:0.8rem; color:var(--accent-gold);"></i></a></li>
+                <li><a href="#menu" onclick="closeMobileMenu()">Menu <i class="fa-solid fa-chevron-right" style="font-size:0.8rem; color:var(--accent-gold);"></i></a></li>
+                <li><a href="#experience" onclick="closeMobileMenu()">Ambiance <i class="fa-solid fa-chevron-right" style="font-size:0.8rem; color:var(--accent-gold);"></i></a></li>
+                <li><a href="#reviews" onclick="closeMobileMenu()">Reviews <i class="fa-solid fa-chevron-right" style="font-size:0.8rem; color:var(--accent-gold);"></i></a></li>
+                <li><a href="#contact" onclick="closeMobileMenu()">Contact & Location <i class="fa-solid fa-chevron-right" style="font-size:0.8rem; color:var(--accent-gold);"></i></a></li>
+            </ul>
+        </div>
+
+        <div class="mobile-drawer-bottom">
+            <a href="tel:09819544999" class="btn-call-direct" style="text-align:center; justify-content:center;">
+                <i class="fa-solid fa-phone"></i> Call 098195 44999
+            </a>
+            <button type="button" class="btn-hero-primary" style="text-align:center; justify-content:center; width:100%;" onclick="closeMobileMenu(); openReservationModal();">
+                Book a Table
+            </button>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         3. HERO SECTION WITH FULLSCREEN BACKGROUND VIDEO
+         ========================================================================== -->
+    <section class="hero" id="home">
+        <!-- Loop Video with Poster Fallback -->
+        <video class="hero-video" autoplay loop muted playsinline poster="CAFE 2.jpeg">
+            <source src="bg video.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fa-solid fa-star"></i>
+                <span>Specialty Coffee &bull; House-Made Poee &bull; Thane West</span>
+            </div>
+
+            <h1 class="hero-title">More Espresso,<br><span class="title-accent">Less Depresso.</span></h1>
+
+            <p class="hero-subtitle">
+                Nestled in Hiranandani Estate, Thane West, our inviting sanctuary crafts ethically sourced single-origin brews, authentic house-made Goan poee sandwiches, and rich coastal curry bowls in an unhurried luxury atmosphere.
+            </p>
+
+            <div class="hero-actions">
+                <button type="button" class="btn-hero-primary" onclick="openReservationModal()">
+                    <span>Make a Reservation</span>
+                    <i class="fa-solid fa-arrow-right" style="font-size:0.85rem;"></i>
+                </button>
+                <a href="#menu" class="btn-hero-secondary">
+                    <span>View Our Menu</span>
+                    <i class="fa-solid fa-utensils" style="font-size:0.85rem;"></i>
+                </a>
+            </div>
+
+            <div class="hero-meta-row">
+                <div class="hero-meta-item">
+                    <div class="hero-meta-icon"><i class="fa-solid fa-location-dot"></i></div>
+                    <div class="hero-meta-text">
+                        <strong>Hiranandani Estate</strong>
+                        <span>Thane West, Maharashtra</span>
+                    </div>
+                </div>
+
+                <div class="hero-meta-item">
+                    <div class="hero-meta-icon"><i class="fa-solid fa-clock"></i></div>
+                    <div class="hero-meta-text">
+                        <strong>Daily from 11:30 AM</strong>
+                        <span>Open 7 Days a Week</span>
+                    </div>
+                </div>
+
+                <div class="hero-meta-item">
+                    <div class="hero-meta-icon"><i class="fa-solid fa-phone"></i></div>
+                    <div class="hero-meta-text">
+                        <strong>Direct Reservations</strong>
+                        <span><a href="tel:09819544999" style="color:var(--accent-gold-light);">+91 98195 44999</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         4. ABOUT US SECTION
+         ========================================================================== -->
+    <section class="about-section" id="about">
+        <div class="about-grid">
+            <div class="about-image-composition">
+                <div class="about-main-img-wrap">
+                    <img src="CAFE 2.jpeg" alt="Café Obregado Warm Architecture & Courtyard">
+                </div>
+                <!-- Floating Badge -->
+                <div class="about-floating-badge">
+                    <div class="badge-icon"><i class="fa-solid fa-mug-hot"></i></div>
+                    <div class="badge-text">
+                        <strong>Artisan Roasted</strong>
+                        <span>100% Arabica Quality</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-text">
+                <div class="section-tag">Our Heritage & Craft</div>
+                <h2 class="section-title">Coffee. Community. Warm Coastal Culture.</h2>
+                <p class="lead-text" style="margin-top:1.2rem;">
+                    Café Obregado is born from a passion for thoughtful culinary craft and unhurried hospitality.
+                </p>
+                <p>
+                    Tucked away next to Platinum Heritage in Thane West, we invite you to pause the city rush. Every cup is brewed with scientific precision using top-tier Arabica beans ethically sourced from India's finest estates, while our kitchen honors authentic Goan culinary heritage with freshly baked poee bread prepared daily.
+                </p>
+
+                <div class="about-highlights">
+                    <div class="highlight-card">
+                        <div class="highlight-icon"><i class="fa-solid fa-seedling"></i></div>
+                        <h4>Specialty Brews</h4>
+                        <p>Ethically sourced single-origin Arabica beans, roasted to highlight rich cocoa notes and bright aromatics.</p>
+                    </div>
+
+                    <div class="highlight-card">
+                        <div class="highlight-icon"><i class="fa-solid fa-bread-slice"></i></div>
+                        <h4>House-Made Poee</h4>
+                        <p>Traditional Goan fermented bread baked with authentic pockets, stuffed with savory, slow-simmered fillings.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         5. MENU SECTION (STICKY TWO-COLUMN WITH EXACT INR PRICES)
+         ========================================================================== -->
+    <section class="menu-section" id="menu">
+        <div class="section-header center">
+            <div class="section-tag">Curated Culinary Selection</div>
+            <h2 class="section-title">Our Signature Menu</h2>
+            <p class="section-desc">From meticulously pulled espresso to slow-simmered coastal curry bowls and warm house-baked poee.</p>
+        </div>
+
+        <div class="menu-layout">
+            <!-- Left Sticky Showcase Card -->
+            <div class="menu-sticky-col">
+                <div class="menu-sticky-img-card">
+                    <img src="CAFE 4.jpeg" alt="Café Obregado Coffee and Freshly Baked Poee Sandwich">
+                    <div class="menu-img-caption">
+                        <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:1.5px; color:var(--accent-gold-light); font-weight:600;">Chef's Special pairing</span>
+                        <h3>Fresh Poee & Specialty Latte</h3>
+                        <p>Warm oven-baked poee pocket filled with savory chicken kheema alongside a silky, balanced double-shot latte.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Categorized Menu List -->
+            <div class="menu-categories">
+
+                <!-- 1. Hot Brews -->
+                <div class="menu-cat-group">
+                    <div class="menu-cat-header">
+                        <h3 class="menu-cat-title"><i class="fa-solid fa-mug-saucer"></i> Hot Brews</h3>
+                        <span class="menu-cat-tag">Artisanal Espresso Bar</span>
+                    </div>
+
+                    <div class="menu-items-list">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <span class="menu-item-name">Espresso</span>
+                                <span class="menu-item-price">₹180</span>
+                            </div>
+                            <div class="menu-item-desc">Rich and bold double shot extracted with dense crema and caramel finish</div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <span class="menu-item-name">Pour Over <span class="item-badge bestseller">Staff Pick</span></span>
+                                <span class="menu-item-price">₹240</span>
+                            </div>
+                            <div class="menu-item-desc">Hand-poured single origin filter brew highlighting delicate floral and citrus nuances</div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <span class="menu-item-name">Spanish Latte</span>
+                                <span class="menu-item-price">₹310</span>
+                            </div>
+                            <div class="menu-item-desc">Double espresso combined with textured steamed milk and a touch of condensed sweetness</div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <span class="menu-item-name">Latte / Cappuccino</span>
+                                <span class="menu-item-price">₹250</span>
+                            </div>
+                            <div class="menu-item-desc">Classic specialty coffee with velvety micro-foam and harmonious espresso balance</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Cold Brews & Refreshers -->
+                <div class="menu-cat-group">
+                    <div class="menu-cat-header">
+                        <h3 class="menu-cat-title"><i class="fa-solid fa-snowflake"></i> Cold Brews & Shakes</h3>
+                        <span class="menu-cat-tag">Chilled Signatures</span>
+                    </div>
+
+                    <div class="menu-items-list">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <span class="menu-item-name">Iced Americano</span>
+                                <span class="menu-item-price">₹240</span>
+                            </div>
+                            <div class="menu-item-desc">Intense double espresso poured over artisanal ice cubes and crystal chilled water</div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <span class="menu-item-name">Tiramisu Iced Latte <span class="item-badge bestseller">Signature</span></span>
+                                <span class="menu-item-price">₹420</span>
+                            </div>
+                            <div class="menu-item-desc">Decadent cocoa-dusted tiramisu notes layered over cold milk and rich espresso shot</div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <span class="menu-item-name">Lotus Biscoff Frappe</span>
+                                <span class="menu-item-price">₹380</span>
+                            </div>
+                            <div class="menu-item-desc">Creamy blended coffee infused with Belgian cookie butter and topped with biscuit crunch</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. House Poee's -->
+                <div class="menu-cat-group">
+                    <div class="menu-cat-header">
+                        <h3 class="menu-cat-title"><i class="fa-solid fa-bread-slice"></i> House Poee's</h3>
+                        <span class="menu-cat-tag">Authentic Goan Bread</span>
+                    </div>
+
+                    <div class="menu-items-list">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <span class="menu-item-name">Veg Poee Pocket</span>
+                                <span class="menu-item-price">₹360</span>
+                            </div>
+                            <div class="menu-item-desc">Freshly baked traditional Goan bread filled with spiced garden veggies and herb emulsion</div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <span class="menu-item-name">Chicken Kheema Poee Pocket <span class="item-badge bestseller">Guest Favorite</span></span>
+                                <span class="menu-item-price">₹420</span>
+                            </div>
+                            <div class="menu-item-desc">Slow-cooked spiced chicken mince packed inside hot, airy oven-baked poee</div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <span class="menu-item-name">Ros Omelette with Poee</span>
+                                <span class="menu-item-price">₹380</span>
+                            </div>
+                            <div class="menu-item-desc">Authentic street-style Goan fluffy omelette drowned in savory aromatic chicken gravy and served with warm poee</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Curry Bowls -->
+                <div class="menu-cat-group">
+                    <div class="menu-cat-header">
+                        <h3 class="menu-cat-title"><i class="fa-solid fa-bowl-rice"></i> Coastal Curry Bowls</h3>
+                        <span class="menu-cat-tag">Served with Rice or Poee</span>
+                    </div>
+
+                    <div class="menu-items-list">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <span class="menu-item-name">Raw Mango Prawns Curry with Rice <span class="item-badge bestseller">Highly Recommended</span></span>
+                                <span class="menu-item-price">₹490</span>
+                            </div>
+                            <div class="menu-item-desc">Tangy, fragrant coconut-milk coastal curry cooked with fresh succulent prawns and steamed rice</div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <span class="menu-item-name">Chicken Xacuti with Poee</span>
+                                <span class="menu-item-price">₹470</span>
+                            </div>
+                            <div class="menu-item-desc">Heritage Goan chicken curry rich in roasted coconut, white poppy seeds, and roasted whole spices</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         6. EDITORIAL SHOWCASE GALLERY (CAFE 6, CAFE 7, CAFE 8)
+         ========================================================================== -->
+    <section class="showcase-section" id="experience">
+        <div class="showcase-header">
+            <div>
+                <div class="section-tag" style="color:var(--accent-gold-light);">Visual Chronicle</div>
+                <h2 class="showcase-title">The Obregado Atmosphere</h2>
+            </div>
+            <p style="color:var(--text-light-muted); max-width:420px; font-size:0.95rem;">
+                Every corner of Café Obregado is crafted with deliberate warmth—from intimate corner tables to sunlit outdoor benches.
+            </p>
+        </div>
+
+        <div class="showcase-grid">
+            <div class="showcase-card">
+                <img src="CAFE 6.jpeg" alt="Artisan Pour-Over Brewing at Café Obregado">
+                <div class="showcase-card-overlay">
+                    <span class="showcase-card-tag">Artisan Precision</span>
+                    <h3 class="showcase-card-title">Craft Pour-Overs</h3>
+                    <p class="showcase-card-desc">Hand-dripped slow extraction that unlocks delicate regional coffee profiles.</p>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <img src="CAFE 7.jpeg" alt="House Baked Goan Poee and Savory Pairings">
+                <div class="showcase-card-overlay">
+                    <span class="showcase-card-tag">Heritage Kitchen</span>
+                    <h3 class="showcase-card-title">Oven-Fresh Poee</h3>
+                    <p class="showcase-card-desc">Authentic sourdough fermentation delivering that unmistakable Goan crumb and aroma.</p>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <img src="CAFE 8.jpeg" alt="Cozy Ambience and Courtyard Moments">
+                <div class="showcase-card-overlay">
+                    <span class="showcase-card-tag">Unhurried Hours</span>
+                    <h3 class="showcase-card-title">Courtyard Living</h3>
+                    <p class="showcase-card-desc">An earthy sanctuary to read, catch up with old friends, or simply savor the moment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         7. REVIEWS SECTION (CONTINUOUS AUTO-MOVING CAROUSEL WITH PAUSE-ON-HOVER)
+         ========================================================================== -->
+    <section class="reviews-section" id="reviews">
+        <div class="reviews-header-wrap">
+            <div>
+                <div class="section-tag">Community Voices</div>
+                <h2 class="section-title">What Our Guests Say</h2>
+                <div class="reviews-stats-pill">
+                    <i class="fa-solid fa-star"></i>
+                    <span>4.5 / 5.0 Rating across Google & EazyDiner</span>
+                </div>
+            </div>
+
+            <div class="carousel-controls">
+                <button type="button" class="carousel-btn" onclick="slideReviews(-1)" aria-label="Previous Reviews">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <button type="button" class="carousel-btn" onclick="slideReviews(1)" aria-label="Next Reviews">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Continuous Smooth Auto-Moving Carousel with Pause on Hover -->
+        <div class="carousel-window" id="reviewsWindow">
+            <div class="reviews-track" id="reviewsTrack">
+
+                <!-- REVIEW CARD 1 -->
+                <div class="review-card">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "We had ordered the Raw Mango Prawns Curry with Rice and Chicken Xacuti with Poee. Absolute culinary perfection! The balanced tanginess and authentic Goan spices made it exceptional."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Ananya Deshmukh</span>
+                        <span class="author-source"><i class="fa-brands fa-google"></i> Google Review</span>
+                    </div>
+                </div>
+
+                <!-- REVIEW CARD 2 -->
+                <div class="review-card">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "The combination of distinct coffee flavours and the calm, cosy aesthetic makes Café Obregado a genuine gem in Thane. The Tiramisu Iced Latte is by far the best in the city!"
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Rohan &amp; Sneha Patel</span>
+                        <span class="author-source"><i class="fa-solid fa-utensils"></i> Foodie Club</span>
+                    </div>
+                </div>
+
+                <!-- REVIEW CARD 3 -->
+                <div class="review-card">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "The food was incredibly fresh, hearty, and filling. The staff served everything with genuine warmth and hospitality. Love having a world-class cafe in Hiranandani Estate."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Vikram Malhotra</span>
+                        <span class="author-source"><i class="fa-brands fa-google"></i> Local Resident</span>
+                    </div>
+                </div>
+
+                <!-- REVIEW CARD 4 -->
+                <div class="review-card">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "Chicken Kheema Poee Pocket paired with the Spanish Latte was heaven on a rainy afternoon. The ambiance is peaceful, editorial, and beautifully designed."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Meera Sen</span>
+                        <span class="author-source"><i class="fa-solid fa-circle-check"></i> EazyDiner Verified</span>
+                    </div>
+                </div>
+
+                <!-- REVIEW CARD 5 -->
+                <div class="review-card">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "As a specialty coffee purist, their single-origin Pour-Over blew me away. The extraction was spot-on, highlighting delicate floral citrus notes without bitterness. Highly recommended!"
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Kabir Singhania</span>
+                        <span class="author-source"><i class="fa-solid fa-mug-hot"></i> Coffee Connoisseur</span>
+                    </div>
+                </div>
+
+                <!-- REVIEW CARD 6 -->
+                <div class="review-card">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "The Ros Omelette served with piping-hot house-made Goan Poee took me straight back to Panjim. Authentic coastal flavours with upscale café refinement."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Dr. Shalini Joshi</span>
+                        <span class="author-source"><i class="fa-brands fa-google"></i> Google Review</span>
+                    </div>
+                </div>
+
+                <!-- REVIEW CARD 7 -->
+                <div class="review-card">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "The Lotus Biscoff Frappe and Veg Poee Pocket are a dream pairing! The courtyard ambience is so relaxing you could sit here for hours with a good book."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Aarav &amp; Tanvi Mehta</span>
+                        <span class="author-source"><i class="fa-solid fa-heart"></i> Weekend Regulars</span>
+                    </div>
+                </div>
+
+                <!-- REVIEW CARD 8 -->
+                <div class="review-card">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "Exceptional hospitality and attention to detail. From the welcoming warmth of the team to the aroma of freshly ground Arabica, Obregado sets a new benchmark in Thane."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Priya Sundaram</span>
+                        <span class="author-source"><i class="fa-solid fa-award"></i> Zomato Gold</span>
+                    </div>
+                </div>
+
+                <!-- DUPLICATE SET OF 8 REVIEWS FOR SEAMLESS INFINITE LOOP TICKER -->
+                <div class="review-card" aria-hidden="true">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "We had ordered the Raw Mango Prawns Curry with Rice and Chicken Xacuti with Poee. Absolute culinary perfection! The balanced tanginess and authentic Goan spices made it exceptional."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Ananya Deshmukh</span>
+                        <span class="author-source"><i class="fa-brands fa-google"></i> Google Review</span>
+                    </div>
+                </div>
+
+                <div class="review-card" aria-hidden="true">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "The combination of distinct coffee flavours and the calm, cosy aesthetic makes Café Obregado a genuine gem in Thane. The Tiramisu Iced Latte is by far the best in the city!"
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Rohan &amp; Sneha Patel</span>
+                        <span class="author-source"><i class="fa-solid fa-utensils"></i> Foodie Club</span>
+                    </div>
+                </div>
+
+                <div class="review-card" aria-hidden="true">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "The food was incredibly fresh, hearty, and filling. The staff served everything with genuine warmth and hospitality. Love having a world-class cafe in Hiranandani Estate."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Vikram Malhotra</span>
+                        <span class="author-source"><i class="fa-brands fa-google"></i> Local Resident</span>
+                    </div>
+                </div>
+
+                <div class="review-card" aria-hidden="true">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "Chicken Kheema Poee Pocket paired with the Spanish Latte was heaven on a rainy afternoon. The ambiance is peaceful, editorial, and beautifully designed."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Meera Sen</span>
+                        <span class="author-source"><i class="fa-solid fa-circle-check"></i> EazyDiner Verified</span>
+                    </div>
+                </div>
+
+                <div class="review-card" aria-hidden="true">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "As a specialty coffee purist, their single-origin Pour-Over blew me away. The extraction was spot-on, highlighting delicate floral citrus notes without bitterness. Highly recommended!"
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Kabir Singhania</span>
+                        <span class="author-source"><i class="fa-solid fa-mug-hot"></i> Coffee Connoisseur</span>
+                    </div>
+                </div>
+
+                <div class="review-card" aria-hidden="true">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "The Ros Omelette served with piping-hot house-made Goan Poee took me straight back to Panjim. Authentic coastal flavours with upscale café refinement."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Dr. Shalini Joshi</span>
+                        <span class="author-source"><i class="fa-brands fa-google"></i> Google Review</span>
+                    </div>
+                </div>
+
+                <div class="review-card" aria-hidden="true">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "The Lotus Biscoff Frappe and Veg Poee Pocket are a dream pairing! The courtyard ambience is so relaxing you could sit here for hours with a good book."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Aarav &amp; Tanvi Mehta</span>
+                        <span class="author-source"><i class="fa-solid fa-heart"></i> Weekend Regulars</span>
+                    </div>
+                </div>
+
+                <div class="review-card" aria-hidden="true">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "Exceptional hospitality and attention to detail. From the welcoming warmth of the team to the aroma of freshly ground Arabica, Obregado sets a new benchmark in Thane."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Priya Sundaram</span>
+                        <span class="author-source"><i class="fa-solid fa-award"></i> Zomato Gold</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         8. LOCATION & CONTACT SECTION
+         ========================================================================== -->
+    <section class="contact-section" id="contact">
+        <div class="contact-grid">
+            <div>
+                <div class="section-tag">Find Your Sanctuary</div>
+                <h2 class="section-title">Visit Café Obregado</h2>
+                <p class="section-desc">Located in the prestigious Hiranandani Estate in Thane West. We are ready to brew your favorite cup.</p>
+
+                <ul class="contact-info-list">
+                    <li class="contact-info-item">
+                        <div class="contact-info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="contact-info-content">
+                            <strong>Our Address</strong>
+                            <p>Mhatre Compound, Plot no 1, Queens St, adjacent to Aranya banquet, next to Platinum Heritage, Hiranandani Estate, Thane West, Maharashtra 400607</p>
+                        </div>
+                    </li>
+
+                    <li class="contact-info-item">
+                        <div class="contact-info-icon"><i class="fa-solid fa-phone"></i></div>
+                        <div class="contact-info-content">
+                            <strong>Telephone Inquiries & Bookings</strong>
+                            <p><a href="tel:09819544999" class="contact-phone-link">098195 44999</a> &bull; <a href="tel:09819544999" class="contact-phone-link">+91 98195 44999</a></p>
+                        </div>
+                    </li>
+
+                    <li class="contact-info-item">
+                        <div class="contact-info-icon"><i class="fa-solid fa-clock"></i></div>
+                        <div class="contact-info-content">
+                            <strong>Operating Hours</strong>
+                            <p>Opens Daily at 11:30 AM &bull; Open throughout the week including public holidays</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="contact-actions">
+                    <a href="tel:09819544999" class="btn-call-direct" title="Tap to Call Immediately">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>Call 098195 44999</span>
+                    </a>
+
+                    <a href="https://www.instagram.com/cafe_obregado?stkn=NmgwMGpvM2lrMW56" target="_blank" rel="noopener noreferrer" class="btn-instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                        <span>Follow @cafe_obregado</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-image-wrap">
+                <img src="CAFE 5.jpeg" alt="Café Obregado Welcoming Dining Space and Interior">
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         9. RESERVATION MODAL (WITH WHATSAPP AUTOMATIC REDIRECT)
+         ========================================================================== -->
+    <div class="modal-overlay" id="reservationModal" aria-modal="true" role="dialog" aria-labelledby="modalTitle">
+        <div class="modal-card">
+            <!-- Modal Side Image Panel -->
+            <div class="modal-sidebar">
+                <div class="modal-sidebar-overlay"></div>
+                <div class="modal-sidebar-content">
+                    <div class="modal-sidebar-tag">Reserve Ahead</div>
+                    <h3 class="modal-sidebar-title">An Artisanal Coffee Table Awaits</h3>
+                    <p class="modal-sidebar-desc">Whether for an intimate date, work catch-up, or Sunday brunch with poee, we keep your table ready.</p>
+                </div>
+            </div>
+
+            <!-- Modal Form -->
+            <div class="modal-form-container">
+                <button type="button" class="modal-close-btn" onclick="closeReservationModal()" aria-label="Close reservation modal">&times;</button>
+
+                <div class="section-tag" style="margin-bottom:0.4rem;">Instant Confirmation</div>
+                <h3 class="modal-heading" id="modalTitle">Table Reservation</h3>
+                <p class="modal-subheading">Submit your reservation details below. It will automatically redirect to our café manager on WhatsApp.</p>
+
+                <form id="reservationForm" onsubmit="handleReservationSubmit(event)">
+                    <div class="form-group">
+                        <label class="form-label" for="resName">Full Name *</label>
+                        <div class="form-input-wrap">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" id="resName" class="form-control" placeholder="e.g. Jane Smith" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="resPhone">Phone Number *</label>
+                            <div class="form-input-wrap">
+                                <i class="fa-solid fa-phone"></i>
+                                <input type="tel" id="resPhone" class="form-control" placeholder="+91 98765 43210" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="resGuests">Guests *</label>
+                            <div class="form-input-wrap">
+                                <i class="fa-solid fa-users"></i>
+                                <input type="number" id="resGuests" class="form-control" placeholder="2 Guests" min="1" max="20" value="2" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="resDate">Reservation Date *</label>
+                            <div class="form-input-wrap">
+                                <i class="fa-solid fa-calendar-day"></i>
+                                <input type="date" id="resDate" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="resTime">Preferred Time *</label>
+                            <div class="form-input-wrap">
+                                <i class="fa-solid fa-clock"></i>
+                                <input type="time" id="resTime" class="form-control" value="13:00" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WhatsApp Confirm Button -->
+                    <button type="submit" class="btn-modal-submit" id="submitResBtn">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <span>Confirm via WhatsApp (+91 98195 44999)</span>
+                    </button>
+                </form>
+
+                <div class="modal-call-divider">
+                    <span>Or reserve instantly by voice</span>
+                </div>
+
+                <!-- Secondary Call Café Directly Link Inside Modal -->
+                <a href="tel:09819544999" class="btn-modal-call">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>Call Café Directly (098195 44999)</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         10. FOOTER (IRISH CAFÉ STYLE GIANT WATERMARK MARQUEE & PILL NAVIGATION)
+         ========================================================================== -->
+    <footer class="irish-footer">
+        <div class="footer-top-row">
+            <!-- Rounded Pill Navigation Links with Inline Arrow Icons -->
+            <div class="footer-pill-nav">
+                <a href="#menu" class="pill-link">
+                    <span>Menu</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#about" class="pill-link">
+                    <span>About</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#experience" class="pill-link">
+                    <span>Ambiance</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#reviews" class="pill-link">
+                    <span>Reviews</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#contact" class="pill-link">
+                    <span>Contact</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Social Media & Direct Phone Buttons -->
+            <div class="footer-actions-group">
+                <a href="tel:09819544999" class="footer-call-pill" title="Direct Phone Call">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>098195 44999</span>
+                </a>
+
+                <div class="footer-socials">
+                    <a href="https://www.instagram.com/cafe_obregado?stkn=NmgwMGpvM2lrMW56" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/919819544999" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                    <a href="https://maps.google.com/?q=Cafe+Obregado+Hiranandani+Estate+Thane" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Google Maps">
+                        <i class="fa-solid fa-location-arrow"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1. GIANT FOOTER WATERMARK ANIMATION (CONTINUOUS HORIZONTAL MARQUEE SLIDE) -->
+        <div class="footer-watermark-marquee" aria-hidden="true">
+            <div class="watermark-track">
+                <span class="watermark-item">CAFÉ OBREGADO <span class="watermark-dot">&bull;</span></span>
+                <span class="watermark-item">CAFÉ OBREGADO <span class="watermark-dot">&bull;</span></span>
+                <span class="watermark-item">CAFÉ OBREGADO <span class="watermark-dot">&bull;</span></span>
+                <span class="watermark-item">CAFÉ OBREGADO <span class="watermark-dot">&bull;</span></span>
+                <!-- Seamless Duplicate Set for 100% Smooth Infinite Gliding -->
+                <span class="watermark-item">CAFÉ OBREGADO <span class="watermark-dot">&bull;</span></span>
+                <span class="watermark-item">CAFÉ OBREGADO <span class="watermark-dot">&bull;</span></span>
+                <span class="watermark-item">CAFÉ OBREGADO <span class="watermark-dot">&bull;</span></span>
+                <span class="watermark-item">CAFÉ OBREGADO <span class="watermark-dot">&bull;</span></span>
+            </div>
+        </div>
+
+        <!-- Bottom Copyright & Credits -->
+        <div class="footer-bottom-bar">
+            <div>&copy; 2026 Café Obregado. All rights reserved. Thane West, Maharashtra.</div>
+            <div>
+                Specialty Arabica &bull; Authentic Goan Poee &bull;
+                <a href="#home">Back to top &uarr;</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Bubbles for Quick Access on Mobile -->
+    <div class="floating-action-bubble">
+        <a href="https://wa.me/919819544999" target="_blank" class="bubble-btn whatsapp" title="Chat on WhatsApp" aria-label="WhatsApp Chat">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:09819544999" class="bubble-btn phone" title="Call Café Obregado" aria-label="Call Café Directly">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
+
+    <!-- ==========================================================================
+         JAVASCRIPT ENGINE
+         ========================================================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /* ----------------------------------------------------------------------
+               1. PRELOADER ENGINE (DIRECT 0% TO 100% SYNCED FLYING OWL)
+               ---------------------------------------------------------------------- */
+            let currentPercent = 0;
+            const percentDisplay = document.getElementById('loaderPercent');
+            const progressFill = document.getElementById('loaderBar');
+            const flyingOwl = document.getElementById('flyingOwl');
+            const preloaderElem = document.getElementById('preloader');
+
+            const loaderTimer = setInterval(() => {
+                currentPercent += 1;
+
+                // Sync numerical counter and progress bar width
+                if (percentDisplay) percentDisplay.textContent = currentPercent;
+                if (progressFill) progressFill.style.width = currentPercent + '%';
+
+                // Physical translation across track strictly matching 0% -> 100%
+                if (flyingOwl) {
+                    flyingOwl.style.left = currentPercent + '%';
+
+                    // Sine-wave active flying/flapping motion
+                    const verticalSine = Math.sin(currentPercent * 0.18) * 9;
+                    flyingOwl.style.transform = `translateX(-50%) translateY(${verticalSine}px)`;
+                }
+
+                if (currentPercent >= 100) {
+                    clearInterval(loaderTimer);
+                    setTimeout(() => {
+                        preloaderElem.classList.add('loaded');
+                    }, 320);
+                }
+            }, 25);
+
+            /* ----------------------------------------------------------------------
+               2. NAVBAR SCROLL EFFECT
+               ---------------------------------------------------------------------- */
+            const navbar = document.getElementById('mainNavbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }, { passive: true });
+
+            /* ----------------------------------------------------------------------
+               3. DATE FIELD MIN CONSTRAINT (Today or later)
+               ---------------------------------------------------------------------- */
+            const dateInput = document.getElementById('resDate');
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.min = today;
+                dateInput.value = today;
+            }
+
+            /* ----------------------------------------------------------------------
+               4. CONTINUOUS AUTOMATIC REVIEWS TICKER WITH PAUSE-ON-HOVER & MANUAL BUTTONS
+               ---------------------------------------------------------------------- */
+            const reviewsWindow = document.getElementById('reviewsWindow');
+            let isReviewsPaused = false;
+            const scrollSpeed = 0.95; // Pixels per frame for smooth luxury velocity
+
+            function animateReviewsTicker() {
+                if (!isReviewsPaused && reviewsWindow) {
+                    reviewsWindow.scrollLeft += scrollSpeed;
+
+                    // When scrolled half of the duplicated content width, loop seamlessly
+                    const halfWidth = reviewsWindow.scrollWidth / 2;
+                    if (reviewsWindow.scrollLeft >= halfWidth) {
+                        reviewsWindow.scrollLeft -= halfWidth;
+                    }
+                }
+                requestAnimationFrame(animateReviewsTicker);
+            }
+
+            // Start continuous ticker
+            requestAnimationFrame(animateReviewsTicker);
+
+            // Pause on hover so users can easily read reviews
+            if (reviewsWindow) {
+                reviewsWindow.addEventListener('mouseenter', () => {
+                    isReviewsPaused = true;
+                });
+                reviewsWindow.addEventListener('mouseleave', () => {
+                    isReviewsPaused = false;
+                });
+
+                // Touch support for mobile devices
+                reviewsWindow.addEventListener('touchstart', () => {
+                    isReviewsPaused = true;
+                }, { passive: true });
+                reviewsWindow.addEventListener('touchend', () => {
+                    // Small timeout before resuming auto-scroll after touch
+                    setTimeout(() => {
+                        isReviewsPaused = false;
+                    }, 1200);
+                });
+            }
+
+            // Interactive Arrow Navigation Buttons for manual control
+            window.slideReviews = function(direction) {
+                if (!reviewsWindow) return;
+                const firstCard = reviewsWindow.querySelector('.review-card');
+                if (!firstCard) return;
+
+                const cardStep = firstCard.offsetWidth + 32; // Card width + 2rem gap
+                const halfWidth = reviewsWindow.scrollWidth / 2;
+
+                // Handle seamless wrap if stepping backwards past start
+                if (direction < 0 && reviewsWindow.scrollLeft - cardStep < 0) {
+                    reviewsWindow.scrollLeft += halfWidth;
+                } else if (direction > 0 && reviewsWindow.scrollLeft + cardStep >= halfWidth * 1.9) {
+                    reviewsWindow.scrollLeft -= halfWidth;
+                }
+
+                // Temporarily pause auto-movement during manual arrow interaction
+                isReviewsPaused = true;
+                reviewsWindow.scrollBy({
+                    left: direction * cardStep,
+                    behavior: 'smooth'
+                });
+
+                // Resume auto-glide after manual interaction
+                clearTimeout(window.manualReviewTimer);
+                window.manualReviewTimer = setTimeout(() => {
+                    isReviewsPaused = false;
+                }, 2800);
+            };
+
+            /* ----------------------------------------------------------------------
+               5. RESERVATION MODAL CONTROLLERS
+               ---------------------------------------------------------------------- */
+            const modal = document.getElementById('reservationModal');
+
+            window.openReservationModal = function() {
+                if (modal) {
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            };
+
+            window.closeReservationModal = function() {
+                if (modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            };
+
+            // Close on click outside modal card
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        closeReservationModal();
+                    }
+                });
+            }
+
+            // Close on Escape Key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+                    closeReservationModal();
+                }
+            });
+
+            /* ----------------------------------------------------------------------
+               6. WHATSAPP AUTOMATIC REDIRECT ENGINE
+               ---------------------------------------------------------------------- */
+            window.handleReservationSubmit = function(e) {
+                e.preventDefault();
+
+                const name = document.getElementById('resName').value.trim();
+                const phone = document.getElementById('resPhone').value.trim();
+                const guests = document.getElementById('resGuests').value.trim();
+                const date = document.getElementById('resDate').value.trim();
+                const time = document.getElementById('resTime').value.trim();
+
+                if (!name || !phone || !date || !time) {
+                    alert('Please provide your name, phone number, date, and preferred time.');
+                    return;
+                }
+
+                // Format human-friendly readable date (e.g. 14 Sep 2026)
+                let formattedDate = date;
+                try {
+                    const parsedDate = new Date(date);
+                    formattedDate = parsedDate.toLocaleDateString('en-IN', {
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric'
+                    });
+                } catch (err) {
+                    formattedDate = date;
+                }
+
+                // Construct clean structured WhatsApp Reservation message
+                const message =
+`*TABLE RESERVATION - CAFÉ OBREGADO* ☕
+
+Hello Café Obregado team, I would like to confirm a table reservation:
+
+• *Guest Name:* ${name}
+• *Phone:* ${phone}
+• *Guests:* ${guests} People
+• *Date:* ${formattedDate}
+• *Time:* ${time}
+
+Kindly confirm availability. Looking forward to dining with you!`;
+
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://wa.me/919819544999?text=${encodedMessage}`;
+
+                // Close modal and redirect
+                closeReservationModal();
+
+                // Open WhatsApp in a new window/tab
+                window.open(whatsappUrl, '_blank');
+            };
+
+            /* ----------------------------------------------------------------------
+               7. MOBILE DRAWER CONTROLLER
+               ---------------------------------------------------------------------- */
+            const mobileMenuBtn = document.getElementById('mobileMenuToggle');
+            const mobileDrawer = document.getElementById('mobileDrawer');
+            const mobileBackdrop = document.getElementById('mobileDrawerBackdrop');
+
+            window.openMobileMenu = function() {
+                if (mobileDrawer && mobileBackdrop) {
+                    mobileDrawer.classList.add('active');
+                    mobileBackdrop.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            };
+
+            window.closeMobileMenu = function() {
+                if (mobileDrawer && mobileBackdrop) {
+                    mobileDrawer.classList.remove('active');
+                    mobileBackdrop.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            };
+
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', openMobileMenu);
+            }
+        });
+    </script>
+</body>
+
+</html>
