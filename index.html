@@ -15,7 +15,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
 
     <style>
         /* ==========================================================================
@@ -47,16 +46,6 @@
             --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.04);
             --shadow-elevated: 0 20px 45px rgba(0, 0, 0, 0.08);
             --shadow-modal: 0 35px 80px rgba(0, 0, 0, 0.35);
-        }
-
-        /* Smooth Custom Owl Cursor across the website */
-        body, a, button, input, select, textarea {
-            cursor: url('owl-cursor.png') 16 16, url('CAFE LOGO.jpeg') 16 16, auto !important;
-        }
-
-        /* Ensure interactive elements keep smooth pointer feedback */
-        a:hover, button:hover, .btn:hover, [role="button"]:hover, .bubble-btn:hover {
-            cursor: url('owl-cursor.png') 16 16, url('CAFE LOGO.jpeg') 16 16, pointer !important;
         }
 
         /* --- GLOBAL RESETS --- */
@@ -2572,6 +2561,28 @@
                 gap: 0.8rem;
             }
         }
+
+        /* ==========================================================================
+           SELF-CONTAINED FLOATING OWL CURSOR
+           ========================================================================== */
+        #custom-owl-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 32px;
+            height: 32px;
+            pointer-events: none; /* Crucial: allows clicks to pass through without sticking */
+            z-index: 99999;
+            will-change: transform;
+        }
+
+        #custom-owl-cursor img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+            filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4));
+        }
     </style>
 </head>
 
@@ -4083,6 +4094,39 @@ Kindly confirm availability. Looking forward to dining with you!`;
                 mobileMenuBtn.addEventListener('click', openMobileMenu);
             }
         });
+    </script>
+
+    <!-- ==========================================================================
+         SELF-CONTAINED FLOATING OWL CURSOR
+         ========================================================================== -->
+    <div id="custom-owl-cursor">
+        <img src="CAFE LOGO.jpeg" alt="Owl Cursor">
+    </div>
+
+    <script>
+        (function() {
+            const owlCursor = document.getElementById('custom-owl-cursor');
+            if (!owlCursor) return;
+
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            function animateOwlCursor() {
+                // Smooth linear interpolation (0.2 factor for smooth gliding)
+                cursorX += (mouseX - cursorX) * 0.2;
+                cursorY += (mouseY - cursorY) * 0.2;
+                
+                owlCursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
+                requestAnimationFrame(animateOwlCursor);
+            }
+            
+            animateOwlCursor();
+        })();
     </script>
 </body>
 
