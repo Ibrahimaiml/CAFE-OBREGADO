@@ -226,7 +226,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.1rem 4.5rem;
+            padding: 1rem 2rem;
             z-index: 1000;
             background: var(--glass-dark);
             backdrop-filter: blur(18px);
@@ -236,7 +236,7 @@
         }
 
         .navbar.scrolled {
-            padding: 0.85rem 4.5rem;
+            padding: 0.75rem 2rem;
             background: rgba(17, 14, 12, 0.88);
             border-bottom-color: rgba(200, 157, 84, 0.2);
         }
@@ -301,15 +301,22 @@
 
         .nav-links {
             display: flex;
-            gap: 2.4rem;
+            align-items: center;
+            gap: 1.15rem;
             list-style: none;
+        }
+
+        .nav-links a,
+        .navbar a {
+            white-space: nowrap;
         }
 
         .nav-links a {
             color: rgba(255, 255, 255, 0.85);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.4px;
+            white-space: nowrap;
             position: relative;
             padding: 4px 0;
             transition: color 0.3s ease;
@@ -2327,11 +2334,15 @@
            ========================================================================== */
         @media (max-width: 1200px) {
             .navbar {
-                padding: 1.1rem 2.5rem;
+                padding: 0.95rem 1.8rem;
             }
 
             .navbar.scrolled {
-                padding: 0.85rem 2.5rem;
+                padding: 0.75rem 1.8rem;
+            }
+
+            .nav-links {
+                gap: 0.95rem;
             }
 
             section {
@@ -2600,8 +2611,8 @@
                 <li><a href="#menu">Menu</a></li>
                 <li><a href="#experience">Ambiance</a></li>
                 <li><a href="#reviews">Reviews</a></li>
-                <li><a href="#community-events">Community &amp; Events</a></li>
-                <li><a href="#partner-with-us">Franchise &amp; Partner</a></li>
+                <li><a href="#community-events">Events</a></li>
+                <li><a href="#partner-with-us">Franchise</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -2644,6 +2655,8 @@
                 <li><a href="#menu" onclick="closeMobileMenu()">Menu <i class="fa-solid fa-chevron-right" style="font-size:0.8rem; color:var(--accent-gold);"></i></a></li>
                 <li><a href="#experience" onclick="closeMobileMenu()">Ambiance <i class="fa-solid fa-chevron-right" style="font-size:0.8rem; color:var(--accent-gold);"></i></a></li>
                 <li><a href="#reviews" onclick="closeMobileMenu()">Reviews <i class="fa-solid fa-chevron-right" style="font-size:0.8rem; color:var(--accent-gold);"></i></a></li>
+                <li><a href="#community-events" onclick="closeMobileMenu()">Community &amp; Events <i class="fa-solid fa-chevron-right" style="font-size:0.8rem; color:var(--accent-gold);"></i></a></li>
+                <li><a href="#partner-with-us" onclick="closeMobileMenu()">Franchise &amp; Partner <i class="fa-solid fa-chevron-right" style="font-size:0.8rem; color:var(--accent-gold);"></i></a></li>
                 <li><a href="#contact" onclick="closeMobileMenu()">Contact & Location <i class="fa-solid fa-chevron-right" style="font-size:0.8rem; color:var(--accent-gold);"></i></a></li>
             </ul>
         </div>
@@ -3610,7 +3623,7 @@
                 <p>Own a suitable commercial property or have experience in hospitality, retail or business development? Let's explore opportunities to collaborate.</p>
             </div>
             <div class="partner-pillar-card">
-                <div class="partner-pillar-icon"><i class="fa-solid fa-calendar-star"></i></div>
+                <div class="partner-pillar-icon"><i class="fa-solid fa-users"></i></div>
                 <h4>Events &amp; Community Collaborations</h4>
                 <p>Are you an event organiser, creative entrepreneur, artist or community builder? Partner with us to create experiences that bring people together.</p>
             </div>
