@@ -2565,23 +2565,27 @@
         /* ==========================================================================
            SELF-CONTAINED FLOATING OWL CURSOR
            ========================================================================== */
+        html, body, a, button, input, select, textarea, [role="button"], * {
+            cursor: none !important;
+        }
+
         #custom-owl-cursor {
             position: fixed;
             top: 0;
             left: 0;
-            width: 32px;
-            height: 32px;
-            pointer-events: none; /* Crucial: allows clicks to pass through without sticking */
-            z-index: 99999;
+            width: 36px;
+            height: 36px;
+            pointer-events: none; /* Allows clicks to pass directly through */
+            z-index: 999999;
             will-change: transform;
+            filter: drop-shadow(0px 2px 8px rgba(212, 175, 55, 0.7)); /* Smooth golden glow */
         }
 
         #custom-owl-cursor img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            border-radius: 50%;
-            filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4));
+            display: block;
         }
     </style>
 </head>
@@ -4096,37 +4100,34 @@ Kindly confirm availability. Looking forward to dining with you!`;
         });
     </script>
 
-    <!-- ==========================================================================
-         SELF-CONTAINED FLOATING OWL CURSOR
-         ========================================================================== -->
     <div id="custom-owl-cursor">
-        <img src="CAFE LOGO.jpeg" alt="Owl Cursor">
+      <img src="owl-cursor.png" alt="Golden Owl Cursor">
     </div>
 
     <script>
-        (function() {
-            const owlCursor = document.getElementById('custom-owl-cursor');
-            if (!owlCursor) return;
+      (function() {
+        const owlCursor = document.getElementById('custom-owl-cursor');
+        if (!owlCursor) return;
 
-            let mouseX = 0, mouseY = 0;
-            let cursorX = 0, cursorY = 0;
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
 
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-            });
+        document.addEventListener('mousemove', (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+        });
 
-            function animateOwlCursor() {
-                // Smooth linear interpolation (0.2 factor for smooth gliding)
-                cursorX += (mouseX - cursorX) * 0.2;
-                cursorY += (mouseY - cursorY) * 0.2;
-                
-                owlCursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
-                requestAnimationFrame(animateOwlCursor);
-            }
-            
-            animateOwlCursor();
-        })();
+        function animateOwlCursor() {
+          // Smooth interpolation factor (0.22)
+          cursorX += (mouseX - cursorX) * 0.22;
+          cursorY += (mouseY - cursorY) * 0.22;
+          
+          owlCursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
+          requestAnimationFrame(animateOwlCursor);
+        }
+        
+        animateOwlCursor();
+      })();
     </script>
 </body>
 
