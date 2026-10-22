@@ -1959,6 +1959,370 @@
         }
 
         /* ==========================================================================
+           COMMUNITY & EVENTS SECTION
+           ========================================================================== */
+        .community-section {
+            background-color: var(--bg-dark);
+            color: #FFFFFF;
+        }
+
+        .community-section .section-title {
+            color: #FFFFFF;
+        }
+
+        .community-section .section-desc {
+            color: var(--text-light-muted);
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+            margin-top: 3rem;
+        }
+
+        .event-placeholder-card {
+            position: relative;
+            background: rgba(255,255,255,0.04);
+            border: 1px dashed rgba(200,157,84,0.3);
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            transition: all 0.35s ease;
+        }
+
+        .event-placeholder-card:hover {
+            background: rgba(200,157,84,0.06);
+            border-color: rgba(200,157,84,0.55);
+            transform: translateY(-5px);
+        }
+
+        .event-placeholder-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(200,157,84,0.12);
+            border: 1px solid rgba(200,157,84,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+        }
+
+        .event-placeholder-label {
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.55);
+            letter-spacing: 1px;
+        }
+
+        .community-note-box {
+            margin-top: 2.8rem;
+            background: rgba(200,157,84,0.07);
+            border: 1px solid rgba(200,157,84,0.22);
+            border-radius: 16px;
+            padding: 1.6rem 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .community-note-box i {
+            color: var(--accent-gold);
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .community-note-box p {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.72);
+            line-height: 1.65;
+            font-style: italic;
+        }
+
+        .community-cta-row {
+            margin-top: 3.2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-community-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #25D366;
+            color: #FFFFFF;
+            padding: 1.05rem 2.4rem;
+            border-radius: 35px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 8px 24px rgba(37,211,102,0.35);
+            transition: all 0.3s ease;
+        }
+
+        .btn-community-cta:hover {
+            background: #20BA5A;
+            transform: translateY(-3px);
+            box-shadow: 0 14px 32px rgba(37,211,102,0.45);
+        }
+
+        /* ==========================================================================
+           FRANCHISE & PARTNER SECTION
+           ========================================================================== */
+        .partner-section {
+            background-color: var(--bg-dark-surface);
+            color: #FFFFFF;
+        }
+
+        .partner-section .section-title {
+            color: #FFFFFF;
+        }
+
+        .partner-intro-block {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 5rem;
+            align-items: center;
+            margin-bottom: 5rem;
+        }
+
+        .partner-intro-text p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: rgba(255,255,255,0.8);
+            margin-top: 1.8rem;
+        }
+
+        .btn-partner-explore {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--accent-gold);
+            color: #110E0C;
+            padding: 1.05rem 2.4rem;
+            border-radius: 35px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(200,157,84,0.35);
+        }
+
+        .btn-partner-explore:hover {
+            background: var(--accent-gold-light);
+            transform: translateY(-3px);
+            box-shadow: 0 14px 32px rgba(200,157,84,0.45);
+        }
+
+        .partner-tagline-block {
+            background: rgba(200,157,84,0.07);
+            border: 1px solid rgba(200,157,84,0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .partner-tagline-block .tagline-icon {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        .partner-tagline-block h3 {
+            font-family: var(--font-heading);
+            font-size: 1.35rem;
+            color: #FFFFFF;
+            line-height: 1.35;
+            letter-spacing: 0.5px;
+        }
+
+        .partner-why-title {
+            font-family: var(--font-heading);
+            font-size: clamp(1.6rem, 2.8vw, 2.3rem);
+            color: #FFFFFF;
+            text-align: center;
+            margin-bottom: 0.7rem;
+        }
+
+        .partner-why-sub {
+            text-align: center;
+            color: var(--text-light-muted);
+            font-size: 0.96rem;
+            margin-bottom: 3rem;
+        }
+
+        .partner-features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .partner-feature-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 2.2rem;
+            transition: all 0.35s ease;
+        }
+
+        .partner-feature-card:hover {
+            background: rgba(200,157,84,0.06);
+            border-color: rgba(200,157,84,0.3);
+            transform: translateY(-5px);
+        }
+
+        .partner-feature-number {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            color: rgba(200,157,84,0.25);
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .partner-feature-card h4 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: var(--accent-gold-light);
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        .partner-feature-card p {
+            font-size: 0.92rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.65;
+        }
+
+        .partner-pillars-title {
+            font-family: var(--font-heading);
+            font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+            color: #FFFFFF;
+            text-align: center;
+            margin-bottom: 0.6rem;
+        }
+
+        .partner-pillars-sub {
+            text-align: center;
+            color: var(--text-light-muted);
+            font-size: 0.96rem;
+            margin-bottom: 2.8rem;
+        }
+
+        .partner-pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .partner-pillar-card {
+            background: linear-gradient(145deg, rgba(200,157,84,0.1), rgba(200,157,84,0.03));
+            border: 1px solid rgba(200,157,84,0.25);
+            border-radius: 22px;
+            padding: 2.4rem 2rem;
+            transition: all 0.35s ease;
+        }
+
+        .partner-pillar-card:hover {
+            background: linear-gradient(145deg, rgba(200,157,84,0.16), rgba(200,157,84,0.06));
+            border-color: var(--accent-gold);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .partner-pillar-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: rgba(200,157,84,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-gold);
+            font-size: 1.4rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .partner-pillar-card h4 {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            color: #FFFFFF;
+            margin-bottom: 0.7rem;
+            letter-spacing: 0.5px;
+        }
+
+        .partner-pillar-card p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.65;
+        }
+
+        .partner-cta-box {
+            background: linear-gradient(135deg, var(--bg-dark-card), rgba(200,157,84,0.08));
+            border: 1px solid rgba(200,157,84,0.3);
+            border-radius: 28px;
+            padding: 4rem;
+            text-align: center;
+        }
+
+        .partner-cta-box h3 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            color: #FFFFFF;
+            margin-bottom: 1.4rem;
+            line-height: 1.2;
+        }
+
+        .partner-cta-box p {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.72);
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto 2.2rem;
+        }
+
+        .btn-partner-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--accent-gold);
+            color: #110E0C;
+            padding: 1.1rem 2.8rem;
+            border-radius: 35px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 28px rgba(200,157,84,0.4);
+        }
+
+        .btn-partner-whatsapp:hover {
+            background: var(--accent-gold-light);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 36px rgba(200,157,84,0.5);
+        }
+
+        .partner-disclaimer {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.35);
+            margin-top: 1.6rem;
+            font-style: italic;
+        }
+
+        /* ==========================================================================
            RESPONSIVE BREAKPOINTS
            ========================================================================== */
         @media (max-width: 1200px) {
@@ -2236,6 +2600,8 @@
                 <li><a href="#menu">Menu</a></li>
                 <li><a href="#experience">Ambiance</a></li>
                 <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#community-events">Community &amp; Events</a></li>
+                <li><a href="#partner-with-us">Franchise &amp; Partner</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -2426,139 +2792,320 @@
             <!-- Right Categorized Menu List -->
             <div class="menu-categories">
 
-                <!-- 1. Hot Brews -->
+                <!-- HOT BREWS -->
                 <div class="menu-cat-group">
                     <div class="menu-cat-header">
                         <h3 class="menu-cat-title"><i class="fa-solid fa-mug-saucer"></i> Hot Brews</h3>
                         <span class="menu-cat-tag">Artisanal Espresso Bar</span>
                     </div>
-
+                    <div style="font-size:0.78rem; text-transform:uppercase; letter-spacing:1.5px; color:var(--accent-gold); font-weight:700; margin-bottom:0.7rem;">— Black —</div>
                     <div class="menu-items-list">
                         <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Espresso</span>
-                                <span class="menu-item-price">₹180</span>
-                            </div>
-                            <div class="menu-item-desc">Rich and bold double shot extracted with dense crema and caramel finish</div>
+                            <div class="menu-item-header"><span class="menu-item-name">Espresso</span><span class="menu-item-price">₹180</span></div>
                         </div>
-
                         <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Pour Over <span class="item-badge bestseller">Staff Pick</span></span>
-                                <span class="menu-item-price">₹240</span>
-                            </div>
-                            <div class="menu-item-desc">Hand-poured single origin filter brew highlighting delicate floral and citrus nuances</div>
+                            <div class="menu-item-header"><span class="menu-item-name">Pour Over <span class="item-badge bestseller">Staff Pick</span></span><span class="menu-item-price">₹240</span></div>
                         </div>
-
                         <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Spanish Latte</span>
-                                <span class="menu-item-price">₹310</span>
-                            </div>
-                            <div class="menu-item-desc">Double espresso combined with textured steamed milk and a touch of condensed sweetness</div>
+                            <div class="menu-item-header"><span class="menu-item-name">Americano</span><span class="menu-item-price">₹220</span></div>
                         </div>
-
+                    </div>
+                    <div style="font-size:0.78rem; text-transform:uppercase; letter-spacing:1.5px; color:var(--accent-gold); font-weight:700; margin:1.2rem 0 0.7rem;">— White —</div>
+                    <div class="menu-items-list">
                         <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Latte / Cappuccino</span>
-                                <span class="menu-item-price">₹250</span>
-                            </div>
-                            <div class="menu-item-desc">Classic specialty coffee with velvety micro-foam and harmonious espresso balance</div>
+                            <div class="menu-item-header"><span class="menu-item-name">Cortado</span><span class="menu-item-price">₹220</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Macchiato</span><span class="menu-item-price">₹200</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Flat White</span><span class="menu-item-price">₹240</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Spanish Latte</span><span class="menu-item-price">₹310</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Sea Salt Mocha</span><span class="menu-item-price">₹330</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Latte / Cappuccino</span><span class="menu-item-price">₹250</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Orange Zest Mocha</span><span class="menu-item-price">₹340</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Signature Hot Chocolate</span><span class="menu-item-price">₹380</span></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 2. Cold Brews & Refreshers -->
+                <!-- COLD BREWS -->
                 <div class="menu-cat-group">
                     <div class="menu-cat-header">
-                        <h3 class="menu-cat-title"><i class="fa-solid fa-snowflake"></i> Cold Brews & Shakes</h3>
+                        <h3 class="menu-cat-title"><i class="fa-solid fa-snowflake"></i> Cold Brews</h3>
                         <span class="menu-cat-tag">Chilled Signatures</span>
                     </div>
-
+                    <div style="font-size:0.78rem; text-transform:uppercase; letter-spacing:1.5px; color:var(--accent-gold); font-weight:700; margin-bottom:0.7rem;">— Black —</div>
                     <div class="menu-items-list">
                         <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Iced Americano</span>
-                                <span class="menu-item-price">₹240</span>
-                            </div>
-                            <div class="menu-item-desc">Intense double espresso poured over artisanal ice cubes and crystal chilled water</div>
+                            <div class="menu-item-header"><span class="menu-item-name">Iced Americano</span><span class="menu-item-price">₹240</span></div>
                         </div>
-
                         <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Tiramisu Iced Latte <span class="item-badge bestseller">Signature</span></span>
-                                <span class="menu-item-price">₹420</span>
-                            </div>
-                            <div class="menu-item-desc">Decadent cocoa-dusted tiramisu notes layered over cold milk and rich espresso shot</div>
+                            <div class="menu-item-header"><span class="menu-item-name">Iced Pour Over</span><span class="menu-item-price">₹260</span></div>
                         </div>
-
                         <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Lotus Biscoff Frappe</span>
-                                <span class="menu-item-price">₹380</span>
-                            </div>
-                            <div class="menu-item-desc">Creamy blended coffee infused with Belgian cookie butter and topped with biscuit crunch</div>
+                            <div class="menu-item-header"><span class="menu-item-name">Orange Cold Brew</span><span class="menu-item-price">₹360</span></div>
+                        </div>
+                    </div>
+                    <div style="font-size:0.78rem; text-transform:uppercase; letter-spacing:1.5px; color:var(--accent-gold); font-weight:700; margin:1.2rem 0 0.7rem;">— White —</div>
+                    <div class="menu-items-list">
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Affogato</span><span class="menu-item-price">₹310</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Iced Latte</span><span class="menu-item-price">₹280</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Island Brew</span><span class="menu-item-price">₹350</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Coffee Milkshake</span><span class="menu-item-price">₹320</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Tiramisu Affogato</span><span class="menu-item-price">₹360</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Citrus Cloud Brew</span><span class="menu-item-price">₹350</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">House Cold Coffee</span><span class="menu-item-price">₹310</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Tiramisu Iced Latte <span class="item-badge bestseller">Signature</span></span><span class="menu-item-price">₹420</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Iced Coconut Latte</span><span class="menu-item-price">₹390</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Lotus Biscoff Frappe</span><span class="menu-item-price">₹380</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Vietnamese Iced Coffee</span><span class="menu-item-price">₹320</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Belgian Obsession <span class="item-badge bestseller">The OG</span></span><span class="menu-item-price">₹450</span></div>
+                            <div class="menu-item-desc">The OG Belgian Cold Chocolate</div>
+                        </div>
+                    </div>
+                    <div style="background:rgba(200,157,84,0.08); border:1px dashed rgba(200,157,84,0.3); border-radius:12px; padding:1rem 1.2rem; margin-top:1.4rem;">
+                        <div style="font-size:0.8rem; font-weight:700; color:var(--accent-gold); text-transform:uppercase; letter-spacing:1px; margin-bottom:0.5rem;">Add On Options</div>
+                        <div style="font-size:0.88rem; color:var(--text-muted); line-height:1.6;">
+                            <strong style="color:var(--text-dark);">Choice of Flavour (+₹50):</strong> French Vanilla / House-Made Caramel / House-Made Mocha<br>
+                            <strong style="color:var(--text-dark);">Choice of Milk:</strong> Sarda Farms (₹0) / Raw Pressery Almond Milk (+₹90)
                         </div>
                     </div>
                 </div>
 
-                <!-- 3. House Poee's -->
+                <!-- ON THE ROCKS -->
                 <div class="menu-cat-group">
                     <div class="menu-cat-header">
-                        <h3 class="menu-cat-title"><i class="fa-solid fa-bread-slice"></i> House Poee's</h3>
+                        <h3 class="menu-cat-title"><i class="fa-solid fa-glass-water"></i> On the Rocks</h3>
+                        <span class="menu-cat-tag">Fresh &amp; Chilled</span>
+                    </div>
+                    <div class="menu-items-list">
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Mint Mojito</span><span class="menu-item-price">₹260</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Blue Lagoon</span><span class="menu-item-price">₹260</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Iced Tea (Lemon / Peach)</span><span class="menu-item-price">₹270</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SMOOTHIES -->
+                <div class="menu-cat-group">
+                    <div class="menu-cat-header">
+                        <h3 class="menu-cat-title"><i class="fa-solid fa-blender"></i> Smoothies</h3>
+                        <span class="menu-cat-tag">Wholesome Blends</span>
+                    </div>
+                    <div class="menu-items-list">
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Sunshine Slurp</span><span class="menu-item-price">₹440</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Berry Smoothie Bowl</span><span class="menu-item-price">₹550</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Cacao Banana Seed Elixir</span><span class="menu-item-price">₹390</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MATCHA -->
+                <div class="menu-cat-group">
+                    <div class="menu-cat-header">
+                        <h3 class="menu-cat-title"><i class="fa-solid fa-leaf"></i> Matcha</h3>
+                        <span class="menu-cat-tag">Japanese Green Tea</span>
+                    </div>
+                    <div class="menu-items-list">
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Tonic Matcha</span><span class="menu-item-price">₹390</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Iced Matcha Latte</span><span class="menu-item-price">₹350</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Iced Coconut Matcha</span><span class="menu-item-price">₹380</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Sparkling Matcha Lemonade</span><span class="menu-item-price">₹370</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KOMBUCHA -->
+                <div class="menu-cat-group">
+                    <div class="menu-cat-header">
+                        <h3 class="menu-cat-title"><i class="fa-solid fa-flask"></i> Kombucha</h3>
+                        <span class="menu-cat-tag">Live Culture Brews</span>
+                    </div>
+                    <div class="menu-items-list">
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Ginger Lime</span><span class="menu-item-price">₹280</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Pineapple Spice</span><span class="menu-item-price">₹260</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Pomegranate Mint</span><span class="menu-item-price">₹280</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ARTISANAL TEAS -->
+                <div class="menu-cat-group">
+                    <div class="menu-cat-header">
+                        <h3 class="menu-cat-title"><i class="fa-solid fa-mug-hot"></i> Artisanal Teas</h3>
+                        <span class="menu-cat-tag">Curated Infusions</span>
+                    </div>
+                    <div class="menu-items-list">
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Kashmiri Kahwa</span><span class="menu-item-price">₹210</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Zingly Ginger Tea</span><span class="menu-item-price">₹210</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Chamomile Infusion</span><span class="menu-item-price">₹220</span></div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><span class="menu-item-name">Calming Lavender Tea</span><span class="menu-item-price">₹210</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STARTERS -->
+                <div class="menu-cat-group">
+                    <div class="menu-cat-header">
+                        <h3 class="menu-cat-title"><i class="fa-solid fa-fire-burner"></i> Starters</h3>
+                        <span class="menu-cat-tag">Small Plates</span>
+                    </div>
+                    <div class="menu-items-list">
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Fish Fries</span><span class="menu-item-price">₹460</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">House Fries</span><span class="menu-item-price">₹270</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Fish Fingers</span><span class="menu-item-price">₹480</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Chicken Nuggets</span><span class="menu-item-price">₹390</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Golden Panko Prawns</span><span class="menu-item-price">₹480</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Rawa Chicken Popcorn</span><span class="menu-item-price">₹410</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Jalapeno Cheese Poppers</span><span class="menu-item-price">₹370</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Rosemary Potato Wedges</span><span class="menu-item-price">₹350</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Za'atar Fries with Garlic Dip</span><span class="menu-item-price">₹330</span></div></div>
+                    </div>
+                </div>
+
+                <!-- PIZZA -->
+                <div class="menu-cat-group">
+                    <div class="menu-cat-header">
+                        <h3 class="menu-cat-title"><i class="fa-solid fa-pizza-slice"></i> Pizza</h3>
+                        <span class="menu-cat-tag">Stone-Baked</span>
+                    </div>
+                    <div class="menu-items-list">
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Margherita</span><span class="menu-item-price">₹330</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Farm Fresh</span><span class="menu-item-price">₹350</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Loaded Chicken</span><span class="menu-item-price">₹400</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Chicken Pepperoni</span><span class="menu-item-price">₹380</span></div></div>
+                    </div>
+                </div>
+
+                <!-- PASTA -->
+                <div class="menu-cat-group">
+                    <div class="menu-cat-header">
+                        <h3 class="menu-cat-title"><i class="fa-solid fa-bowl-food"></i> Pasta</h3>
+                        <span class="menu-cat-tag">Penne / Spaghetti</span>
+                    </div>
+                    <div style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">Choice of Penne or Spaghetti &nbsp;|&nbsp; <strong>Add Chicken: +₹120</strong></div>
+                    <div class="menu-items-list">
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Pesto Pasta</span><span class="menu-item-price">₹460</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Creamy Arrabbiata</span><span class="menu-item-price">₹450</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Gochujang Pasta</span><span class="menu-item-price">₹490</span></div></div>
+                    </div>
+                </div>
+
+                <!-- POEE'S -->
+                <div class="menu-cat-group">
+                    <div class="menu-cat-header">
+                        <h3 class="menu-cat-title"><i class="fa-solid fa-bread-slice"></i> Poee's</h3>
                         <span class="menu-cat-tag">Authentic Goan Bread</span>
                     </div>
-
                     <div class="menu-items-list">
-                        <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Veg Poee Pocket</span>
-                                <span class="menu-item-price">₹360</span>
-                            </div>
-                            <div class="menu-item-desc">Freshly baked traditional Goan bread filled with spiced garden veggies and herb emulsion</div>
-                        </div>
-
-                        <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Chicken Kheema Poee Pocket <span class="item-badge bestseller">Guest Favorite</span></span>
-                                <span class="menu-item-price">₹420</span>
-                            </div>
-                            <div class="menu-item-desc">Slow-cooked spiced chicken mince packed inside hot, airy oven-baked poee</div>
-                        </div>
-
-                        <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Ros Omelette with Poee</span>
-                                <span class="menu-item-price">₹380</span>
-                            </div>
-                            <div class="menu-item-desc">Authentic street-style Goan fluffy omelette drowned in savory aromatic chicken gravy and served with warm poee</div>
-                        </div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Veg Poee Pocket</span><span class="menu-item-price">₹360</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Paneer Poee Pocket</span><span class="menu-item-price">₹390</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Chicken Poee Pocket</span><span class="menu-item-price">₹410</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Ros Omelette with Poee</span><span class="menu-item-price">₹380</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Mutton Kheema Poee Pocket</span><span class="menu-item-price">₹440</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Chicken Kheema Poee Pocket <span class="item-badge bestseller">Guest Favorite</span></span><span class="menu-item-price">₹420</span></div></div>
                     </div>
                 </div>
 
-                <!-- 4. Curry Bowls -->
+                <!-- ALL DAY PLATES -->
                 <div class="menu-cat-group">
                     <div class="menu-cat-header">
-                        <h3 class="menu-cat-title"><i class="fa-solid fa-bowl-rice"></i> Coastal Curry Bowls</h3>
-                        <span class="menu-cat-tag">Served with Rice or Poee</span>
+                        <h3 class="menu-cat-title"><i class="fa-solid fa-plate-wheat"></i> All Day Plates</h3>
+                        <span class="menu-cat-tag">Morning to Night</span>
                     </div>
-
                     <div class="menu-items-list">
-                        <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Raw Mango Prawns Curry with Rice <span class="item-badge bestseller">Highly Recommended</span></span>
-                                <span class="menu-item-price">₹490</span>
-                            </div>
-                            <div class="menu-item-desc">Tangy, fragrant coconut-milk coastal curry cooked with fresh succulent prawns and steamed rice</div>
-                        </div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">French Toast</span><span class="menu-item-price">₹450</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Herbed Paneer Steak</span><span class="menu-item-price">₹450</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Chickpea Smash Toast</span><span class="menu-item-price">₹380</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Desi Bombay Sandwich</span><span class="menu-item-price">₹320</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Chilli Cheese Bruschetta</span><span class="menu-item-price">₹380</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Chicken Katsu Sandwich</span><span class="menu-item-price">₹450</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Roast Chicken Sandwich</span><span class="menu-item-price">₹440</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Egg Akuri with Sourdough</span><span class="menu-item-price">₹380</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Pesto Cheese in Sourdough</span><span class="menu-item-price">₹320</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Cheese Capsicum Sandwich</span><span class="menu-item-price">₹340</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Paneer Akuri with Sourdough</span><span class="menu-item-price">₹400</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Hummus Platter with Chicken</span><span class="menu-item-price">₹450</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Pancakes with House Blue Drip</span><span class="menu-item-price">₹480</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Herbed Ricotta Sourdough Toast</span><span class="menu-item-price">₹420</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Hummus Platter with Moong Falafel</span><span class="menu-item-price">₹400</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Garden Pesto Cottage Cheese Sandwich</span><span class="menu-item-price">₹390</span></div></div>
+                    </div>
+                </div>
 
-                        <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Chicken Xacuti with Poee</span>
-                                <span class="menu-item-price">₹470</span>
-                            </div>
-                            <div class="menu-item-desc">Heritage Goan chicken curry rich in roasted coconut, white poppy seeds, and roasted whole spices</div>
-                        </div>
+                <!-- CURRY BOWLS -->
+                <div class="menu-cat-group">
+                    <div class="menu-cat-header">
+                        <h3 class="menu-cat-title"><i class="fa-solid fa-bowl-rice"></i> Curry Bowls</h3>
+                        <span class="menu-cat-tag">Served with Rice</span>
+                    </div>
+                    <div class="menu-items-list">
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Coastal Veg</span><span class="menu-item-price">₹440</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Chicken Xacuti <span class="item-badge bestseller">Heritage</span></span><span class="menu-item-price">₹470</span></div></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Coastal Prawns <span class="item-badge bestseller">Highly Recommended</span></span><span class="menu-item-price">₹490</span></div></div>
                     </div>
                 </div>
 
@@ -2947,6 +3494,140 @@
     </section>
 
     <!-- ==========================================================================
+         COMMUNITY & EVENTS SECTION
+         ========================================================================== -->
+    <section class="community-section" id="community-events">
+        <div class="section-header center">
+            <div class="section-tag" style="color:var(--accent-gold-light);">People &amp; Experiences</div>
+            <h2 class="section-title">Community &amp; Events</h2>
+            <p class="section-desc">Bringing People Together Through Coffee, Culture &amp; Experiences</p>
+        </div>
+
+        <div class="events-grid">
+            <div class="event-placeholder-card">
+                <div class="event-placeholder-icon"><i class="fa-solid fa-camera"></i></div>
+                <span class="event-placeholder-label">Live Acoustic Sessions</span>
+            </div>
+            <div class="event-placeholder-card">
+                <div class="event-placeholder-icon"><i class="fa-solid fa-paintbrush"></i></div>
+                <span class="event-placeholder-label">Creative Workshops</span>
+            </div>
+            <div class="event-placeholder-card">
+                <div class="event-placeholder-icon"><i class="fa-solid fa-users"></i></div>
+                <span class="event-placeholder-label">Community Gatherings</span>
+            </div>
+            <div class="event-placeholder-card">
+                <div class="event-placeholder-icon"><i class="fa-solid fa-mug-hot"></i></div>
+                <span class="event-placeholder-label">Coffee Tasting Events</span>
+            </div>
+            <div class="event-placeholder-card">
+                <div class="event-placeholder-icon"><i class="fa-solid fa-microphone"></i></div>
+                <span class="event-placeholder-label">Open Mic Evenings</span>
+            </div>
+            <div class="event-placeholder-card">
+                <div class="event-placeholder-icon"><i class="fa-solid fa-star"></i></div>
+                <span class="event-placeholder-label">Curated Pop-Ups</span>
+            </div>
+        </div>
+
+        <div class="community-note-box">
+            <i class="fa-solid fa-circle-info"></i>
+            <p><em>Upcoming &amp; Recent Events Gallery — Check back soon for photos from our latest workshops and live acoustic sessions!</em></p>
+        </div>
+
+        <div class="community-cta-row">
+            <a href="https://wa.me/919819544999?text=Hi%20Caf%C3%A9%20Obregado%21%20I%27d%20like%20to%20enquire%20about%20hosting%20an%20event%20at%20your%20space." target="_blank" rel="noopener noreferrer" class="btn-community-cta">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>Host an Event With Us</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         FRANCHISE & PARTNER SECTION
+         ========================================================================== -->
+    <section class="partner-section" id="partner-with-us">
+        <div class="partner-intro-block">
+            <div class="partner-intro-text">
+                <div class="section-tag" style="color:var(--accent-gold-light);">Grow With Us</div>
+                <h2 class="section-title">Franchise &amp; Partner With Us</h2>
+                <p style="font-size:1rem; color:rgba(255,255,255,0.55); letter-spacing:0.5px; margin-top:0.5rem;">A Café That Brews More Than Coffee. Coffee. Community. Culture.</p>
+                <p>
+                    At Café Obregado, we believe a great café is more than a place to grab a coffee. It is where conversations begin, friendships grow, ideas come alive and communities find their space. Born from a love for coffee, distinctive food and meaningful experiences, Café Obregado brings together contemporary café culture, comforting flavours and a welcoming atmosphere. Now, we invite passionate entrepreneurs, hospitality enthusiasts and strategic partners to be part of our journey as we explore new locations and bring the Obregado experience to more communities. Let's build something worth coming back to.
+                </p>
+                <a href="#partner-form-anchor" class="btn-partner-explore">
+                    <i class="fa-solid fa-handshake"></i>
+                    <span>Explore Franchise Opportunities</span>
+                </a>
+            </div>
+            <div class="partner-tagline-block">
+                <div class="tagline-icon"><i class="fa-solid fa-mug-hot"></i></div>
+                <h3>Coffee. Community. Culture.<br><span style="color:var(--accent-gold); font-style:italic;">One Shared Vision.</span></h3>
+            </div>
+        </div>
+
+        <div class="partner-why-title">Why Café Obregado?</div>
+        <div class="partner-why-sub">More Than a Café. A Community Experience.</div>
+        <div class="partner-features-grid">
+            <div class="partner-feature-card">
+                <div class="partner-feature-number">01</div>
+                <h4>A Distinctive Café Identity</h4>
+                <p>A contemporary café experience combining coffee, thoughtfully curated food and a warm, inviting ambience.</p>
+            </div>
+            <div class="partner-feature-card">
+                <div class="partner-feature-number">02</div>
+                <h4>Food That Brings People Together</h4>
+                <p>From coffee and refreshing brews to signature Poee pockets and comforting favourites, our menu is designed to make every visit memorable.</p>
+            </div>
+            <div class="partner-feature-card">
+                <div class="partner-feature-number">03</div>
+                <h4>Built Around Community</h4>
+                <p>Music, creative workshops, social gatherings and collaborations make Café Obregado a place where people connect beyond the menu.</p>
+            </div>
+            <div class="partner-feature-card">
+                <div class="partner-feature-number">04</div>
+                <h4>A Modern Café Culture</h4>
+                <p>A fresh, approachable identity that appeals to today's coffee lovers, young professionals, families and community-driven audiences.</p>
+            </div>
+            <div class="partner-feature-card">
+                <div class="partner-feature-number">05</div>
+                <h4>A Brand With Room to Grow</h4>
+                <p>We are looking to connect with the right partners who share our vision and want to build memorable café experiences in their own cities.</p>
+            </div>
+        </div>
+
+        <div class="partner-pillars-title">Your City. Our Coffee Culture. One Shared Vision.</div>
+        <div class="partner-pillars-sub">Choose how you'd like to work with us</div>
+        <div class="partner-pillars-grid">
+            <div class="partner-pillar-card">
+                <div class="partner-pillar-icon"><i class="fa-solid fa-store"></i></div>
+                <h4>Franchise Partnership</h4>
+                <p>Interested in opening a Café Obregado in your city? Let's explore the right location, café format and business model together.</p>
+            </div>
+            <div class="partner-pillar-card">
+                <div class="partner-pillar-icon"><i class="fa-solid fa-briefcase"></i></div>
+                <h4>Strategic Business Partnership</h4>
+                <p>Own a suitable commercial property or have experience in hospitality, retail or business development? Let's explore opportunities to collaborate.</p>
+            </div>
+            <div class="partner-pillar-card">
+                <div class="partner-pillar-icon"><i class="fa-solid fa-calendar-star"></i></div>
+                <h4>Events &amp; Community Collaborations</h4>
+                <p>Are you an event organiser, creative entrepreneur, artist or community builder? Partner with us to create experiences that bring people together.</p>
+            </div>
+        </div>
+
+        <div class="partner-cta-box" id="partner-form-anchor">
+            <h3>Let's Build the Next Obregado</h3>
+            <p>We believe the right partnerships begin with a shared vision. Whether you are an aspiring entrepreneur, an established business owner or someone with the perfect location, we would love to hear from you. Tell us a little about yourself, your city and your vision. Our team will connect with you to explore the possibilities. Ready to brew something meaningful together?</p>
+            <a href="https://wa.me/919819544999?text=Hi%20Caf%C3%A9%20Obregado%21%20I%27m%20interested%20in%20exploring%20a%20Franchise%20%2F%20Partnership%20opportunity.%20My%20Name%3A%20%5BYour%20Name%5D%20%7C%20City%3A%20%5BYour%20City%5D%20%7C%20Interest%3A%20%5BFranchise%20%2F%20Property%20%2F%20Events%5D.%20Would%20love%20to%20connect%21" target="_blank" rel="noopener noreferrer" class="btn-partner-whatsapp">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>Partner With Café Obregado</span>
+            </a>
+            <p class="partner-disclaimer">*All franchise and partnership opportunities are subject to evaluation, commercial discussions and a mutually agreed arrangement.</p>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
          9. RESERVATION MODAL (WITH WHATSAPP AUTOMATIC REDIRECT)
          ========================================================================== -->
     <div class="modal-overlay" id="reservationModal" aria-modal="true" role="dialog" aria-labelledby="modalTitle">
@@ -3055,6 +3736,14 @@
                 </a>
                 <a href="#reviews" class="pill-link">
                     <span>Reviews</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#community-events" class="pill-link">
+                    <span>Events</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#partner-with-us" class="pill-link">
+                    <span>Partner</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
                 <a href="#contact" class="pill-link">
