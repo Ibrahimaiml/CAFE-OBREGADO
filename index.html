@@ -2047,23 +2047,46 @@
         .events-nav-btn.prev { left: -22px; }
         .events-nav-btn.next { right: -22px; }
 
-        /* --- EVENT CARD --- */
-        .event-card {
-            flex: 0 0 360px;
-            height: 520px;
-            border-radius: 22px;
-            overflow: hidden;
-            position: relative;
-            scroll-snap-align: start;
-            background: #1a1411;
-            transition: transform 0.4s var(--transition-smooth), box-shadow 0.4s ease;
-            cursor: pointer;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+        /* ==========================================================================
+           SCROLL-REVEAL ANIMATION & CARD STYLING
+           ========================================================================== */
+        /* Scroll reveal base state */
+        .event-card-scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .event-card:hover {
-            transform: translateY(-8px) scale(1.012);
-            box-shadow: 0 24px 60px rgba(0,0,0,0.65);
+        .event-card-scroll-reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Dimmed default state with bright hover activation */
+        .event-card,
+        .event-card-item {
+            flex: 0 0 360px;
+            height: 520px;
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            background: #120d0b;
+            scroll-snap-align: start;
+            filter: brightness(0.65) grayscale(0.2);
+            transition: filter 0.4s ease, transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+            cursor: pointer;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+        }
+
+        .event-card:hover,
+        .event-card.active-bright,
+        .event-card-item:hover,
+        .event-card-item.active-bright {
+            filter: brightness(1.15) grayscale(0);
+            transform: translateY(-8px) scale(1.02);
+            border-color: #D4AF37;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(212, 175, 55, 0.3);
         }
 
         .event-card-bg {
@@ -2074,7 +2097,8 @@
             transition: transform 0.6s var(--transition-smooth);
         }
 
-        .event-card:hover .event-card-bg {
+        .event-card:hover .event-card-bg,
+        .event-card-item:hover .event-card-bg {
             transform: scale(1.07);
         }
 
@@ -2083,9 +2107,9 @@
             inset: 0;
             background: linear-gradient(
                 180deg,
-                rgba(10,7,5,0.18) 0%,
-                rgba(10,7,5,0.35) 40%,
-                rgba(10,7,5,0.92) 100%
+                rgba(10, 7, 5, 0.18) 0%,
+                rgba(10, 7, 5, 0.35) 40%,
+                rgba(10, 7, 5, 0.92) 100%
             );
             z-index: 1;
         }
@@ -2096,32 +2120,92 @@
             z-index: 2;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            padding: 1.5rem;
+            justify-content: flex-end;
+            padding: 1.75rem;
         }
 
-        /* Status Pill */
-        .event-status-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.38rem 0.95rem;
-            border-radius: 30px;
-            border: 1.5px solid var(--accent-gold);
-            background: rgba(200,157,84,0.12);
-            backdrop-filter: blur(8px);
-            font-size: 0.7rem;
+        /* Reference Video Vertical Gallery Strip */
+        .video-style-gallery-strip {
+            display: flex;
+            gap: 12px;
+            height: 380px;
+            margin-top: 3rem;
+            overflow-x: auto;
+            border-radius: 18px;
+        }
+
+        .video-style-gallery-strip::-webkit-scrollbar {
+            height: 5px;
+        }
+        .video-style-gallery-strip::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 99px;
+        }
+        .video-style-gallery-strip::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light));
+            border-radius: 99px;
+        }
+
+        .gallery-slice {
+            flex: 1;
+            min-width: 80px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            filter: brightness(0.6);
+            transition: flex 0.5s ease, filter 0.5s ease;
+            cursor: pointer;
+        }
+
+        .gallery-slice:hover {
+            flex: 3;
+            filter: brightness(1.1);
+        }
+
+        .gallery-slice img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+        }
+
+        .gallery-slice-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.2rem 1rem 1rem;
+            background: linear-gradient(0deg, rgba(10,7,5,0.88) 0%, transparent 100%);
+            color: #FFFFFF;
+            font-family: var(--font-heading);
+            font-size: 0.78rem;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent-gold-light);
-            font-weight: 700;
-            align-self: flex-start;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
-        .event-status-pill.limited {
-            border-color: #e8a045;
-            color: #f0b865;
-            background: rgba(232,160,69,0.12);
+        .gallery-slice:hover .gallery-slice-label {
+            opacity: 1;
+        }
+
+        .gallery-strip-heading {
+            font-family: var(--font-heading);
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            color: rgba(255,255,255,0.55);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-top: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .gallery-strip-heading span {
+            color: var(--accent-gold);
         }
 
         /* Card Footer */
@@ -3802,161 +3886,151 @@
 
             <div class="events-scroll-track" id="eventsTrack">
 
-                <!-- CARD 1: Painting & Canvas Workshops -->
-                <div class="event-card" onclick="openGalleryModal('painting')">
+                <!-- CARD 1: Artisan Pottery & Clay Crafts -->
+                <div class="event-card event-card-item event-card-scroll-reveal" onclick="openGalleryModal('ceramic')">
+                    <div class="event-card-bg" style="background-image:url('pottery_1.jpeg');"></div>
+                    <div class="event-card-gradient"></div>
+                    <div class="event-card-body">
+                        <div class="event-card-footer">
+                            <div class="event-card-subtitle">CRAFT WORKSHOP</div>
+                            <h3 class="event-card-title">Pottery &amp; Ceramic Crafts</h3>
+                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('ceramic')">
+                                VIEW GALLERY &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 2: Creative Painting & Canvas Sessions -->
+                <div class="event-card event-card-item event-card-scroll-reveal" onclick="openGalleryModal('painting')">
                     <div class="event-card-bg" style="background-image:url('painting.jpeg');"></div>
                     <div class="event-card-gradient"></div>
                     <div class="event-card-body">
-                        <span class="event-status-pill"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Available</span>
                         <div class="event-card-footer">
-                            <div class="event-card-subtitle">Creative Arts &bull; Café Obregado</div>
+                            <div class="event-card-subtitle">CREATIVE WORKSHOP</div>
                             <h3 class="event-card-title">Painting &amp; Canvas Workshops</h3>
                             <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('painting')">
-                                View Gallery <i class="fa-solid fa-arrow-right"></i>
+                                VIEW GALLERY &rarr;
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- CARD 2: Private Birthday Celebrations -->
-                <div class="event-card" onclick="openGalleryModal('birthday')">
+                <!-- CARD 3: Private Birthday Celebrations -->
+                <div class="event-card event-card-item event-card-scroll-reveal" onclick="openGalleryModal('birthday')">
                     <div class="event-card-bg" style="background-image:url('birthday_party_3.jpeg');"></div>
                     <div class="event-card-gradient"></div>
                     <div class="event-card-body">
-                        <span class="event-status-pill limited"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Limited Slots</span>
                         <div class="event-card-footer">
-                            <div class="event-card-subtitle">Private Venue &bull; Café Obregado</div>
-                            <h3 class="event-card-title">Private Birthday Celebrations</h3>
+                            <div class="event-card-subtitle">PRIVATE EVENTS</div>
+                            <h3 class="event-card-title">Birthday Parties &amp; Private Dinners</h3>
                             <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('birthday')">
-                                View Gallery <i class="fa-solid fa-arrow-right"></i>
+                                VIEW GALLERY &rarr;
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- CARD 3: Dance Group Performances -->
-                <div class="event-card" onclick="openGalleryModal('dance')">
+                <!-- CARD 4: Dance & Performing Arts Showcase -->
+                <div class="event-card event-card-item event-card-scroll-reveal" onclick="openGalleryModal('dance')">
                     <div class="event-card-bg" style="background-image:url('dance_performance_1.jpeg');"></div>
                     <div class="event-card-gradient"></div>
                     <div class="event-card-body">
-                        <span class="event-status-pill"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Available</span>
                         <div class="event-card-footer">
-                            <div class="event-card-subtitle">Performing Arts &bull; Café Obregado</div>
+                            <div class="event-card-subtitle">PERFORMING ARTS</div>
                             <h3 class="event-card-title">Dance Group Performances</h3>
                             <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('dance')">
-                                View Gallery <i class="fa-solid fa-arrow-right"></i>
+                                VIEW GALLERY &rarr;
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- CARD 4: Plant Potting & Green Living -->
-                <div class="event-card" onclick="openGalleryModal('pottery')">
+                <!-- CARD 5: Plant Potting & Botanical Living -->
+                <div class="event-card event-card-item event-card-scroll-reveal" onclick="openGalleryModal('greenlife')">
                     <div class="event-card-bg" style="background-image:url('pottery_5.jpeg');"></div>
                     <div class="event-card-gradient"></div>
                     <div class="event-card-body">
-                        <span class="event-status-pill"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Available</span>
                         <div class="event-card-footer">
-                            <div class="event-card-subtitle">Green Living &bull; Café Obregado</div>
+                            <div class="event-card-subtitle">GREEN LIVING</div>
                             <h3 class="event-card-title">Plant Potting &amp; Green Living</h3>
-                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('pottery')">
-                                View Gallery <i class="fa-solid fa-arrow-right"></i>
+                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('greenlife')">
+                                VIEW GALLERY &rarr;
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- CARD 5: Christmas & Santa Letter Activity -->
-                <div class="event-card" onclick="openGalleryModal('christmas')">
+                <!-- CARD 6: Christmas & Seasonal Celebrations -->
+                <div class="event-card event-card-item event-card-scroll-reveal" onclick="openGalleryModal('christmas')">
                     <div class="event-card-bg" style="background-image:url('christmas_activity.jpeg');"></div>
                     <div class="event-card-gradient"></div>
                     <div class="event-card-body">
-                        <span class="event-status-pill limited"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Limited Slots</span>
                         <div class="event-card-footer">
-                            <div class="event-card-subtitle">Seasonal &bull; Café Obregado</div>
-                            <h3 class="event-card-title">Christmas &amp; Santa Letter Activity</h3>
+                            <div class="event-card-subtitle">SEASONAL EVENT</div>
+                            <h3 class="event-card-title">Christmas &amp; Letter to Santa Activity</h3>
                             <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('christmas')">
-                                View Gallery <i class="fa-solid fa-arrow-right"></i>
+                                VIEW GALLERY &rarr;
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- CARD 6: Mahjong Game Nights -->
-                <div class="event-card" onclick="openGalleryModal('mahjong')">
+                <!-- CARD 7: Mahjong Social Game Nights -->
+                <div class="event-card event-card-item event-card-scroll-reveal" onclick="openGalleryModal('mahjong')">
                     <div class="event-card-bg" style="background-image:url('mahjong_game.jpeg');"></div>
                     <div class="event-card-gradient"></div>
                     <div class="event-card-body">
-                        <span class="event-status-pill"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Available</span>
                         <div class="event-card-footer">
-                            <div class="event-card-subtitle">Game Night &bull; Café Obregado</div>
+                            <div class="event-card-subtitle">GAME NIGHT</div>
                             <h3 class="event-card-title">Mahjong Game Nights</h3>
                             <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('mahjong')">
-                                View Gallery <i class="fa-solid fa-arrow-right"></i>
+                                VIEW GALLERY &rarr;
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- CARD 7: Pottery & Ceramic Crafts -->
-                <div class="event-card" onclick="openGalleryModal('ceramic')">
-                    <div class="event-card-bg" style="background-image:url('pottery_5.jpeg'); background-position: 30% center;"></div>
-                    <div class="event-card-gradient"></div>
-                    <div class="event-card-body">
-                        <span class="event-status-pill"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Available</span>
-                        <div class="event-card-footer">
-                            <div class="event-card-subtitle">Craft Workshop &bull; Café Obregado</div>
-                            <h3 class="event-card-title">Pottery &amp; Ceramic Crafts</h3>
-                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('ceramic')">
-                                View Gallery <i class="fa-solid fa-arrow-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CARD 8: Halloween Theme Gatherings -->
-                <div class="event-card" onclick="openGalleryModal('halloween')">
+                <!-- CARD 8: Halloween Theme Parties -->
+                <div class="event-card event-card-item event-card-scroll-reveal" onclick="openGalleryModal('halloween')">
                     <div class="event-card-bg" style="background-image:url('halloween_party_1.jpeg');"></div>
                     <div class="event-card-gradient"></div>
                     <div class="event-card-body">
-                        <span class="event-status-pill limited"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Limited Slots</span>
                         <div class="event-card-footer">
-                            <div class="event-card-subtitle">Themed Party &bull; Café Obregado</div>
-                            <h3 class="event-card-title">Halloween Theme Gatherings</h3>
+                            <div class="event-card-subtitle">THEME NIGHT</div>
+                            <h3 class="event-card-title">Halloween Party Gathering</h3>
                             <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('halloween')">
-                                View Gallery <i class="fa-solid fa-arrow-right"></i>
+                                VIEW GALLERY &rarr;
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- CARD 9: Women's Health & Wellness -->
-                <div class="event-card" onclick="openGalleryModal('wellness')">
+                <!-- CARD 9: Women's Health & Wellness Seminars -->
+                <div class="event-card event-card-item event-card-scroll-reveal" onclick="openGalleryModal('wellness')">
                     <div class="event-card-bg" style="background-image:url('women_health_workshop.jpeg');"></div>
                     <div class="event-card-gradient"></div>
                     <div class="event-card-body">
-                        <span class="event-status-pill"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Available</span>
                         <div class="event-card-footer">
-                            <div class="event-card-subtitle">Wellness &bull; Café Obregado</div>
+                            <div class="event-card-subtitle">WELLNESS WORKSHOP</div>
                             <h3 class="event-card-title">Women's Health &amp; Wellness</h3>
                             <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('wellness')">
-                                View Gallery <i class="fa-solid fa-arrow-right"></i>
+                                VIEW GALLERY &rarr;
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- CARD 10: Live Music Jamming & Film Shoots -->
-                <div class="event-card" onclick="openGalleryModal('livemusic')">
+                <!-- CARD 10: Live Music, Jamming & Film Shoots -->
+                <div class="event-card event-card-item event-card-scroll-reveal" onclick="openGalleryModal('livemusic')">
                     <div class="event-card-bg" style="background-image:url('live_music_jamming_1.jpeg');"></div>
                     <div class="event-card-gradient"></div>
                     <div class="event-card-body">
-                        <span class="event-status-pill"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Available</span>
                         <div class="event-card-footer">
-                            <div class="event-card-subtitle">Live &amp; Film &bull; Café Obregado</div>
-                            <h3 class="event-card-title">Live Acoustic Jam &amp; Film Shoots</h3>
+                            <div class="event-card-subtitle">MUSIC &amp; FILM LOCATION</div>
+                            <h3 class="event-card-title">Live Music, Jamming &amp; Film Shoots</h3>
                             <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('livemusic')">
-                                View Gallery <i class="fa-solid fa-arrow-right"></i>
+                                VIEW GALLERY &rarr;
                             </button>
                         </div>
                     </div>
@@ -3964,6 +4038,39 @@
 
             </div><!-- /events-scroll-track -->
         </div><!-- /events-scroll-outer -->
+
+        <!-- ACCORDION GALLERY STRIP — “THROUGH OUR EYES” -->
+        <p class="gallery-strip-heading">Through <span>Our Eyes</span></p>
+        <div class="video-style-gallery-strip">
+            <div class="gallery-slice" onclick="openGalleryModal('ceramic')">
+                <img src="pottery_1.jpeg" alt="Pottery Workshop">
+                <div class="gallery-slice-label">Pottery &amp; Ceramics</div>
+            </div>
+            <div class="gallery-slice" onclick="openGalleryModal('halloween')">
+                <img src="halloween_party_2.jpeg" alt="Halloween">
+                <div class="gallery-slice-label">Halloween Night</div>
+            </div>
+            <div class="gallery-slice" onclick="openGalleryModal('dance')">
+                <img src="dance_performance_2.jpeg" alt="Dance">
+                <div class="gallery-slice-label">Dance Showcase</div>
+            </div>
+            <div class="gallery-slice" onclick="openGalleryModal('birthday')">
+                <img src="birthday_party_4.jpeg" alt="Birthday">
+                <div class="gallery-slice-label">Private Celebrations</div>
+            </div>
+            <div class="gallery-slice" onclick="openGalleryModal('livemusic')">
+                <img src="live_music_jamming_2.jpeg" alt="Live Music">
+                <div class="gallery-slice-label">Live Music &amp; Jams</div>
+            </div>
+            <div class="gallery-slice" onclick="openGalleryModal('painting')">
+                <img src="painiting_workshop.jpeg" alt="Painting">
+                <div class="gallery-slice-label">Canvas Workshops</div>
+            </div>
+            <div class="gallery-slice" onclick="openGalleryModal('livemusic')">
+                <img src="filmshootfor_zee_primevideo1.jpeg" alt="Film Shoot">
+                <div class="gallery-slice-label">Film Location</div>
+            </div>
+        </div>
 
         <div class="community-cta-row">
             <a href="https://wa.me/919819544999?text=Hi%20Caf%C3%A9%20Obregado%21%20I%27d%20like%20to%20enquire%20about%20hosting%20an%20event%20at%20your%20space." target="_blank" rel="noopener noreferrer" class="btn-community-cta">
@@ -4556,57 +4663,100 @@ Kindly confirm availability. Looking forward to dining with you!`;
             }
 
             /* ----------------------------------------------------------------------
-               9. GALLERY MODAL CONTROLLER
+               8b. SCROLL REVEAL OBSERVER & INTERACTIVE BRIGHTNESS FOR EVENT CARDS
+               ---------------------------------------------------------------------- */
+            const eventCards = document.querySelectorAll('.event-card-scroll-reveal');
+            if ('IntersectionObserver' in window) {
+                const eventCardObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach((entry, idx) => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => {
+                                entry.target.classList.add('is-visible');
+                            }, idx * 60);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    root: null,
+                    threshold: 0.15,
+                    rootMargin: '0px 0px -40px 0px'
+                });
+
+                eventCards.forEach(card => eventCardObserver.observe(card));
+            } else {
+                eventCards.forEach(card => card.classList.add('is-visible'));
+            }
+
+            // Click activation for lighting up card
+            document.querySelectorAll('.event-card, .event-card-item').forEach(card => {
+                card.addEventListener('click', function() {
+                    document.querySelectorAll('.event-card, .event-card-item').forEach(c => c.classList.remove('active-bright'));
+                    this.classList.add('active-bright');
+                });
+            });
+
+            /* ----------------------------------------------------------------------
+               9. GALLERY MODAL CONTROLLER (EXACT ASSET MAPPING)
                ---------------------------------------------------------------------- */
             const galleryData = {
+                ceramic: {
+                    tag: 'CRAFT WORKSHOP',
+                    title: 'Pottery & Ceramic Crafts',
+                    images: ['pottery_1.jpeg', 'pottery_2.jpeg', 'pottery_3.jpeg', 'pottery_4.jpeg', 'pottery_5.jpeg']
+                },
+                pottery: {
+                    tag: 'CRAFT WORKSHOP',
+                    title: 'Pottery & Ceramic Crafts',
+                    images: ['pottery_1.jpeg', 'pottery_2.jpeg', 'pottery_3.jpeg', 'pottery_4.jpeg', 'pottery_5.jpeg']
+                },
                 painting: {
-                    tag: 'Creative Arts',
+                    tag: 'CREATIVE WORKSHOP',
                     title: 'Painting & Canvas Workshops',
                     images: ['painting.jpeg', 'painiting_workshop.jpeg']
                 },
                 birthday: {
-                    tag: 'Private Venue',
-                    title: 'Private Birthday Celebrations',
+                    tag: 'PRIVATE EVENTS',
+                    title: 'Birthday Parties & Private Dinners',
                     images: ['birthday_party_3.jpeg', 'birthday_party_4.jpeg']
                 },
                 dance: {
-                    tag: 'Performing Arts',
+                    tag: 'PERFORMING ARTS',
                     title: 'Dance Group Performances',
                     images: ['dance_performance_1.jpeg', 'dance_performance_2.jpeg']
                 },
-                pottery: {
-                    tag: 'Green Living',
+                greenlife: {
+                    tag: 'GREEN LIVING',
+                    title: 'Plant Potting & Green Living',
+                    images: ['pottery_5.jpeg']
+                },
+                potting: {
+                    tag: 'GREEN LIVING',
                     title: 'Plant Potting & Green Living',
                     images: ['pottery_5.jpeg']
                 },
                 christmas: {
-                    tag: 'Seasonal',
-                    title: 'Christmas & Santa Letter Activity',
+                    tag: 'SEASONAL EVENT',
+                    title: 'Christmas & Letter to Santa Activity',
                     images: ['christmas_activity.jpeg']
                 },
                 mahjong: {
-                    tag: 'Game Night',
+                    tag: 'GAME NIGHT',
                     title: 'Mahjong Game Nights',
                     images: ['mahjong_game.jpeg']
                 },
-                ceramic: {
-                    tag: 'Craft Workshop',
-                    title: 'Pottery & Ceramic Crafts',
-                    images: ['pottery_5.jpeg']
-                },
                 halloween: {
-                    tag: 'Themed Party',
-                    title: 'Halloween Theme Gatherings',
+                    tag: 'THEME NIGHT',
+                    title: 'Halloween Party Gathering',
                     images: ['halloween_party_1.jpeg', 'halloween_party_2.jpeg', 'halloween_party_3.jpeg', 'halloween_party_4.jpeg', 'halloween_party_5.jpeg']
                 },
                 wellness: {
-                    tag: 'Wellness',
+                    tag: 'WELLNESS WORKSHOP',
                     title: "Women's Health & Wellness",
                     images: ['women_health_workshop.jpeg']
                 },
                 livemusic: {
-                    tag: 'Live & Film',
-                    title: 'Live Acoustic Jam & Film Shoots',
+                    tag: 'MUSIC & FILM LOCATION',
+                    title: 'Live Music, Jamming & Film Shoots',
                     images: ['live_music_jamming_1.jpeg', 'live_music_jamming_2.jpeg', 'live_music_jamming_3.jpeg', 'filmshootfor_zee_primevideo1.jpeg', 'filmshootfor_zee_primevideo2.jpeg']
                 }
             };
