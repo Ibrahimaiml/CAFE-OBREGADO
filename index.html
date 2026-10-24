@@ -1968,9 +1968,13 @@
         /* ==========================================================================
            COMMUNITY & EVENTS SECTION
            ========================================================================== */
+        /* ==========================================================================
+           COMMUNITY & EVENTS — HORIZONTAL STICKY SCROLL
+           ========================================================================== */
         .community-section {
             background-color: var(--bg-dark);
             color: #FFFFFF;
+            overflow: hidden;
         }
 
         .community-section .section-title {
@@ -1981,79 +1985,205 @@
             color: var(--text-light-muted);
         }
 
-        .events-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.8rem;
+        /* Scroll Track Wrapper */
+        .events-scroll-outer {
+            position: relative;
             margin-top: 3rem;
         }
 
-        .event-placeholder-card {
-            position: relative;
-            background: rgba(255,255,255,0.04);
-            border: 1px dashed rgba(200,157,84,0.3);
-            border-radius: 20px;
+        .events-scroll-track {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding: 1rem 0 2rem 0;
+            -webkit-overflow-scrolling: touch;
+            cursor: grab;
+        }
+
+        .events-scroll-track:active {
+            cursor: grabbing;
+        }
+
+        /* Custom dark-gold scrollbar */
+        .events-scroll-track::-webkit-scrollbar {
+            height: 5px;
+        }
+        .events-scroll-track::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+            border-radius: 99px;
+        }
+        .events-scroll-track::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light));
+            border-radius: 99px;
+        }
+
+        /* Arrow nav buttons */
+        .events-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(200,157,84,0.18);
+            border: 1.5px solid rgba(200,157,84,0.5);
+            color: var(--accent-gold-light);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+        .events-nav-btn:hover {
+            background: rgba(200,157,84,0.38);
+            border-color: var(--accent-gold);
+            transform: translateY(-50%) scale(1.08);
+        }
+        .events-nav-btn.prev { left: -22px; }
+        .events-nav-btn.next { right: -22px; }
+
+        /* --- EVENT CARD --- */
+        .event-card {
+            flex: 0 0 360px;
+            height: 520px;
+            border-radius: 22px;
             overflow: hidden;
-            aspect-ratio: 4/3;
+            position: relative;
+            scroll-snap-align: start;
+            background: #1a1411;
+            transition: transform 0.4s var(--transition-smooth), box-shadow 0.4s ease;
+            cursor: pointer;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+        }
+
+        .event-card:hover {
+            transform: translateY(-8px) scale(1.012);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.65);
+        }
+
+        .event-card-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s var(--transition-smooth);
+        }
+
+        .event-card:hover .event-card-bg {
+            transform: scale(1.07);
+        }
+
+        .event-card-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(10,7,5,0.18) 0%,
+                rgba(10,7,5,0.35) 40%,
+                rgba(10,7,5,0.92) 100%
+            );
+            z-index: 1;
+        }
+
+        .event-card-body {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+            padding: 1.5rem;
+        }
+
+        /* Status Pill */
+        .event-status-pill {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            transition: all 0.35s ease;
-        }
-
-        .event-placeholder-card:hover {
-            background: rgba(200,157,84,0.06);
-            border-color: rgba(200,157,84,0.55);
-            transform: translateY(-5px);
-        }
-
-        .event-placeholder-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
+            gap: 0.4rem;
+            padding: 0.38rem 0.95rem;
+            border-radius: 30px;
+            border: 1.5px solid var(--accent-gold);
             background: rgba(200,157,84,0.12);
-            border: 1px solid rgba(200,157,84,0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent-gold);
-            font-size: 1.5rem;
+            backdrop-filter: blur(8px);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-gold-light);
+            font-weight: 700;
+            align-self: flex-start;
         }
 
-        .event-placeholder-label {
+        .event-status-pill.limited {
+            border-color: #e8a045;
+            color: #f0b865;
+            background: rgba(232,160,69,0.12);
+        }
+
+        /* Card Footer */
+        .event-card-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .event-card-subtitle {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        .event-card-title {
             font-family: var(--font-heading);
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.55);
-            letter-spacing: 1px;
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            color: #FFFFFF;
+            line-height: 1.2;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.8rem;
         }
 
-        .community-note-box {
-            margin-top: 2.8rem;
-            background: rgba(200,157,84,0.07);
-            border: 1px solid rgba(200,157,84,0.22);
-            border-radius: 16px;
-            padding: 1.6rem 2rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
+        /* View Gallery CTA */
+        .btn-view-gallery {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(255,255,255,0.1);
+            border: 1.5px solid rgba(255,255,255,0.28);
+            backdrop-filter: blur(10px);
+            color: #FFFFFF;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 0.6rem 1.3rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            align-self: flex-start;
         }
 
-        .community-note-box i {
-            color: var(--accent-gold);
-            font-size: 1.3rem;
-            flex-shrink: 0;
-            margin-top: 2px;
+        .btn-view-gallery:hover {
+            background: var(--accent-gold);
+            border-color: var(--accent-gold);
+            color: #110E0C;
         }
 
-        .community-note-box p {
-            font-size: 0.95rem;
-            color: rgba(255,255,255,0.72);
-            line-height: 1.65;
-            font-style: italic;
+        .btn-view-gallery i {
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
         }
 
+        .btn-view-gallery:hover i {
+            transform: translateX(4px);
+        }
+
+        /* Bottom CTA Row */
         .community-cta-row {
             margin-top: 3.2rem;
             display: flex;
@@ -2079,6 +2209,130 @@
             background: #20BA5A;
             transform: translateY(-3px);
             box-shadow: 0 14px 32px rgba(37,211,102,0.45);
+        }
+
+        /* ==========================================================================
+           GALLERY MODAL
+           ========================================================================== */
+        .gallery-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            z-index: 9000;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+            overflow-y: auto;
+        }
+
+        .gallery-modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .gallery-modal-inner {
+            width: 100%;
+            max-width: 1100px;
+            margin: auto;
+            padding: 4rem 2rem 5rem;
+        }
+
+        .gallery-modal-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 2.5rem;
+            gap: 1rem;
+        }
+
+        .gallery-modal-title-block .gallery-modal-tag {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: var(--accent-gold);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-modal-title-block h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            color: #FFFFFF;
+            letter-spacing: 0.5px;
+        }
+
+        .gallery-modal-close {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #FFFFFF;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-modal-close:hover {
+            background: rgba(200,157,84,0.2);
+            border-color: var(--accent-gold);
+            color: var(--accent-gold-light);
+        }
+
+        .gallery-modal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-modal-img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            border-radius: 14px;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            cursor: zoom-in;
+        }
+
+        .gallery-modal-img:hover {
+            transform: scale(1.025);
+            box-shadow: 0 12px 40px rgba(200,157,84,0.25);
+        }
+
+        .gallery-modal-footer {
+            display: flex;
+            justify-content: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn-gallery-book {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #25D366;
+            color: #FFFFFF;
+            padding: 1.05rem 2.6rem;
+            border-radius: 35px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 8px 24px rgba(37,211,102,0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-gallery-book:hover {
+            background: #20BA5A;
+            transform: translateY(-3px);
+            box-shadow: 0 14px 32px rgba(37,211,102,0.5);
         }
 
         /* ==========================================================================
@@ -2708,10 +2962,6 @@
         <div class="hero-overlay"></div>
 
         <div class="hero-content">
-            <div class="hero-badge">
-                <i class="fa-solid fa-star"></i>
-                <span>Specialty Coffee &bull; House-Made Poee &bull; Thane West</span>
-            </div>
 
             <h1 class="hero-title">More Espresso,<br><span class="title-accent">Less Depresso.</span></h1>
 
@@ -3541,37 +3791,179 @@
             <p class="section-desc">Bringing People Together Through Coffee, Culture &amp; Experiences</p>
         </div>
 
-        <div class="events-grid">
-            <div class="event-placeholder-card">
-                <div class="event-placeholder-icon"><i class="fa-solid fa-camera"></i></div>
-                <span class="event-placeholder-label">Live Acoustic Sessions</span>
-            </div>
-            <div class="event-placeholder-card">
-                <div class="event-placeholder-icon"><i class="fa-solid fa-paintbrush"></i></div>
-                <span class="event-placeholder-label">Creative Workshops</span>
-            </div>
-            <div class="event-placeholder-card">
-                <div class="event-placeholder-icon"><i class="fa-solid fa-users"></i></div>
-                <span class="event-placeholder-label">Community Gatherings</span>
-            </div>
-            <div class="event-placeholder-card">
-                <div class="event-placeholder-icon"><i class="fa-solid fa-mug-hot"></i></div>
-                <span class="event-placeholder-label">Coffee Tasting Events</span>
-            </div>
-            <div class="event-placeholder-card">
-                <div class="event-placeholder-icon"><i class="fa-solid fa-microphone"></i></div>
-                <span class="event-placeholder-label">Open Mic Evenings</span>
-            </div>
-            <div class="event-placeholder-card">
-                <div class="event-placeholder-icon"><i class="fa-solid fa-star"></i></div>
-                <span class="event-placeholder-label">Curated Pop-Ups</span>
-            </div>
-        </div>
+        <div class="events-scroll-outer">
+            <!-- Prev / Next nav buttons -->
+            <button class="events-nav-btn prev" id="evtPrev" aria-label="Scroll left">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button class="events-nav-btn next" id="evtNext" aria-label="Scroll right">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
 
-        <div class="community-note-box">
-            <i class="fa-solid fa-circle-info"></i>
-            <p><em>Upcoming &amp; Recent Events Gallery — Check back soon for photos from our latest workshops and live acoustic sessions!</em></p>
-        </div>
+            <div class="events-scroll-track" id="eventsTrack">
+
+                <!-- CARD 1: Painting & Canvas Workshops -->
+                <div class="event-card" onclick="openGalleryModal('painting')">
+                    <div class="event-card-bg" style="background-image:url('painting.jpeg');"></div>
+                    <div class="event-card-gradient"></div>
+                    <div class="event-card-body">
+                        <span class="event-status-pill"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Available</span>
+                        <div class="event-card-footer">
+                            <div class="event-card-subtitle">Creative Arts &bull; Café Obregado</div>
+                            <h3 class="event-card-title">Painting &amp; Canvas Workshops</h3>
+                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('painting')">
+                                View Gallery <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 2: Private Birthday Celebrations -->
+                <div class="event-card" onclick="openGalleryModal('birthday')">
+                    <div class="event-card-bg" style="background-image:url('birthday_party_3.jpeg');"></div>
+                    <div class="event-card-gradient"></div>
+                    <div class="event-card-body">
+                        <span class="event-status-pill limited"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Limited Slots</span>
+                        <div class="event-card-footer">
+                            <div class="event-card-subtitle">Private Venue &bull; Café Obregado</div>
+                            <h3 class="event-card-title">Private Birthday Celebrations</h3>
+                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('birthday')">
+                                View Gallery <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 3: Dance Group Performances -->
+                <div class="event-card" onclick="openGalleryModal('dance')">
+                    <div class="event-card-bg" style="background-image:url('dance_performance_1.jpeg');"></div>
+                    <div class="event-card-gradient"></div>
+                    <div class="event-card-body">
+                        <span class="event-status-pill"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Available</span>
+                        <div class="event-card-footer">
+                            <div class="event-card-subtitle">Performing Arts &bull; Café Obregado</div>
+                            <h3 class="event-card-title">Dance Group Performances</h3>
+                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('dance')">
+                                View Gallery <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 4: Plant Potting & Green Living -->
+                <div class="event-card" onclick="openGalleryModal('pottery')">
+                    <div class="event-card-bg" style="background-image:url('pottery_5.jpeg');"></div>
+                    <div class="event-card-gradient"></div>
+                    <div class="event-card-body">
+                        <span class="event-status-pill"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Available</span>
+                        <div class="event-card-footer">
+                            <div class="event-card-subtitle">Green Living &bull; Café Obregado</div>
+                            <h3 class="event-card-title">Plant Potting &amp; Green Living</h3>
+                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('pottery')">
+                                View Gallery <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 5: Christmas & Santa Letter Activity -->
+                <div class="event-card" onclick="openGalleryModal('christmas')">
+                    <div class="event-card-bg" style="background-image:url('christmas_activity.jpeg');"></div>
+                    <div class="event-card-gradient"></div>
+                    <div class="event-card-body">
+                        <span class="event-status-pill limited"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Limited Slots</span>
+                        <div class="event-card-footer">
+                            <div class="event-card-subtitle">Seasonal &bull; Café Obregado</div>
+                            <h3 class="event-card-title">Christmas &amp; Santa Letter Activity</h3>
+                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('christmas')">
+                                View Gallery <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 6: Mahjong Game Nights -->
+                <div class="event-card" onclick="openGalleryModal('mahjong')">
+                    <div class="event-card-bg" style="background-image:url('mahjong_game.jpeg');"></div>
+                    <div class="event-card-gradient"></div>
+                    <div class="event-card-body">
+                        <span class="event-status-pill"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Available</span>
+                        <div class="event-card-footer">
+                            <div class="event-card-subtitle">Game Night &bull; Café Obregado</div>
+                            <h3 class="event-card-title">Mahjong Game Nights</h3>
+                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('mahjong')">
+                                View Gallery <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 7: Pottery & Ceramic Crafts -->
+                <div class="event-card" onclick="openGalleryModal('ceramic')">
+                    <div class="event-card-bg" style="background-image:url('pottery_5.jpeg'); background-position: 30% center;"></div>
+                    <div class="event-card-gradient"></div>
+                    <div class="event-card-body">
+                        <span class="event-status-pill"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Available</span>
+                        <div class="event-card-footer">
+                            <div class="event-card-subtitle">Craft Workshop &bull; Café Obregado</div>
+                            <h3 class="event-card-title">Pottery &amp; Ceramic Crafts</h3>
+                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('ceramic')">
+                                View Gallery <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 8: Halloween Theme Gatherings -->
+                <div class="event-card" onclick="openGalleryModal('halloween')">
+                    <div class="event-card-bg" style="background-image:url('halloween_party_1.jpeg');"></div>
+                    <div class="event-card-gradient"></div>
+                    <div class="event-card-body">
+                        <span class="event-status-pill limited"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Limited Slots</span>
+                        <div class="event-card-footer">
+                            <div class="event-card-subtitle">Themed Party &bull; Café Obregado</div>
+                            <h3 class="event-card-title">Halloween Theme Gatherings</h3>
+                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('halloween')">
+                                View Gallery <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 9: Women's Health & Wellness -->
+                <div class="event-card" onclick="openGalleryModal('wellness')">
+                    <div class="event-card-bg" style="background-image:url('women_health_workshop.jpeg');"></div>
+                    <div class="event-card-gradient"></div>
+                    <div class="event-card-body">
+                        <span class="event-status-pill"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Available</span>
+                        <div class="event-card-footer">
+                            <div class="event-card-subtitle">Wellness &bull; Café Obregado</div>
+                            <h3 class="event-card-title">Women's Health &amp; Wellness</h3>
+                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('wellness')">
+                                View Gallery <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 10: Live Music Jamming & Film Shoots -->
+                <div class="event-card" onclick="openGalleryModal('livemusic')">
+                    <div class="event-card-bg" style="background-image:url('live_music_jamming_1.jpeg');"></div>
+                    <div class="event-card-gradient"></div>
+                    <div class="event-card-body">
+                        <span class="event-status-pill"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Available</span>
+                        <div class="event-card-footer">
+                            <div class="event-card-subtitle">Live &amp; Film &bull; Café Obregado</div>
+                            <h3 class="event-card-title">Live Acoustic Jam &amp; Film Shoots</h3>
+                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('livemusic')">
+                                View Gallery <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /events-scroll-track -->
+        </div><!-- /events-scroll-outer -->
 
         <div class="community-cta-row">
             <a href="https://wa.me/919819544999?text=Hi%20Caf%C3%A9%20Obregado%21%20I%27d%20like%20to%20enquire%20about%20hosting%20an%20event%20at%20your%20space." target="_blank" rel="noopener noreferrer" class="btn-community-cta">
@@ -3580,6 +3972,32 @@
             </a>
         </div>
     </section>
+
+    <!-- ==========================================================================
+         GALLERY MODAL
+         ========================================================================== -->
+    <div class="gallery-modal-overlay" id="galleryModal" aria-modal="true" role="dialog">
+        <div class="gallery-modal-inner">
+            <div class="gallery-modal-header">
+                <div class="gallery-modal-title-block">
+                    <div class="gallery-modal-tag" id="galleryModalTag">Event Gallery</div>
+                    <h2 id="galleryModalTitle">Gallery</h2>
+                </div>
+                <button class="gallery-modal-close" onclick="closeGalleryModal()" aria-label="Close gallery">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="gallery-modal-grid" id="galleryModalGrid">
+                <!-- Images injected by JS -->
+            </div>
+            <div class="gallery-modal-footer">
+                <a id="galleryBookBtn" href="https://wa.me/919819544999?text=Hi%20Caf%C3%A9%20Obregado%21%20I%27d%20like%20to%20enquire%20about%20booking%20this%20event%20at%20your%20space." target="_blank" rel="noopener noreferrer" class="btn-gallery-book">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    Book / Host With Us
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- ==========================================================================
          FRANCHISE & PARTNER SECTION
@@ -4096,6 +4514,142 @@ Kindly confirm availability. Looking forward to dining with you!`;
             if (mobileMenuBtn) {
                 mobileMenuBtn.addEventListener('click', openMobileMenu);
             }
+
+            /* ----------------------------------------------------------------------
+               8. EVENTS SCROLL — DRAG TO SCROLL + ARROW NAV
+               ---------------------------------------------------------------------- */
+            const eventsTrack = document.getElementById('eventsTrack');
+            const evtPrev = document.getElementById('evtPrev');
+            const evtNext = document.getElementById('evtNext');
+
+            if (eventsTrack) {
+                // Arrow buttons
+                if (evtPrev) {
+                    evtPrev.addEventListener('click', () => {
+                        eventsTrack.scrollBy({ left: -380, behavior: 'smooth' });
+                    });
+                }
+                if (evtNext) {
+                    evtNext.addEventListener('click', () => {
+                        eventsTrack.scrollBy({ left: 380, behavior: 'smooth' });
+                    });
+                }
+
+                // Drag-to-scroll
+                let isDragging = false, startX = 0, scrollLeft = 0;
+
+                eventsTrack.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    startX = e.pageX - eventsTrack.offsetLeft;
+                    scrollLeft = eventsTrack.scrollLeft;
+                    eventsTrack.style.cursor = 'grabbing';
+                });
+                eventsTrack.addEventListener('mouseleave', () => { isDragging = false; eventsTrack.style.cursor = 'grab'; });
+                eventsTrack.addEventListener('mouseup', () => { isDragging = false; eventsTrack.style.cursor = 'grab'; });
+                eventsTrack.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    e.preventDefault();
+                    const x = e.pageX - eventsTrack.offsetLeft;
+                    const walk = (x - startX) * 1.4;
+                    eventsTrack.scrollLeft = scrollLeft - walk;
+                });
+            }
+
+            /* ----------------------------------------------------------------------
+               9. GALLERY MODAL CONTROLLER
+               ---------------------------------------------------------------------- */
+            const galleryData = {
+                painting: {
+                    tag: 'Creative Arts',
+                    title: 'Painting & Canvas Workshops',
+                    images: ['painting.jpeg', 'painiting_workshop.jpeg']
+                },
+                birthday: {
+                    tag: 'Private Venue',
+                    title: 'Private Birthday Celebrations',
+                    images: ['birthday_party_3.jpeg', 'birthday_party_4.jpeg']
+                },
+                dance: {
+                    tag: 'Performing Arts',
+                    title: 'Dance Group Performances',
+                    images: ['dance_performance_1.jpeg', 'dance_performance_2.jpeg']
+                },
+                pottery: {
+                    tag: 'Green Living',
+                    title: 'Plant Potting & Green Living',
+                    images: ['pottery_5.jpeg']
+                },
+                christmas: {
+                    tag: 'Seasonal',
+                    title: 'Christmas & Santa Letter Activity',
+                    images: ['christmas_activity.jpeg']
+                },
+                mahjong: {
+                    tag: 'Game Night',
+                    title: 'Mahjong Game Nights',
+                    images: ['mahjong_game.jpeg']
+                },
+                ceramic: {
+                    tag: 'Craft Workshop',
+                    title: 'Pottery & Ceramic Crafts',
+                    images: ['pottery_5.jpeg']
+                },
+                halloween: {
+                    tag: 'Themed Party',
+                    title: 'Halloween Theme Gatherings',
+                    images: ['halloween_party_1.jpeg', 'halloween_party_2.jpeg', 'halloween_party_3.jpeg', 'halloween_party_4.jpeg', 'halloween_party_5.jpeg']
+                },
+                wellness: {
+                    tag: 'Wellness',
+                    title: "Women's Health & Wellness",
+                    images: ['women_health_workshop.jpeg']
+                },
+                livemusic: {
+                    tag: 'Live & Film',
+                    title: 'Live Acoustic Jam & Film Shoots',
+                    images: ['live_music_jamming_1.jpeg', 'live_music_jamming_2.jpeg', 'live_music_jamming_3.jpeg', 'filmshootfor_zee_primevideo1.jpeg', 'filmshootfor_zee_primevideo2.jpeg']
+                }
+            };
+
+            const galleryModal = document.getElementById('galleryModal');
+            const galleryModalTitle = document.getElementById('galleryModalTitle');
+            const galleryModalTag = document.getElementById('galleryModalTag');
+            const galleryModalGrid = document.getElementById('galleryModalGrid');
+
+            window.openGalleryModal = function(key) {
+                const data = galleryData[key];
+                if (!data || !galleryModal) return;
+
+                galleryModalTag.textContent = data.tag;
+                galleryModalTitle.textContent = data.title;
+
+                galleryModalGrid.innerHTML = data.images.map(src =>
+                    `<img class="gallery-modal-img" src="${src}" alt="${data.title}" loading="lazy">`
+                ).join('');
+
+                galleryModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            };
+
+            window.closeGalleryModal = function() {
+                if (galleryModal) {
+                    galleryModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            };
+
+            if (galleryModal) {
+                galleryModal.addEventListener('click', (e) => {
+                    if (e.target === galleryModal) closeGalleryModal();
+                });
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && galleryModal && galleryModal.classList.contains('active')) {
+                    closeGalleryModal();
+                }
+            });
+
         });
     </script>
 
