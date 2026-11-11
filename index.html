@@ -2730,7 +2730,7 @@
             display: flex;
             gap: 1.5rem;
             width: max-content;
-            animation: smoothMarquee 35s linear infinite;
+            animation: smoothMarquee 16s linear infinite;
             will-change: transform;
         }
 
@@ -4192,31 +4192,62 @@
             </p>
         </div>
 
-        <div class="showcase-grid">
-            <div class="showcase-card">
-                <img src="CAFE 6.jpeg" alt="Artisan Pour-Over Brewing at Café Obregado">
-                <div class="showcase-card-overlay">
-                    <span class="showcase-card-tag">Artisan Precision</span>
-                    <h3 class="showcase-card-title">Craft Pour-Overs</h3>
-                    <p class="showcase-card-desc">Hand-dripped slow extraction that unlocks delicate regional coffee profiles.</p>
+        <div class="ambiance-marquee-outer">
+            <div class="ambiance-marquee-track">
+                <!-- Original Set (CAFE 6, CAFE 7, CAFE 8) -->
+                <div class="showcase-card">
+                    <img src="CAFE 6.jpeg" alt="Artisan Pour-Over Brewing at Café Obregado">
+                    <div class="showcase-card-overlay">
+                        <span class="showcase-card-tag">Artisan Precision</span>
+                        <h3 class="showcase-card-title">Craft Pour-Overs</h3>
+                        <p class="showcase-card-desc">Hand-dripped slow extraction that unlocks delicate regional coffee profiles.</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="showcase-card">
-                <img src="CAFE 7.jpeg" alt="House Baked Goan Poee and Savory Pairings">
-                <div class="showcase-card-overlay">
-                    <span class="showcase-card-tag">Heritage Kitchen</span>
-                    <h3 class="showcase-card-title">Oven-Fresh Poee</h3>
-                    <p class="showcase-card-desc">Authentic sourdough fermentation delivering that unmistakable Goan crumb and aroma.</p>
+                <div class="showcase-card">
+                    <img src="CAFE 7.jpeg" alt="House Baked Goan Poee and Savory Pairings">
+                    <div class="showcase-card-overlay">
+                        <span class="showcase-card-tag">Heritage Kitchen</span>
+                        <h3 class="showcase-card-title">Oven-Fresh Poee</h3>
+                        <p class="showcase-card-desc">Authentic sourdough fermentation delivering that unmistakable Goan crumb and aroma.</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="showcase-card">
-                <img src="CAFE 8.jpeg" alt="Cozy Ambience and Courtyard Moments">
-                <div class="showcase-card-overlay">
-                    <span class="showcase-card-tag">Unhurried Hours</span>
-                    <h3 class="showcase-card-title">Courtyard Living</h3>
-                    <p class="showcase-card-desc">An earthy sanctuary to read, catch up with old friends, or simply savor the moment.</p>
+                <div class="showcase-card">
+                    <img src="CAFE 8.jpeg" alt="Cozy Ambience and Courtyard Moments">
+                    <div class="showcase-card-overlay">
+                        <span class="showcase-card-tag">Unhurried Hours</span>
+                        <h3 class="showcase-card-title">Courtyard Living</h3>
+                        <p class="showcase-card-desc">An earthy sanctuary to read, catch up with old friends, or simply savor the moment.</p>
+                    </div>
+                </div>
+
+                <!-- Duplicate Set for Seamless Infinite Loop -->
+                <div class="showcase-card" aria-hidden="true">
+                    <img src="CAFE 6.jpeg" alt="Artisan Pour-Over Brewing at Café Obregado">
+                    <div class="showcase-card-overlay">
+                        <span class="showcase-card-tag">Artisan Precision</span>
+                        <h3 class="showcase-card-title">Craft Pour-Overs</h3>
+                        <p class="showcase-card-desc">Hand-dripped slow extraction that unlocks delicate regional coffee profiles.</p>
+                    </div>
+                </div>
+
+                <div class="showcase-card" aria-hidden="true">
+                    <img src="CAFE 7.jpeg" alt="House Baked Goan Poee and Savory Pairings">
+                    <div class="showcase-card-overlay">
+                        <span class="showcase-card-tag">Heritage Kitchen</span>
+                        <h3 class="showcase-card-title">Oven-Fresh Poee</h3>
+                        <p class="showcase-card-desc">Authentic sourdough fermentation delivering that unmistakable Goan crumb and aroma.</p>
+                    </div>
+                </div>
+
+                <div class="showcase-card" aria-hidden="true">
+                    <img src="CAFE 8.jpeg" alt="Cozy Ambience and Courtyard Moments">
+                    <div class="showcase-card-overlay">
+                        <span class="showcase-card-tag">Unhurried Hours</span>
+                        <h3 class="showcase-card-title">Courtyard Living</h3>
+                        <p class="showcase-card-desc">An earthy sanctuary to read, catch up with old friends, or simply savor the moment.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -4773,8 +4804,8 @@
         </div>
 
         <!-- Continuous Smooth Auto-Moving Carousel with Pause on Hover -->
-        <div class="carousel-window" id="reviewsWindow">
-            <div class="reviews-track" id="reviewsTrack">
+        <div class="carousel-window reviews-marquee-outer" id="reviewsWindow">
+            <div class="reviews-track reviews-marquee-track" id="reviewsTrack">
 
                 <!-- REVIEW CARD 1 -->
                 <div class="review-card">
@@ -5280,7 +5311,8 @@
             const flyingOwl = document.getElementById('flyingOwl');
             const preloaderElem = document.getElementById('preloader');
 
-            const loaderTimer = setInterval(() => {
+            // Handled by script.js initLuxuryPreloader
+            const loaderTimer_disabled = setInterval(() => {
                 currentPercent += 1;
 
                 // Sync numerical counter and progress bar width
@@ -5343,11 +5375,13 @@
                         reviewsWindow.scrollLeft -= halfWidth;
                     }
                 }
-                requestAnimationFrame(animateReviewsTicker);
+                // CSS smoothMarquee handles reviews
+            // requestAnimationFrame(animateReviewsTicker);
             }
 
             // Start continuous ticker
-            requestAnimationFrame(animateReviewsTicker);
+            // CSS smoothMarquee handles reviews
+            // requestAnimationFrame(animateReviewsTicker);
 
             // Pause on hover so users can easily read reviews
             if (reviewsWindow) {
@@ -5785,31 +5819,7 @@ Kindly confirm availability. Looking forward to dining with you!`;
       </svg>
     </div>
 
-    <script>
-      (function() {
-        const owlCursor = document.getElementById('custom-owl-cursor');
-        if (!owlCursor) return;
-
-        let mouseX = 0, mouseY = 0;
-        let cursorX = 0, cursorY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-          mouseX = e.clientX;
-          mouseY = e.clientY;
-        });
-
-        function animateOwlCursor() {
-          // Smooth linear interpolation (0.22 factor)
-          cursorX += (mouseX - cursorX) * 0.22;
-          cursorY += (mouseY - cursorY) * 0.22;
-          
-          owlCursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
-          requestAnimationFrame(animateOwlCursor);
-        }
-        
-        animateOwlCursor();
-      })();
-    </script>
+    
 </body>
 
 </html>

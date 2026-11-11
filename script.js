@@ -39,7 +39,7 @@
                 clearInterval(timer);
                 setTimeout(() => {
                     preloader.classList.add('loaded');
-                }, 200);
+                }, 180);
             }
         }, intervalTime);
     }
@@ -51,30 +51,30 @@
         const owlCursor = document.getElementById('custom-owl-cursor');
         if (!owlCursor) return;
 
-        let mouseX = window.innerWidth / 2;
-        let mouseY = window.innerHeight / 2;
-        let curX = mouseX;
-        let curY = mouseY;
+        let targetX = window.innerWidth / 2;
+        let targetY = window.innerHeight / 2;
+        let curX = targetX;
+        let curY = targetY;
 
-        function updatePos(x, y) {
-            mouseX = x;
-            mouseY = y;
-        }
+        window.addEventListener('mousemove', (e) => {
+            targetX = e.clientX;
+            targetY = e.clientY;
+        }, { passive: true });
 
-        window.addEventListener('mousemove', (e) => updatePos(e.clientX, e.clientY), { passive: true });
         window.addEventListener('touchmove', (e) => {
             if (e.touches && e.touches[0]) {
-                updatePos(e.touches[0].clientX, e.touches[0].clientY);
+                targetX = e.touches[0].clientX;
+                targetY = e.touches[0].clientY;
             }
         }, { passive: true });
 
-        function loop() {
-            curX += (mouseX - curX) * 0.22;
-            curY += (mouseY - curY) * 0.22;
+        function animCursor() {
+            curX += (targetX - curX) * 0.22;
+            curY += (targetY - curY) * 0.22;
             owlCursor.style.transform = `translate3d(${curX}px, ${curY}px, 0) translate(-50%, -50%)`;
-            requestAnimationFrame(loop);
+            requestAnimationFrame(animCursor);
         }
-        loop();
+        animCursor();
     }
 
     /**
@@ -85,7 +85,7 @@
         if (!catBar) return;
 
         const pills = catBar.querySelectorAll('.menu-cat-pill');
-        const sections = document.querySelectorAll('.menu-cat-group-clean');
+        const sections = document.querySelectorAll('.menu-cat-group-clean, .menu-cat-group');
 
         if (!pills.length || !sections.length) return;
 

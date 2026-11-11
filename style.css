@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CAFÉ OBREGATO — MOBILE-FIRST OPTIMIZATION & INLINE MENU SYSTEM
+   CAFÉ OBREGATO — MOBILE-FIRST OPTIMIZATION, HIGH CONTRAST & INLINE MENU SYSTEM
    ========================================================================== */
 
 /* 1. LOCK MOBILE VIEWPORT BOUNDS & FIX HORIZONTAL BREAKS */
@@ -30,7 +30,7 @@ html, body {
 }
 
 /* ==========================================================================
-   2. FULL 0-100% LUXURY PRELOADER ANIMATION
+   2. PRELOADER ANIMATION (0–100%)
    ========================================================================== */
 #preloader {
   position: fixed;
@@ -102,12 +102,12 @@ html, body {
 }
 
 .loader-bar-bg {
-  width: 100%;
+  width: min(80vw, 360px);
   height: 3px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 3px;
+  margin: 1.5rem 0 1rem;
   overflow: hidden;
-  margin-top: 1.5rem;
   position: relative;
 }
 
@@ -115,32 +115,31 @@ html, body {
   width: 0%;
   height: 100%;
   background: #D4AF37 !important;
-  will-change: width;
   border-radius: 3px;
   box-shadow: 0 0 14px rgba(212, 175, 55, 0.5);
-  transition: width 0.04s linear;
+  transition: width 0.05s linear;
+}
+
+.loader-counter {
+  color: #D4AF37;
+  font-family: var(--font-heading, 'Cinzel', serif);
+  font-size: 1.4rem;
+  font-weight: 700;
 }
 
 .loader-status-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  width: 100%;
-  margin-top: 1.2rem;
+  width: min(80vw, 360px);
+  margin-top: 0.8rem;
   font-size: 0.82rem;
   letter-spacing: 1px;
   color: rgba(255, 255, 255, 0.7);
 }
 
-.loader-counter {
-  font-family: var(--font-heading, 'Cinzel', serif);
-  font-weight: 700;
-  color: #D4AF37;
-  font-size: 1rem;
-}
-
 /* ==========================================================================
-   3. MOBILE & DESKTOP CONTINUOUS ANIMATED OWL CURSOR
+   3. ANIMATED OWL CURSOR (Desktop & Mobile)
    ========================================================================== */
 #custom-owl-cursor {
   position: fixed;
@@ -179,8 +178,109 @@ html, body {
 }
 
 /* ==========================================================================
-   5. STICKY HORIZONTALLY-SCROLLABLE CATEGORY NAVIGATION BAR
+   5. MENU CONTRAST & VISIBILITY FIX (#menu)
    ========================================================================== */
+#menu, .menu-section {
+  background-color: #120d0b !important;
+  color: #FFF8EF !important;
+}
+
+.menu-section .section-title {
+  color: #FFFFFF !important;
+}
+
+.menu-section .section-desc {
+  color: rgba(255, 248, 239, 0.75) !important;
+}
+
+.menu-cat-group, .menu-cat-group-clean {
+  background: transparent !important;
+  scroll-margin-top: 135px;
+  margin-bottom: 2.8rem;
+}
+
+.menu-cat-header .menu-cat-title {
+  color: #D4AF37 !important;
+}
+
+.menu-cat-tag {
+  color: rgba(255, 248, 239, 0.6) !important;
+}
+
+.menu-item, .menu-item-row-clean {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(212, 175, 55, 0.15) !important;
+  border-radius: 12px !important;
+  padding: 1.1rem 1.25rem !important;
+  margin-bottom: 0.75rem !important;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.menu-item:hover, .menu-item-row-clean:hover {
+  background-color: rgba(212, 175, 55, 0.08) !important;
+  border-color: rgba(212, 175, 55, 0.35) !important;
+  transform: translateX(4px);
+}
+
+.menu-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.menu-item-name, .menu-item-name-clean {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+  font-family: var(--font-heading, 'Cinzel', serif);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8) !important;
+  margin: 0;
+  letter-spacing: 0.4px;
+}
+
+.menu-item-name-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.3rem;
+}
+
+.menu-item-desc, .menu-item-desc-clean {
+  color: rgba(255, 248, 239, 0.8) !important;
+  font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.88rem !important;
+  line-height: 1.5 !important;
+  margin-top: 0.3rem !important;
+}
+
+.menu-item-price, .menu-item-price-clean {
+  color: #D4AF37 !important;
+  font-weight: 700 !important;
+  font-size: 1.18rem !important;
+  font-family: var(--font-heading, 'Cinzel', serif);
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: 0.5px;
+  padding-top: 2px;
+}
+
+.item-badge, .menu-item-badge-clean, .item-badge.bestseller {
+  background: rgba(212, 175, 55, 0.15) !important;
+  color: #D4AF37 !important;
+  border: 1px solid rgba(212, 175, 55, 0.4) !important;
+  font-weight: 700 !important;
+  font-size: 0.68rem !important;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+}
+
+/* Sticky Category Pills Bar */
 .menu-sticky-categories-bar {
   position: sticky;
   top: 72px;
@@ -238,103 +338,21 @@ html, body {
   box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
 }
 
-/* 6. CLEAN SINGLE-COLUMN INLINE MENU ROWS */
-.menu-items-list-clean {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.menu-item-row-clean {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1.25rem;
-  padding: 1.1rem 0.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.menu-item-row-clean:hover {
-  background: rgba(200, 157, 84, 0.04);
-  border-radius: 10px;
-}
-
-.menu-item-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.menu-item-name-wrap {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-  margin-bottom: 0.3rem;
-}
-
-.menu-item-name-clean {
-  font-family: var(--font-heading, 'Cinzel', serif);
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: #FFFFFF;
-  margin: 0;
-  letter-spacing: 0.4px;
-}
-
-.menu-item-badge-clean {
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 0.2rem 0.6rem;
-  border-radius: 12px;
-  background: rgba(212, 175, 55, 0.15);
-  border: 1px solid rgba(212, 175, 55, 0.4);
-  color: #DFC18A;
-}
-
-.menu-item-desc-clean {
-  font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
-  font-size: 0.88rem;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.65);
-  margin: 0;
-}
-
-.menu-item-price-clean {
-  font-family: var(--font-heading, 'Cinzel', serif);
-  font-size: 1.18rem;
-  font-weight: 700;
-  color: #D4AF37 !important;
-  white-space: nowrap;
-  flex-shrink: 0;
-  letter-spacing: 0.5px;
-  padding-top: 2px;
-}
-
-.menu-cat-group-clean {
-  scroll-margin-top: 135px;
-  margin-bottom: 3.2rem;
-}
-
-.menu-cat-group-clean:last-child {
-  margin-bottom: 1rem;
-}
-
 /* ==========================================================================
-   7. COMMUNITY & EVENTS MARQUEE SPEED (16s)
+   6. MARQUEE SPEEDS & INFINITE SCROLL
    ========================================================================== */
-.events-marquee-track {
-  animation: smoothMarquee 16s linear infinite !important;
+@keyframes smoothMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-/* ==========================================================================
-   8. AUTOMATED HORIZONTAL SCROLL FOR AMBIANCE & REVIEWS
-   ========================================================================== */
 @keyframes marquee-scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
+}
+
+.events-marquee-track {
+  animation: smoothMarquee 16s linear infinite !important;
 }
 
 .ambiance-marquee-outer {
@@ -348,15 +366,10 @@ html, body {
 
 .ambiance-marquee-track {
   display: flex;
-  gap: 1.8rem;
+  gap: 1.5rem;
   width: max-content;
-  animation: marquee-scroll 20s linear infinite;
+  animation: smoothMarquee 20s linear infinite !important;
   will-change: transform;
-}
-
-.ambiance-marquee-track:hover,
-.ambiance-marquee-track:active {
-  animation-play-state: paused;
 }
 
 .ambiance-marquee-track .showcase-card {
@@ -388,41 +401,49 @@ html, body {
   position: relative;
 }
 
-.reviews-marquee-track {
+.reviews-marquee-track,
+.reviews-track {
   display: flex;
-  gap: 1.8rem;
+  gap: 1.5rem;
   width: max-content;
-  animation: marquee-scroll 22s linear infinite;
+  animation: smoothMarquee 22s linear infinite !important;
   will-change: transform;
 }
 
-.reviews-marquee-track:hover,
-.reviews-marquee-track:active {
-  animation-play-state: paused;
-}
-
-.reviews-marquee-track .review-card {
+.reviews-marquee-track .review-card,
+.reviews-track .review-card {
   flex: 0 0 380px;
   width: 380px;
   box-sizing: border-box;
 }
 
+/* Pause marquee on hover and active touch */
+.events-marquee-track:hover,
+.events-marquee-track:active,
+.ambiance-marquee-track:hover,
+.ambiance-marquee-track:active,
+.reviews-marquee-track:hover,
+.reviews-marquee-track:active,
+.reviews-track:hover,
+.reviews-track:active {
+  animation-play-state: paused !important;
+}
+
 /* ==========================================================================
-   9. MOBILE BREAKPOINTS (max-width: 768px)
+   7. MOBILE BREAKPOINTS (max-width: 768px)
    ========================================================================== */
 @media (max-width: 768px) {
-  /* Hero Landing Mobile Optimization */
+  .hero-overlay {
+    background: linear-gradient(180deg, rgba(18,13,11,0.25) 0%, rgba(18,13,11,0.55) 100%) !important;
+  }
+
   .hero {
     min-height: 92vh !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
-    padding: 4.8rem 1rem 2rem 1rem !important;
+    padding: 5rem 1rem 2rem 1rem !important;
     box-sizing: border-box !important;
-  }
-
-  .hero-overlay {
-    background: linear-gradient(180deg, rgba(18,13,11,0.2) 0%, rgba(18,13,11,0.5) 100%) !important;
   }
 
   .hero-content {
@@ -430,7 +451,7 @@ html, body {
     flex-direction: column !important;
     justify-content: space-between !important;
     height: 100% !important;
-    min-height: calc(92vh - 6.8rem) !important;
+    flex: 1 !important;
     width: 100% !important;
     padding: 0 !important;
   }
@@ -438,9 +459,9 @@ html, body {
   .hero-title {
     font-size: 1.75rem !important;
     line-height: 1.2 !important;
-    font-weight: 700 !important;
     text-align: center !important;
-    margin-bottom: 0.5rem !important;
+    margin: 0 !important;
+    font-weight: 700 !important;
   }
 
   /* Hide middle paragraph overlay so center video is completely clear */
@@ -449,16 +470,16 @@ html, body {
   }
 
   .hero-actions {
+    margin-top: auto !important;
     flex-direction: column !important;
     width: 100% !important;
-    gap: 0.75rem !important;
-    margin-top: auto !important;
+    gap: 0.65rem !important;
   }
 
   .hero-actions .btn-hero-primary,
   .hero-actions .btn-hero-secondary {
     width: 100% !important;
-    min-height: 48px !important;
+    min-height: 46px !important;
     justify-content: center !important;
     margin: 0 !important;
   }
@@ -479,18 +500,18 @@ html, body {
   }
 
   /* Single Column Menu Rows on Mobile */
-  .menu-item-row-clean {
-    padding: 0.95rem 0.25rem;
+  .menu-item, .menu-item-row-clean {
+    padding: 0.95rem 0.85rem !important;
     gap: 0.9rem;
   }
-  .menu-item-name-clean {
-    font-size: 0.98rem;
+  .menu-item-name, .menu-item-name-clean {
+    font-size: 1rem !important;
   }
-  .menu-item-desc-clean {
-    font-size: 0.82rem;
+  .menu-item-desc, .menu-item-desc-clean {
+    font-size: 0.82rem !important;
   }
-  .menu-item-price-clean {
-    font-size: 1.05rem;
+  .menu-item-price, .menu-item-price-clean {
+    font-size: 1.1rem !important;
   }
 
   /* Mobile Marquee Sizing */
@@ -499,7 +520,8 @@ html, body {
     height: 380px !important;
   }
 
-  .reviews-marquee-track .review-card {
+  .reviews-marquee-track .review-card,
+  .reviews-track .review-card {
     flex: 0 0 310px !important;
     width: 310px !important;
   }
