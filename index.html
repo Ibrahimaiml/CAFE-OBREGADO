@@ -3256,7 +3256,7 @@
 </head>
 
 <body class="is-loading">
-    <script>setTimeout(function(){document.body.classList.remove('is-loading')},8000)</script>
+    <script>setTimeout(function(){var p=document.getElementById('preloader');if(p){p.classList.add('is-hidden');}document.body.classList.remove('is-loading');},8000)</script>
 
     <!-- ==========================================================================
          1. PRELOADER WITH DIRECT-SYNC FLYING OWL
