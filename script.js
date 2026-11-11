@@ -1,17 +1,84 @@
 /**
- * CAFÉ OBREGATO — MOBILE-FIRST INLINE MENU & INTERACTION CONTROLLER
- * Clean, lightweight, zero popup modals. Sticky category scroll-spy and smooth navigation.
+ * CAFÉ OBREGATO — CONTROLLER
+ * Full 0-100% Luxury Preloader, Mobile & Desktop Animated Owl Cursor,
+ * and Sticky Category Navigation.
  */
 
 (function () {
     'use strict';
 
     document.addEventListener('DOMContentLoaded', () => {
+        initLuxuryPreloader();
+        initOwlCursor();
         initStickyMenuNavigation();
     });
 
     /**
-     * Sticky Horizontally-Scrollable Category Bar: Smooth Scroll & Scroll-Spy
+     * 1. FULL 0-100% LUXURY PRELOADER ANIMATION (~1.2s)
+     */
+    function initLuxuryPreloader() {
+        const percentDisplay = document.getElementById('loaderPercent');
+        const progressBar = document.getElementById('loaderBar');
+        const preloader = document.getElementById('preloader');
+        const flyingOwl = document.getElementById('flyingOwl');
+        if (!preloader) return;
+
+        let percent = 0;
+        const intervalTime = 12; // 12ms * 100 = 1.2s
+        const timer = setInterval(() => {
+            percent += 1;
+            if (percentDisplay) percentDisplay.textContent = percent;
+            if (progressBar) progressBar.style.width = `${percent}%`;
+            if (flyingOwl) {
+                flyingOwl.style.left = `${percent}%`;
+                const verticalSine = Math.sin(percent * 0.18) * 8;
+                flyingOwl.style.transform = `translateX(-50%) translateY(${verticalSine}px)`;
+            }
+
+            if (percent >= 100) {
+                clearInterval(timer);
+                setTimeout(() => {
+                    preloader.classList.add('loaded');
+                }, 200);
+            }
+        }, intervalTime);
+    }
+
+    /**
+     * 2. MOBILE & DESKTOP CONTINUOUS ANIMATED OWL CURSOR
+     */
+    function initOwlCursor() {
+        const owlCursor = document.getElementById('custom-owl-cursor');
+        if (!owlCursor) return;
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let curX = mouseX;
+        let curY = mouseY;
+
+        function updatePos(x, y) {
+            mouseX = x;
+            mouseY = y;
+        }
+
+        window.addEventListener('mousemove', (e) => updatePos(e.clientX, e.clientY), { passive: true });
+        window.addEventListener('touchmove', (e) => {
+            if (e.touches && e.touches[0]) {
+                updatePos(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        }, { passive: true });
+
+        function loop() {
+            curX += (mouseX - curX) * 0.22;
+            curY += (mouseY - curY) * 0.22;
+            owlCursor.style.transform = `translate3d(${curX}px, ${curY}px, 0) translate(-50%, -50%)`;
+            requestAnimationFrame(loop);
+        }
+        loop();
+    }
+
+    /**
+     * 3. STICKY HORIZONTALLY-SCROLLABLE CATEGORY NAVIGATION BAR
      */
     function initStickyMenuNavigation() {
         const catBar = document.getElementById('menuCategoriesBar');

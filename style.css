@@ -15,6 +15,8 @@ html, body {
 
 /* Wrap all scroll/marquee components with boundary protection */
 .events-marquee-outer,
+.ambiance-marquee-outer,
+.reviews-marquee-outer,
 .setup-gallery-grid,
 .partner-setup-grid,
 .reviews-track,
@@ -27,7 +29,140 @@ html, body {
   box-sizing: border-box;
 }
 
-/* 2. FRANCHISE SECTION BACKGROUND INTEGRATION */
+/* ==========================================================================
+   2. FULL 0-100% LUXURY PRELOADER ANIMATION
+   ========================================================================== */
+#preloader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #120d0b !important;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  pointer-events: all;
+}
+
+#preloader.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.preloader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(90vw, 420px);
+  text-align: center;
+}
+
+.preloader-brand {
+  font-family: var(--font-heading, 'Cinzel', serif);
+  font-size: 1.35rem;
+  letter-spacing: 5px;
+  color: #DFC18A;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  opacity: 0.95;
+}
+
+.flight-track-wrapper {
+  position: relative;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.flight-track {
+  position: relative;
+  width: 100%;
+  height: 60px;
+}
+
+.flying-owl {
+  position: absolute;
+  top: 0;
+  left: 0%;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #D4AF37;
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.4), 0 8px 20px rgba(0, 0, 0, 0.6);
+  transform: translateX(-50%);
+  will-change: left, transform;
+  z-index: 2;
+  background-color: #120d0b;
+}
+
+.loader-bar-bg {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 1.5rem;
+  position: relative;
+}
+
+.loader-bar-fill {
+  width: 0%;
+  height: 100%;
+  background: #D4AF37 !important;
+  will-change: width;
+  border-radius: 3px;
+  box-shadow: 0 0 14px rgba(212, 175, 55, 0.5);
+  transition: width 0.04s linear;
+}
+
+.loader-status-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  margin-top: 1.2rem;
+  font-size: 0.82rem;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.loader-counter {
+  font-family: var(--font-heading, 'Cinzel', serif);
+  font-weight: 700;
+  color: #D4AF37;
+  font-size: 1rem;
+}
+
+/* ==========================================================================
+   3. MOBILE & DESKTOP CONTINUOUS ANIMATED OWL CURSOR
+   ========================================================================== */
+#custom-owl-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  pointer-events: none !important;
+  z-index: 999999;
+  will-change: transform;
+  filter: drop-shadow(0px 2px 8px rgba(212, 175, 55, 0.8));
+}
+
+#custom-owl-cursor svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ==========================================================================
+   4. FRANCHISE SECTION BACKGROUND INTEGRATION
+   ========================================================================== */
 .partner-cta-box {
   background: linear-gradient(rgba(18, 13, 11, 0.88), rgba(18, 13, 11, 0.95)), url('CAFE 2.jpeg') center/cover no-repeat !important;
   border: 1px solid rgba(200, 157, 84, 0.3) !important;
@@ -43,7 +178,9 @@ html, body {
   pointer-events: none;
 }
 
-/* 3. STICKY HORIZONTALLY-SCROLLABLE CATEGORY NAVIGATION BAR */
+/* ==========================================================================
+   5. STICKY HORIZONTALLY-SCROLLABLE CATEGORY NAVIGATION BAR
+   ========================================================================== */
 .menu-sticky-categories-bar {
   position: sticky;
   top: 72px;
@@ -101,7 +238,7 @@ html, body {
   box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
 }
 
-/* 4. CLEAN SINGLE-COLUMN INLINE MENU ROWS */
+/* 6. CLEAN SINGLE-COLUMN INLINE MENU ROWS */
 .menu-items-list-clean {
   display: flex;
   flex-direction: column;
@@ -176,7 +313,6 @@ html, body {
   padding-top: 2px;
 }
 
-/* Category Sections Anchor Padding */
 .menu-cat-group-clean {
   scroll-margin-top: 135px;
   margin-bottom: 3.2rem;
@@ -186,45 +322,149 @@ html, body {
   margin-bottom: 1rem;
 }
 
-/* 5. MOBILE BREAKPOINTS (max-width: 768px) */
+/* ==========================================================================
+   7. COMMUNITY & EVENTS MARQUEE SPEED (16s)
+   ========================================================================== */
+.events-marquee-track {
+  animation: smoothMarquee 16s linear infinite !important;
+}
+
+/* ==========================================================================
+   8. AUTOMATED HORIZONTAL SCROLL FOR AMBIANCE & REVIEWS
+   ========================================================================== */
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ambiance-marquee-outer {
+  width: 100vw;
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 1.5rem 0 2rem;
+  position: relative;
+}
+
+.ambiance-marquee-track {
+  display: flex;
+  gap: 1.8rem;
+  width: max-content;
+  animation: marquee-scroll 20s linear infinite;
+  will-change: transform;
+}
+
+.ambiance-marquee-track:hover,
+.ambiance-marquee-track:active {
+  animation-play-state: paused;
+}
+
+.ambiance-marquee-track .showcase-card {
+  flex: 0 0 380px;
+  height: 440px;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ambiance-marquee-track .showcase-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.65s ease;
+}
+
+.ambiance-marquee-track .showcase-card:hover img {
+  transform: scale(1.06);
+}
+
+.reviews-marquee-outer,
+.carousel-window {
+  width: 100vw;
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.reviews-marquee-track {
+  display: flex;
+  gap: 1.8rem;
+  width: max-content;
+  animation: marquee-scroll 22s linear infinite;
+  will-change: transform;
+}
+
+.reviews-marquee-track:hover,
+.reviews-marquee-track:active {
+  animation-play-state: paused;
+}
+
+.reviews-marquee-track .review-card {
+  flex: 0 0 380px;
+  width: 380px;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   9. MOBILE BREAKPOINTS (max-width: 768px)
+   ========================================================================== */
 @media (max-width: 768px) {
   /* Hero Landing Mobile Optimization */
   .hero {
-    min-height: 85vh;
-    padding: 5.5rem 1rem 3rem 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    min-height: 92vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    padding: 4.8rem 1rem 2rem 1rem !important;
+    box-sizing: border-box !important;
   }
+
   .hero-overlay {
-    background: linear-gradient(180deg, rgba(18,13,11,0.45) 0%, rgba(18,13,11,0.70) 100%) !important;
+    background: linear-gradient(180deg, rgba(18,13,11,0.2) 0%, rgba(18,13,11,0.5) 100%) !important;
   }
+
+  .hero-content {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    height: 100% !important;
+    min-height: calc(92vh - 6.8rem) !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
   .hero-title {
-    font-size: 1.85rem !important;
+    font-size: 1.75rem !important;
     line-height: 1.2 !important;
     font-weight: 700 !important;
     text-align: center !important;
-    margin-bottom: 1rem !important;
+    margin-bottom: 0.5rem !important;
   }
+
+  /* Hide middle paragraph overlay so center video is completely clear */
   .hero-subtitle {
-    font-size: 0.95rem !important;
-    line-height: 1.4 !important;
-    opacity: 0.9 !important;
-    max-width: 90% !important;
-    margin: 0 auto 1.5rem auto !important;
-    text-align: center !important;
+    display: none !important;
   }
+
   .hero-actions {
     flex-direction: column !important;
     width: 100% !important;
     gap: 0.75rem !important;
+    margin-top: auto !important;
   }
+
   .hero-actions .btn-hero-primary,
   .hero-actions .btn-hero-secondary {
     width: 100% !important;
     min-height: 48px !important;
     justify-content: center !important;
     margin: 0 !important;
+  }
+
+  .hero-meta-row {
+    display: none !important;
   }
 
   /* Sticky Categories Nav Bar on Mobile */
@@ -253,6 +493,17 @@ html, body {
     font-size: 1.05rem;
   }
 
+  /* Mobile Marquee Sizing */
+  .ambiance-marquee-track .showcase-card {
+    flex: 0 0 300px !important;
+    height: 380px !important;
+  }
+
+  .reviews-marquee-track .review-card {
+    flex: 0 0 310px !important;
+    width: 310px !important;
+  }
+
   /* Floating CTAs & Mobile Touch Safe Zones */
   .floating-action-bubble {
     position: fixed !important;
@@ -263,9 +514,11 @@ html, body {
     transform: scale(0.85) !important;
     transform-origin: bottom right !important;
   }
+
   .irish-footer, footer {
     padding-bottom: 80px !important;
   }
+
   .partner-setup-grid {
     display: flex !important;
     overflow-x: auto !important;
@@ -274,6 +527,7 @@ html, body {
     padding-bottom: 1rem !important;
     -webkit-overflow-scrolling: touch !important;
   }
+
   .partner-setup-card {
     flex: 0 0 80% !important;
     scroll-snap-align: center !important;
