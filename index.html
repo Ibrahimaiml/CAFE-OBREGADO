@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20261112">
+    <link rel="stylesheet" href="style.css?v=20261112_01">
 
     <style>
         /* ==========================================================================
@@ -148,19 +148,22 @@
 
         /* Direct Synced Flying Owl */
         .flying-owl {
-            position: absolute;
-            top: 6px;
-            left: 0%;
-            width: 68px;
-            height: 68px;
+            position: relative !important;
+            top: 0 !important;
+            left: 0 !important;
+            margin: 0 !important;
+            width: 58px;
+            height: 58px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--accent-gold);
-            box-shadow: 0 0 30px var(--accent-gold-glow), 0 8px 20px rgba(0, 0, 0, 0.6);
-            transform: translateX(-50%);
-            will-change: left, transform;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.4), 0 8px 20px rgba(0, 0, 0, 0.6);
+            transform: none !important;
+            animation: none !important;
+            will-change: auto;
             z-index: 2;
             background-color: var(--bg-dark);
+            display: block;
         }
 
         .flight-path-guide {
@@ -3251,7 +3254,6 @@
             }
         }
     </style>
-<link rel="stylesheet" href="style.css?v=20261112">
     <noscript><style>body.is-loading>*:not(#preloader){visibility:visible!important}#preloader{display:none!important}</style></noscript>
 </head>
 
@@ -5822,7 +5824,7 @@ Kindly confirm availability. Looking forward to dining with you!`;
     </div>
 
     <!-- Script.js Engine: Complete Menu Interaction Controller -->
-    <script src="script.js?v=20261112"></script>
+    <script src="script.js?v=20261112_01"></script>
 
     <div id="custom-owl-cursor">
       <svg viewBox="0 0 500 500" width="36" height="36" xmlns="http://www.w3.org/2000/svg">
