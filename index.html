@@ -3276,11 +3276,6 @@
         </div>
 
         <div class="nav-actions">
-            <!-- Fika-Style Top Dropdown Navigation Board Toggle ("Menu ▾") -->
-            <button type="button" class="btn-menu-dropdown-toggle" id="menuDropdownToggle" aria-expanded="false" aria-controls="fikaMegaMenu">
-                <span>Menu</span> <i class="fa-solid fa-chevron-down"></i>
-            </button>
-
             <!-- Direct Phone Call Link -->
             <a href="tel:09819544999" class="btn-call-nav" title="Call Café Obregado">
                 <i class="fa-solid fa-phone"></i>
@@ -3298,49 +3293,6 @@
             </button>
         </div>
     </nav>
-
-    <!-- ==========================================================================
-         FIKA-STYLE INTERACTIVE MEGA MENU BOARD (#fikaMegaMenu)
-         ========================================================================== -->
-    <div class="fika-mega-menu" id="fikaMegaMenu" role="region" aria-label="Interactive Menu Board">
-        <div class="fika-mega-inner">
-            <!-- Mega Header -->
-            <div class="fika-mega-header">
-                <div class="fika-mega-title-block">
-                    <h3>The Café Obregado Collection</h3>
-                    <p>Specialty Arabica Roasts, House-Baked Poee, Artisanal Brews &amp; Savory Plates</p>
-                </div>
-                <div class="fika-mega-controls">
-                    <div class="fika-search-box">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" id="fikaMenuSearch" placeholder="Search menu, flavor, roast..." aria-label="Search menu">
-                    </div>
-                    <button type="button" class="fika-mega-close" id="fikaMegaClose" aria-label="Close menu">&times;</button>
-                </div>
-            </div>
-
-            <!-- "ON THE COUNTER TODAY" Pill Slider -->
-            <div class="fika-counter-section">
-                <div class="fika-section-label">
-                    <i class="fa-solid fa-fire-burner"></i>
-                    <span>On The Counter Today &bull; Fresh Bakes &amp; Specialty Brews</span>
-                </div>
-                <div class="fika-counter-slider" id="fikaCounterSlider">
-                    <!-- Injected dynamically by script.js -->
-                </div>
-            </div>
-
-            <!-- Category Tabs -->
-            <div class="fika-category-tabs" id="fikaCategoryTabs">
-                <!-- Injected dynamically by script.js -->
-            </div>
-
-            <!-- Categorized Items Grid -->
-            <div class="fika-grid-container" id="fikaGridContainer">
-                <!-- Injected dynamically by script.js -->
-            </div>
-        </div>
-    </div>
 
     <!-- Mobile Drawer & Backdrop -->
     <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop" onclick="closeMobileMenu()"></div>
@@ -5403,85 +5355,7 @@ Kindly confirm availability. Looking forward to dining with you!`;
         </div>
     </div>
 
-    <!-- ==========================================================================
-         FIKA HERO DETAIL MODAL (FULLSCREEN VIEW)
-         ========================================================================== -->
-    <div class="fika-hero-modal" id="fikaHeroDetail" role="dialog" aria-modal="true" aria-labelledby="fikaHeroTitle">
-        <div class="fika-hero-card" onclick="event.stopPropagation()">
-            <!-- Close Button -->
-            <button type="button" class="fika-hero-close" id="fikaHeroClose" aria-label="Close detail modal">&times;</button>
-
-            <!-- Navigation Arrows -->
-            <button type="button" class="fika-nav-btn prev" id="fikaPrevBtn" aria-label="Previous item">
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
-            <button type="button" class="fika-nav-btn next" id="fikaNextBtn" aria-label="Next item">
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
-
-            <!-- Left Content Column -->
-            <div class="fika-hero-left">
-                <div>
-                    <div class="fika-hero-badges-row" id="fikaHeroBadges">
-                        <!-- Badges injected dynamically by script.js -->
-                    </div>
-
-                    <h2 class="fika-hero-title" id="fikaHeroTitle">Item Name</h2>
-
-                    <div class="fika-hero-price-card">
-                        <span class="fika-price-val" id="fikaHeroPrice">₹000</span>
-                        <span class="fika-price-meta">Inclusive of taxes &bull; Freshly Prepared</span>
-                    </div>
-
-                    <p class="fika-hero-desc" id="fikaHeroDesc">Item sensorial description.</p>
-
-                    <!-- Meta Box -->
-                    <div class="fika-meta-box">
-                        <div class="fika-meta-row">
-                            <span class="fika-meta-label">Allergens:</span>
-                            <span class="fika-meta-val" id="fikaHeroAllergens">None</span>
-                        </div>
-                        <div class="fika-meta-row">
-                            <span class="fika-meta-label">Craft Note:</span>
-                            <span class="fika-meta-val" id="fikaHeroNote">Craft note.</span>
-                        </div>
-                    </div>
-
-                    <!-- Goes Well With... Section -->
-                    <div class="fika-pairings-block">
-                        <div class="fika-pairings-title">
-                            <i class="fa-solid fa-sparkles"></i>
-                            <span>Goes Well With &bull; Chef Recommended Pairings</span>
-                        </div>
-                        <div class="fika-pairings-grid" id="fikaHeroPairings">
-                            <!-- Injected dynamically by script.js -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="fika-hero-actions">
-                    <a href="#" id="fikaPreOrderBtn" target="_blank" rel="noopener noreferrer" class="btn-fika-preorder">
-                        <i class="fa-brands fa-whatsapp"></i>
-                        <span>Add to Pre-Order</span>
-                    </a>
-                    <button type="button" class="btn-fika-back" id="fikaBackBtn">
-                        <i class="fa-solid fa-arrow-left"></i>
-                        <span>Back to Menu</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Right Showcase Column -->
-            <div class="fika-hero-right">
-                <div class="fika-hero-showcase-box">
-                    <img src="" alt="Showcase Item" class="fika-hero-showcase-img" id="fikaHeroShowcaseImg">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Script.js Engine: Complete Menu Dataset & Canvas/SVG Generator -->
+    <!-- Script.js Engine: Complete Menu Interaction Controller -->
     <script src="script.js"></script>
 
     <div id="custom-owl-cursor">
