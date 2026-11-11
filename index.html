@@ -4192,62 +4192,31 @@
             </p>
         </div>
 
-        <div class="ambiance-marquee-outer">
-            <div class="ambiance-marquee-track">
-                <!-- Original Set (CAFE 6, CAFE 7, CAFE 8) -->
-                <div class="showcase-card">
-                    <img src="CAFE 6.jpeg" alt="Artisan Pour-Over Brewing at Café Obregado">
-                    <div class="showcase-card-overlay">
-                        <span class="showcase-card-tag">Artisan Precision</span>
-                        <h3 class="showcase-card-title">Craft Pour-Overs</h3>
-                        <p class="showcase-card-desc">Hand-dripped slow extraction that unlocks delicate regional coffee profiles.</p>
-                    </div>
+        <div class="showcase-grid">
+            <div class="showcase-card">
+                <img src="CAFE 6.jpeg" alt="Artisan Pour-Over Brewing at Café Obregado">
+                <div class="showcase-card-overlay">
+                    <span class="showcase-card-tag">Artisan Precision</span>
+                    <h3 class="showcase-card-title">Craft Pour-Overs</h3>
+                    <p class="showcase-card-desc">Hand-dripped slow extraction that unlocks delicate regional coffee profiles.</p>
                 </div>
+            </div>
 
-                <div class="showcase-card">
-                    <img src="CAFE 7.jpeg" alt="House Baked Goan Poee and Savory Pairings">
-                    <div class="showcase-card-overlay">
-                        <span class="showcase-card-tag">Heritage Kitchen</span>
-                        <h3 class="showcase-card-title">Oven-Fresh Poee</h3>
-                        <p class="showcase-card-desc">Authentic sourdough fermentation delivering that unmistakable Goan crumb and aroma.</p>
-                    </div>
+            <div class="showcase-card">
+                <img src="CAFE 7.jpeg" alt="House Baked Goan Poee and Savory Pairings">
+                <div class="showcase-card-overlay">
+                    <span class="showcase-card-tag">Heritage Kitchen</span>
+                    <h3 class="showcase-card-title">Oven-Fresh Poee</h3>
+                    <p class="showcase-card-desc">Authentic sourdough fermentation delivering that unmistakable Goan crumb and aroma.</p>
                 </div>
+            </div>
 
-                <div class="showcase-card">
-                    <img src="CAFE 8.jpeg" alt="Cozy Ambience and Courtyard Moments">
-                    <div class="showcase-card-overlay">
-                        <span class="showcase-card-tag">Unhurried Hours</span>
-                        <h3 class="showcase-card-title">Courtyard Living</h3>
-                        <p class="showcase-card-desc">An earthy sanctuary to read, catch up with old friends, or simply savor the moment.</p>
-                    </div>
-                </div>
-
-                <!-- Duplicate Set for Seamless Infinite Loop -->
-                <div class="showcase-card" aria-hidden="true">
-                    <img src="CAFE 6.jpeg" alt="Artisan Pour-Over Brewing at Café Obregado">
-                    <div class="showcase-card-overlay">
-                        <span class="showcase-card-tag">Artisan Precision</span>
-                        <h3 class="showcase-card-title">Craft Pour-Overs</h3>
-                        <p class="showcase-card-desc">Hand-dripped slow extraction that unlocks delicate regional coffee profiles.</p>
-                    </div>
-                </div>
-
-                <div class="showcase-card" aria-hidden="true">
-                    <img src="CAFE 7.jpeg" alt="House Baked Goan Poee and Savory Pairings">
-                    <div class="showcase-card-overlay">
-                        <span class="showcase-card-tag">Heritage Kitchen</span>
-                        <h3 class="showcase-card-title">Oven-Fresh Poee</h3>
-                        <p class="showcase-card-desc">Authentic sourdough fermentation delivering that unmistakable Goan crumb and aroma.</p>
-                    </div>
-                </div>
-
-                <div class="showcase-card" aria-hidden="true">
-                    <img src="CAFE 8.jpeg" alt="Cozy Ambience and Courtyard Moments">
-                    <div class="showcase-card-overlay">
-                        <span class="showcase-card-tag">Unhurried Hours</span>
-                        <h3 class="showcase-card-title">Courtyard Living</h3>
-                        <p class="showcase-card-desc">An earthy sanctuary to read, catch up with old friends, or simply savor the moment.</p>
-                    </div>
+            <div class="showcase-card">
+                <img src="CAFE 8.jpeg" alt="Cozy Ambience and Courtyard Moments">
+                <div class="showcase-card-overlay">
+                    <span class="showcase-card-tag">Unhurried Hours</span>
+                    <h3 class="showcase-card-title">Courtyard Living</h3>
+                    <p class="showcase-card-desc">An earthy sanctuary to read, catch up with old friends, or simply savor the moment.</p>
                 </div>
             </div>
         </div>
@@ -4261,6 +4230,15 @@
             <div class="section-tag" style="color:var(--accent-gold-light);">People &amp; Experiences</div>
             <h2 class="section-title">Community &amp; Events</h2>
             <p class="section-desc">Bringing People Together Through Coffee, Culture &amp; Experiences</p>
+        </div>
+
+        <div class="events-nav-controls" style="display:flex; justify-content:center; gap:1rem; margin-bottom:1.5rem;">
+            <button type="button" class="events-nav-btn events-nav-prev" id="evtPrev" aria-label="Previous Events">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <button type="button" class="events-nav-btn events-nav-next" id="evtNext" aria-label="Next Events">
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
         </div>
 
         <div class="events-marquee-outer">
@@ -4703,6 +4681,7 @@
             <p class="partner-gallery-sub">Explore our thoughtfully crafted café architecture, cozy dining spaces, and artisanal coffee bar.</p>
         </div>
 
+        <div class="partner-setup-outer">
         <div class="partner-setup-grid setup-gallery-grid">
             <div class="partner-setup-card setup-gallery-card" onclick="openFranchiseLightbox('franchaise3.png', 'Indoor Seating Setup')">
                 <img src="franchaise3.png" alt="Indoor Seating Setup" loading="lazy">
@@ -4746,6 +4725,52 @@
                     <span class="partner-setup-label">Courtyard &amp; Dining Ambiance</span>
                 </div>
             </div>
+        
+            <!-- DUPLICATE SET FOR SEAMLESS INFINITE LOOP -->
+            <div class="partner-setup-card setup-gallery-card" onclick="openFranchiseLightbox('franchaise3.png', 'Indoor Seating Setup')">
+                <img src="franchaise3.png" alt="Indoor Seating Setup" loading="lazy">
+                <div class="partner-setup-overlay">
+                    <span class="partner-setup-tag">Atmosphere</span>
+                    <span class="partner-setup-label">Indoor Seating Setup</span>
+                </div>
+            </div>
+            <div class="partner-setup-card setup-gallery-card" onclick="openFranchiseLightbox('franchaise5.png', 'Counter & Coffee Bar')">
+                <img src="franchaise5.png" alt="Counter and Coffee Bar" loading="lazy">
+                <div class="partner-setup-overlay">
+                    <span class="partner-setup-tag">Barista Station</span>
+                    <span class="partner-setup-label">Counter &amp; Coffee Bar</span>
+                </div>
+            </div>
+            <div class="partner-setup-card setup-gallery-card" onclick="openFranchiseLightbox('franchaise7.png', 'Alfresco Evening Lighting')">
+                <img src="franchaise7.png" alt="Alfresco Evening Lighting" loading="lazy">
+                <div class="partner-setup-overlay">
+                    <span class="partner-setup-tag">Evening Glow</span>
+                    <span class="partner-setup-label">Alfresco Evening Lighting</span>
+                </div>
+            </div>
+            <div class="partner-setup-card setup-gallery-card" onclick="openFranchiseLightbox('franchaise8.png', 'Dining & Warm Aesthetics')">
+                <img src="franchaise8.png" alt="Dining Corners" loading="lazy">
+                <div class="partner-setup-overlay">
+                    <span class="partner-setup-tag">Interiors</span>
+                    <span class="partner-setup-label">Dining &amp; Warm Aesthetics</span>
+                </div>
+            </div>
+            <div class="partner-setup-card setup-gallery-card" onclick="openFranchiseLightbox('franchaise9.png', 'Aesthetic Seating Corners')">
+                <img src="franchaise9.png" alt="Aesthetic Ambience" loading="lazy">
+                <div class="partner-setup-overlay">
+                    <span class="partner-setup-tag">Cozy Spaces</span>
+                    <span class="partner-setup-label">Aesthetic Seating Corners</span>
+                </div>
+            </div>
+            <div class="partner-setup-card setup-gallery-card" onclick="openFranchiseLightbox('franchaise10.png', 'Courtyard & Dining Ambiance')">
+                <img src="franchaise10.png" alt="Café Interior" loading="lazy">
+                <div class="partner-setup-overlay">
+                    <span class="partner-setup-tag">Courtyard</span>
+                    <span class="partner-setup-label">Courtyard &amp; Dining Ambiance</span>
+                </div>
+            </div>
+        
+        </div>
         </div>
 
         <div class="partner-pillars-title">Your City. Our Coffee Culture. One Shared Vision.</div>

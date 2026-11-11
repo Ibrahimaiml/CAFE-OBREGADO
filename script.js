@@ -34,7 +34,7 @@
 
         let current = 0;
         const timer = setInterval(() => {
-            current = Math.min(current + 1, 100); // strictly increments forward up to 100
+            current = Math.min(current + Math.floor(Math.random() * 5 + 2), 100);
             if (percentDisplay) percentDisplay.textContent = current;
             if (progressBar) progressBar.style.width = `${current}%`;
             if (flyingOwl) {
@@ -50,7 +50,7 @@
                     if (customCursor) customCursor.style.display = 'block';
                 }, 200);
             }
-        }, 12);
+        }, 32);
     }
 
     /**
@@ -106,17 +106,17 @@
         }
 
         // Reviews section carousel buttons
-        const revPrev = document.querySelector('.carousel-btn:first-child') || document.querySelector('.reviews-prev');
-        const revNext = document.querySelector('.carousel-btn:last-child') || document.querySelector('.reviews-next');
-        const revWindow = document.getElementById('reviewsWindow') || document.querySelector('.reviews-track');
-        if (revPrev && revWindow) {
+        const revPrev = document.getElementById('revPrev') || document.querySelector('.carousel-btn:first-child') || document.querySelector('.reviews-prev');
+        const revNext = document.getElementById('revNext') || document.querySelector('.carousel-btn:last-child') || document.querySelector('.reviews-next');
+        const revTrack = document.getElementById('reviewsWindow') || document.querySelector('.reviews-track') || document.querySelector('.reviews-marquee-track');
+        if (revPrev && revTrack) {
             revPrev.addEventListener('click', () => {
-                revWindow.scrollBy({ left: -340, behavior: 'smooth' });
+                revTrack.scrollBy({ left: -300, behavior: 'smooth' });
             });
         }
-        if (revNext && revWindow) {
+        if (revNext && revTrack) {
             revNext.addEventListener('click', () => {
-                revWindow.scrollBy({ left: 340, behavior: 'smooth' });
+                revTrack.scrollBy({ left: 300, behavior: 'smooth' });
             });
         }
     }

@@ -184,7 +184,7 @@ html, body {
 /* ==========================================================================
    4. MENU CONTRAST & VISIBILITY FIX (#menu)
    ========================================================================== */
-#menu, .menu-section {
+#menu, .menu-category-section, .menu-item-card, .menu-section, .menu-layout {
   background-color: #120d0b !important;
   color: #FFF8EF !important;
 }
@@ -211,7 +211,7 @@ html, body {
   color: rgba(255, 248, 239, 0.6) !important;
 }
 
-.menu-item, .menu-item-row-clean {
+.menu-item-card, .menu-item, .menu-item-row-clean {
   background-color: rgba(255, 255, 255, 0.03) !important;
   border: 1px solid rgba(212, 175, 55, 0.15) !important;
   border-radius: 12px !important;
@@ -224,7 +224,7 @@ html, body {
   gap: 1.25rem;
 }
 
-.menu-item:hover, .menu-item-row-clean:hover {
+.menu-item-card:hover, .menu-item:hover, .menu-item-row-clean:hover {
   background-color: rgba(212, 175, 55, 0.08) !important;
   border-color: rgba(212, 175, 55, 0.35) !important;
   transform: translateX(4px);
@@ -235,7 +235,7 @@ html, body {
   min-width: 0;
 }
 
-.menu-item-name, .menu-item-name-clean {
+.menu-item-name, .menu-item-name-clean, .menu-item-card h4 {
   color: #FFFFFF !important;
   font-weight: 700 !important;
   font-size: 1.05rem !important;
@@ -253,7 +253,7 @@ html, body {
   margin-bottom: 0.3rem;
 }
 
-.menu-item-desc, .menu-item-desc-clean {
+.menu-item-desc, .menu-item-desc-clean, .menu-item-card p {
   color: rgba(255, 248, 239, 0.75) !important;
   font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
   font-size: 0.85rem !important;
@@ -261,7 +261,7 @@ html, body {
   margin-top: 4px !important;
 }
 
-.menu-item-price, .menu-item-price-clean {
+.menu-item-price, .menu-item-price-clean, .menu-item-card .price {
   color: #D4AF37 !important;
   font-weight: 700 !important;
   font-size: 1.1rem !important;
@@ -274,10 +274,10 @@ html, body {
   text-align: right;
 }
 
-.item-badge, .menu-item-badge-clean, .item-badge.bestseller {
-  background: rgba(212, 175, 55, 0.12) !important;
+.item-badge, .menu-item-badge-clean {
+  background: rgba(212, 175, 55, 0.15) !important;
   color: #D4AF37 !important;
-  border: 1px solid rgba(212, 175, 55, 0.35) !important;
+  border: 1px solid rgba(212, 175, 55, 0.4) !important;
   font-size: 0.7rem !important;
   border-radius: 4px !important;
   padding: 2px 6px !important;
@@ -347,16 +347,17 @@ html, body {
 /* ==========================================================================
    5. THE OBREGADO ATMOSPHERE — VERTICAL & STATIC (#experience)
    ========================================================================== */
-.showcase-grid {
+.showcase-grid, .atmosphere-subsection {
   display: flex !important;
   flex-direction: column !important;
-  gap: 1.8rem !important;
+  gap: 1.5rem !important;
+  width: 100% !important;
 }
 
 .showcase-card {
   width: 100% !important;
   height: auto !important;
-  border-radius: 14px !important;
+  border-radius: 12px !important;
   border: 1px solid rgba(212, 175, 55, 0.25) !important;
   overflow: hidden !important;
   position: relative !important;
@@ -365,6 +366,7 @@ html, body {
 .showcase-card img {
   width: 100% !important;
   height: auto !important;
+  border-radius: 12px !important;
   max-height: 520px !important;
   object-fit: cover !important;
   display: block !important;
@@ -460,24 +462,24 @@ html, body {
   position: relative;
 }
 
-.partner-setup-grid, .ambiance-marquee-track {
-  display: flex !important;
-  gap: 1.2rem !important;
-  width: max-content !important;
+.ambiance-marquee-track, .partner-setup-grid {
   animation: marquee-scroll 18s linear infinite !important;
+  display: flex !important;
+  gap: 1rem !important;
+  width: max-content !important;
 }
 
-.partner-setup-grid:hover, .ambiance-marquee-track:hover,
-.partner-setup-grid:active, .ambiance-marquee-track:active {
+.ambiance-marquee-track:hover, .partner-setup-grid:hover,
+.ambiance-marquee-track:active, .partner-setup-grid:active {
   animation-play-state: paused !important;
 }
 
 .partner-setup-card {
   width: 280px !important;
   height: 360px !important;
-  flex: 0 0 280px !important;
   border-radius: 12px !important;
   overflow: hidden !important;
+  flex: 0 0 280px !important;
 }
 
 .partner-setup-card img {
@@ -504,10 +506,10 @@ html, body {
 }
 
 .reviews-track, .reviews-marquee-track {
+  animation: marquee-scroll 20s linear infinite !important;
   display: flex !important;
   gap: 1.5rem !important;
   width: max-content !important;
-  animation: marquee-scroll 20s linear infinite !important;
 }
 
 .reviews-track:hover, .reviews-marquee-track:hover,
