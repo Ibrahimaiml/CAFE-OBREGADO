@@ -14,7 +14,7 @@
     });
 
     /**
-     * 1. DETERMINISTIC PRELOADER LOOP & CURSOR HIDE STATE (SINGLE SOURCE OF TRUTH)
+     * 1. DETERMINISTIC PRELOADER LOOP (SINGLE SOURCE OF TRUTH)
      */
     function initPreloader() {
         let progress = 0;
@@ -24,7 +24,20 @@
         const counterEl = document.getElementById('preloader-counter') || document.getElementById('loaderPercent');
         const barEl = document.getElementById('preloader-bar') || document.getElementById('loaderBar');
         const preloaderEl = document.getElementById('preloader');
-        const flyingOwl = document.getElementById('flyingOwl');
+        const track = document.getElementById('crestTrack') || document.querySelector('.crest-track') || document.querySelector('.flight-track');
+        const mover = document.getElementById('crestMover') || document.querySelector('.crest-mover') || document.getElementById('flyingOwl');
+
+        let maxX = 0;
+        function updateMaxX() {
+            if (track && mover) {
+                maxX = Math.max(0, track.clientWidth - mover.offsetWidth);
+            }
+        }
+        updateMaxX();
+        window.addEventListener('resize', () => {
+            updateMaxX();
+            render();
+        }, { passive: true });
 
         function render() {
             shown = Math.max(shown, progress);
@@ -35,18 +48,10 @@
                 barEl.style.transformOrigin = 'left';
                 barEl.style.transform = `scaleX(${shown / 100})`;
             }
-            if (flyingOwl) {
-                const track = flyingOwl.parentElement;
-                const trackW = track ? track.clientWidth : 0;
-                const verticalSine = Math.sin(shown * 0.18) * 6;
-                if (trackW > 0) {
-                    const x = (shown / 100) * trackW;
-                    flyingOwl.style.left = '0px';
-                    flyingOwl.style.transform = `translate3d(${x}px, ${verticalSine}px, 0) translateX(-50%)`;
-                } else {
-                    flyingOwl.style.left = shown + '%';
-                    flyingOwl.style.transform = `translate3d(0, ${verticalSine}px, 0) translateX(-50%)`;
-                }
+            if (mover && track) {
+                if (maxX <= 0) updateMaxX();
+                const x = (maxX * shown / 100).toFixed(1);
+                mover.style.transform = `translate3d(${x}px, 0, 0)`;
             }
         }
 
@@ -74,21 +79,45 @@
             progress = 100;
             shown = 100;
             render();
+
             setTimeout(() => {
-                if (preloaderEl) {
-                    preloaderEl.classList.add('loaded');
+                if (!preloaderEl) {
+                    completeTransition();
+                    return;
                 }
-                setTimeout(() => {
-                    document.body.classList.remove('is-loading');
-                }, 500);
+
+                let transitionFinished = false;
+                function onTransitionEnd(e) {
+                    if (e && e.target !== preloaderEl) return;
+                    if (transitionFinished) return;
+                    transitionFinished = true;
+                    preloaderEl.removeEventListener('transitionend', onTransitionEnd);
+                    completeTransition();
+                }
+
+                preloaderEl.addEventListener('transitionend', onTransitionEnd);
+                setTimeout(onTransitionEnd, 600); // Failsafe fallback for transitionend
+
+                preloaderEl.classList.add('is-hidden');
+                preloaderEl.classList.add('loaded');
             }, 250);
+
+            function completeTransition() {
+                document.body.classList.remove('is-loading');
+                if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+                    startOwlCursor();
+                }
+            }
         }
     }
 
     /**
-     * 2. ANIMATED OWL CURSOR (Desktop Only)
+     * 2. ANIMATED OWL CURSOR (Desktop Real Pointer Only - Starts only after preloader)
      */
+    let startOwlCursor = function () {};
+
     function initOwlCursor() {
+        // Strict guard: Real pointer devices with hover only. Never on touch phones.
         if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
             return;
         }
@@ -96,23 +125,48 @@
         const owlCursor = document.getElementById('custom-owl-cursor');
         if (!owlCursor) return;
 
-        let targetX = window.innerWidth / 2;
-        let targetY = window.innerHeight / 2;
-        let curX = targetX;
-        let curY = targetY;
+        let targetX = -100;
+        let targetY = -100;
+        let curX = -100;
+        let curY = -100;
+        let cursorActive = false;
+        let hasMoved = false;
 
         window.addEventListener('mousemove', (e) => {
             targetX = e.clientX;
             targetY = e.clientY;
+            if (!hasMoved) {
+                hasMoved = true;
+                curX = targetX;
+                curY = targetY;
+                if (cursorActive) {
+                    owlCursor.style.display = 'block';
+                    owlCursor.style.opacity = '1';
+                }
+            }
         }, { passive: true });
 
         function animCursor() {
-            curX += (targetX - curX) * 0.22;
-            curY += (targetY - curY) * 0.22;
-            owlCursor.style.transform = `translate3d(${curX}px, ${curY}px, 0) translate(-50%, -50%)`;
+            if (cursorActive && hasMoved) {
+                curX += (targetX - curX) * 0.22;
+                curY += (targetY - curY) * 0.22;
+                owlCursor.style.transform = `translate3d(${curX}px, ${curY}px, 0) translate(-50%, -50%)`;
+            }
             requestAnimationFrame(animCursor);
         }
         animCursor();
+
+        startOwlCursor = function () {
+            cursorActive = true;
+            if (hasMoved) {
+                owlCursor.style.display = 'block';
+                owlCursor.style.opacity = '1';
+            }
+        };
+
+        if (!document.body.classList.contains('is-loading')) {
+            startOwlCursor();
+        }
     }
 
     /**

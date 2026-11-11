@@ -34,6 +34,17 @@ html, body {
 /* ==========================================================================
    2. PRELOADER & CURSOR OVERLAP FIX
    ========================================================================== */
+body.is-loading > *:not(#preloader) {
+  visibility: hidden !important;
+}
+
+body.is-loading #preloader {
+  visibility: visible !important;
+}
+
+body.is-loading .cursor,
+body.is-loading [id*="cursor"],
+body.is-loading [class*="cursor"],
 body.is-loading #custom-owl-cursor,
 body.is-loading #owl-cursor,
 body.is-loading .custom-cursor {
@@ -58,6 +69,7 @@ body.is-loading .custom-cursor {
   transform: translateZ(0);
 }
 
+#preloader.is-hidden,
 #preloader.loaded {
   opacity: 0 !important;
   visibility: hidden !important;
@@ -92,28 +104,49 @@ body.is-loading .custom-cursor {
   align-items: center;
 }
 
-.flight-track {
-  position: relative;
+.flight-track,
+.crest-track {
+  position: relative !important;
   width: 100%;
   height: 60px;
+  overflow: visible !important;
+}
+
+.crest-mover {
+  position: absolute !important;
+  left: 0 !important;
+  top: 50% !important;
+  margin-top: -29px !important;
+  width: 58px;
+  height: 58px;
+  will-change: transform !important;
+  transition: none !important;
+  z-index: 2;
+}
+
+.crest-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: crestFloat 2s ease-in-out infinite;
+}
+
+@keyframes crestFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1.5px); }
 }
 
 .flying-owl {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 58px;
   height: 58px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid #D4AF37;
   box-shadow: 0 0 25px rgba(212, 175, 55, 0.4), 0 8px 20px rgba(0, 0, 0, 0.6);
-  will-change: transform;
-  backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
-  transition: transform 0.08s linear;
-  z-index: 2;
   background-color: #120d0b;
+  display: block;
 }
 
 .loader-bar-bg {
@@ -134,7 +167,7 @@ body.is-loading .custom-cursor {
   box-shadow: 0 0 14px rgba(212, 175, 55, 0.5);
   transform-origin: left !important;
   transform: scaleX(0);
-  transition: transform 0.08s linear;
+  transition: none !important;
 }
 
 .loader-counter {
@@ -156,27 +189,36 @@ body.is-loading .custom-cursor {
 }
 
 /* Custom Owl Cursor */
-#custom-owl-cursor {
-  pointer-events: none !important;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 36px;
-  height: 36px;
-  z-index: 9999 !important;
-  will-change: transform;
-  filter: drop-shadow(0px 2px 8px rgba(212, 175, 55, 0.8));
-}
+@media (hover: hover) and (pointer: fine) {
+  #custom-owl-cursor {
+    pointer-events: none !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    z-index: 9999 !important;
+    will-change: transform;
+    filter: drop-shadow(0px 2px 8px rgba(212, 175, 55, 0.8));
+    display: none;
+    opacity: 0;
+  }
 
-#custom-owl-cursor svg {
-  width: 100%;
-  height: 100%;
-  display: block;
+  #custom-owl-cursor svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
 }
 
 @media (hover: none) or (pointer: coarse) {
-  #custom-owl-cursor {
+  #custom-owl-cursor,
+  .cursor,
+  [id*="cursor"],
+  [class*="cursor"] {
     display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
   }
 }
 

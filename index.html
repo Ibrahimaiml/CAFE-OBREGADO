@@ -98,19 +98,20 @@
             width: 100vw;
             height: 100vh;
             background-color: var(--bg-dark);
-            z-index: 10000;
+            z-index: 99999;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.85s var(--transition-smooth), visibility 0.85s var(--transition-smooth);
+            transition: opacity 0.5s ease, visibility 0.5s ease;
             pointer-events: all;
         }
 
+        #preloader.is-hidden,
         #preloader.loaded {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
         }
 
         .preloader-inner {
@@ -3196,28 +3197,58 @@
         }
 
         /* ==========================================================================
-           SELF-CONTAINED FLOATING OWL CURSOR
+           SELF-CONTAINED FLOATING OWL CURSOR & PRELOADER LOCK
            ========================================================================== */
-        html, body, a, button, input, select, textarea, [role="button"], * {
-            cursor: none !important;
+        body.is-loading > *:not(#preloader) {
+            visibility: hidden !important;
+        }
+        body.is-loading #preloader {
+            visibility: visible !important;
+        }
+        body.is-loading .cursor,
+        body.is-loading [id*="cursor"],
+        body.is-loading [class*="cursor"],
+        body.is-loading #custom-owl-cursor {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
         }
 
-        #custom-owl-cursor {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 36px;
-            height: 36px;
-            pointer-events: none; /* Crucial: allows clicks to pass directly through */
-            z-index: 999999;
-            will-change: transform;
-            filter: drop-shadow(0px 2px 8px rgba(212, 175, 55, 0.8));
+        @media (hover: hover) and (pointer: fine) {
+            html, body, a, button, input, select, textarea, [role="button"], * {
+                cursor: none !important;
+            }
+
+            #custom-owl-cursor {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 36px;
+                height: 36px;
+                pointer-events: none;
+                z-index: 9999;
+                will-change: transform;
+                filter: drop-shadow(0px 2px 8px rgba(212, 175, 55, 0.8));
+                display: none;
+                opacity: 0;
+            }
+
+            #custom-owl-cursor svg {
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
         }
 
-        #custom-owl-cursor svg {
-            width: 100%;
-            height: 100%;
-            display: block;
+        @media (hover: none) or (pointer: coarse) {
+            #custom-owl-cursor,
+            .cursor,
+            [id*="cursor"],
+            [class*="cursor"] {
+                display: none !important;
+                opacity: 0 !important;
+                visibility: hidden !important;
+            }
         }
     </style>
 <link rel="stylesheet" href="style.css?v=20261112">
@@ -3233,9 +3264,13 @@
             <div class="preloader-brand">Café Obregado</div>
 
             <div class="flight-track-wrapper">
-                <div class="flight-track">
+                <div class="flight-track crest-track" id="crestTrack">
                     <div class="flight-path-guide"></div>
-                    <img src="CAFE LOGO.jpeg" alt="Café Obregado Flying Owl" class="flying-owl" id="flyingOwl">
+                    <div class="crest-mover" id="crestMover">
+                        <div class="crest-inner">
+                            <img src="CAFE LOGO.jpeg" alt="Café Obregado Flying Owl" class="flying-owl" id="flyingOwl">
+                        </div>
+                    </div>
                 </div>
             </div>
 
