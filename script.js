@@ -1,60 +1,53 @@
 /**
  * CAFÉ OBREGATO — CONTROLLER
- * Full 0-100% Luxury Preloader, Mobile & Desktop Animated Owl Cursor,
- * Community Events & Reviews Carousel Controls, and Sticky Category Navigation.
+ * Preloader Logic, Custom Owl Cursor, Community Events, Reviews Carousel, and Sticky Menu
  */
 
 (function () {
     'use strict';
 
     document.addEventListener('DOMContentLoaded', () => {
-        initLuxuryPreloader();
+        initPreloader();
         initOwlCursor();
         initStickyMenuNavigation();
-        initMarqueeNavButtons();
+        initCarouselControls();
     });
 
     /**
-     * 1. FULL 0-100% LUXURY PRELOADER ANIMATION
+     * 1. PRELOADER COUNTER LOOP & CURSOR STATE
      */
-    function initLuxuryPreloader() {
-        const percentDisplay = document.getElementById('loaderPercent');
-        const progressBar = document.getElementById('loaderBar');
-        const preloader = document.getElementById('preloader');
+    function initPreloader() {
+        let progress = 0;
+        const counterEl = document.getElementById('preloader-counter') || document.getElementById('loaderPercent');
+        const barEl = document.getElementById('preloader-bar') || document.getElementById('loaderBar');
+        const preloaderEl = document.getElementById('preloader');
         const flyingOwl = document.getElementById('flyingOwl');
-        const customCursor = document.getElementById('custom-owl-cursor');
 
-        // Hide custom cursor during preloader animation
-        if (customCursor) customCursor.style.display = 'none';
+        // Disable custom cursor during preload
+        document.body.classList.add('is-loading');
 
-        if (!preloader) {
-            if (customCursor) customCursor.style.display = 'block';
-            return;
-        }
-
-        let current = 0;
-        const timer = setInterval(() => {
-            current = Math.min(current + Math.floor(Math.random() * 5 + 2), 100);
-            if (percentDisplay) percentDisplay.textContent = current;
-            if (progressBar) progressBar.style.width = `${current}%`;
+        const interval = setInterval(() => {
+            progress += Math.floor(Math.random() * 4) + 2;
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+                setTimeout(() => {
+                    if (preloaderEl) preloaderEl.classList.add('loaded');
+                    document.body.classList.remove('is-loading');
+                }, 300);
+            }
+            if (counterEl) counterEl.textContent = progress + '%';
+            if (barEl) barEl.style.width = progress + '%';
             if (flyingOwl) {
-                flyingOwl.style.left = `${current}%`;
-                const verticalSine = Math.sin(current * 0.18) * 8;
+                flyingOwl.style.left = progress + '%';
+                const verticalSine = Math.sin(progress * 0.18) * 8;
                 flyingOwl.style.transform = `translateX(-50%) translateY(${verticalSine}px)`;
             }
-
-            if (current >= 100) {
-                clearInterval(timer);
-                setTimeout(() => {
-                    preloader.classList.add('loaded');
-                    if (customCursor) customCursor.style.display = 'block';
-                }, 200);
-            }
-        }, 32);
+        }, 30);
     }
 
     /**
-     * 2. MOBILE & DESKTOP CONTINUOUS ANIMATED OWL CURSOR
+     * 2. ANIMATED OWL CURSOR (Desktop & Touch)
      */
     function initOwlCursor() {
         const owlCursor = document.getElementById('custom-owl-cursor');
@@ -87,13 +80,14 @@
     }
 
     /**
-     * 3. COMMUNITY & EVENTS ARROWS & REVIEWS CAROUSEL BUTTONS
+     * 3. COMMUNITY & EVENTS AND REVIEWS ARROW CONTROLS
      */
-    function initMarqueeNavButtons() {
-        // Community & Events navigation buttons
-        const evtPrev = document.getElementById('evtPrev') || document.querySelector('.events-nav-prev');
-        const evtNext = document.getElementById('evtNext') || document.querySelector('.events-nav-next');
-        const eventsOuter = document.querySelector('.events-marquee-outer') || document.getElementById('eventsTrack');
+    function initCarouselControls() {
+        // Community & Events Golden Arrow Controls (±320px)
+        const evtPrev = document.getElementById('evtPrev');
+        const evtNext = document.getElementById('evtNext');
+        const eventsOuter = document.querySelector('.events-marquee-outer');
+
         if (evtPrev && eventsOuter) {
             evtPrev.addEventListener('click', () => {
                 eventsOuter.scrollBy({ left: -320, behavior: 'smooth' });
@@ -105,18 +99,19 @@
             });
         }
 
-        // Reviews section carousel buttons
-        const revPrev = document.getElementById('revPrev') || document.querySelector('.carousel-btn:first-child') || document.querySelector('.reviews-prev');
-        const revNext = document.getElementById('revNext') || document.querySelector('.carousel-btn:last-child') || document.querySelector('.reviews-next');
-        const revTrack = document.getElementById('reviewsWindow') || document.querySelector('.reviews-track') || document.querySelector('.reviews-marquee-track');
-        if (revPrev && revTrack) {
+        // Reviews Section Carousel Arrow Controls (±320px)
+        const revPrev = document.getElementById('revPrev');
+        const revNext = document.getElementById('revNext');
+        const revCarousel = document.querySelector('.reviews-carousel') || document.getElementById('reviewsWindow') || document.querySelector('.reviews-track');
+
+        if (revPrev && revCarousel) {
             revPrev.addEventListener('click', () => {
-                revTrack.scrollBy({ left: -300, behavior: 'smooth' });
+                revCarousel.scrollBy({ left: -320, behavior: 'smooth' });
             });
         }
-        if (revNext && revTrack) {
+        if (revNext && revCarousel) {
             revNext.addEventListener('click', () => {
-                revTrack.scrollBy({ left: 300, behavior: 'smooth' });
+                revCarousel.scrollBy({ left: 320, behavior: 'smooth' });
             });
         }
     }
@@ -133,7 +128,6 @@
 
         if (!pills.length || !sections.length) return;
 
-        // Smooth scroll click handler
         pills.forEach(pill => {
             pill.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -142,7 +136,7 @@
 
                 const targetElem = document.querySelector(targetId);
                 if (targetElem) {
-                    const navHeight = 130; // accounts for navbar + sticky category bar
+                    const navHeight = 130;
                     const targetPosition = targetElem.getBoundingClientRect().top + window.pageYOffset - navHeight;
 
                     window.scrollTo({
@@ -150,17 +144,13 @@
                         behavior: 'smooth'
                     });
 
-                    // Update active state
                     pills.forEach(p => p.classList.remove('active'));
                     pill.classList.add('active');
-
-                    // Center pill inside horizontal scroll
                     centerPill(pill);
                 }
             });
         });
 
-        // Scroll spy to highlight active category while scrolling
         let isTicking = false;
         window.addEventListener('scroll', () => {
             if (!isTicking) {

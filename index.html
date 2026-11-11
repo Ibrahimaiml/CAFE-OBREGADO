@@ -3220,6 +3220,7 @@
             display: block;
         }
     </style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -3239,12 +3240,12 @@
             </div>
 
             <div class="loader-bar-bg">
-                <div class="loader-bar-fill" id="loaderBar"></div>
+                <div class="loader-bar-fill" id="preloader-bar"></div>
             </div>
 
             <div class="loader-status-row">
                 <span class="loader-label">Brewing Your Experience</span>
-                <div class="loader-counter"><span id="loaderPercent">0</span>%</div>
+                <div class="loader-counter"><span id="preloader-counter">0%</span></div>
             </div>
         </div>
     </div>
@@ -4192,8 +4193,8 @@
             </p>
         </div>
 
-        <div class="showcase-grid">
-            <div class="showcase-card">
+        <div class="showcase-grid atmosphere-subsection">
+            <div class="showcase-card atmosphere-card">
                 <img src="CAFE 6.jpeg" alt="Artisan Pour-Over Brewing at Café Obregado">
                 <div class="showcase-card-overlay">
                     <span class="showcase-card-tag">Artisan Precision</span>
@@ -4202,7 +4203,7 @@
                 </div>
             </div>
 
-            <div class="showcase-card">
+            <div class="showcase-card atmosphere-card">
                 <img src="CAFE 7.jpeg" alt="House Baked Goan Poee and Savory Pairings">
                 <div class="showcase-card-overlay">
                     <span class="showcase-card-tag">Heritage Kitchen</span>
@@ -4211,7 +4212,7 @@
                 </div>
             </div>
 
-            <div class="showcase-card">
+            <div class="showcase-card atmosphere-card">
                 <img src="CAFE 8.jpeg" alt="Cozy Ambience and Courtyard Moments">
                 <div class="showcase-card-overlay">
                     <span class="showcase-card-tag">Unhurried Hours</span>
@@ -4829,7 +4830,7 @@
         </div>
 
         <!-- Continuous Smooth Auto-Moving Carousel with Pause on Hover -->
-        <div class="carousel-window reviews-marquee-outer" id="reviewsWindow">
+        <div class="carousel-window reviews-carousel reviews-marquee-outer" id="reviewsWindow">
             <div class="reviews-track reviews-marquee-track" id="reviewsTrack">
 
                 <!-- REVIEW CARD 1 -->

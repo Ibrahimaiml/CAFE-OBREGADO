@@ -1,8 +1,8 @@
 /* ==========================================================================
-   CAFÉ OBREGATO — MOBILE-FIRST OPTIMIZATION, HIGH CONTRAST & INLINE MENU SYSTEM
+   CAFÉ OBREGATO — MOBILE-FIRST STYLESHEET
    ========================================================================== */
 
-/* 1. LOCK MOBILE VIEWPORT BOUNDS & FIX HORIZONTAL BREAKS */
+/* 1. LOCK MOBILE VIEWPORT BOUNDS */
 html, body {
   width: 100%;
   max-width: 100vw;
@@ -20,6 +20,7 @@ html, body {
 .partner-setup-outer,
 .setup-gallery-grid,
 .partner-setup-grid,
+.reviews-carousel,
 .reviews-track,
 .hero-content,
 .events-scroll-outer,
@@ -31,8 +32,15 @@ html, body {
 }
 
 /* ==========================================================================
-   2. PRELOADER ANIMATION (0–100%) & OWL CURSOR FIX
+   2. PRELOADER & CURSOR OVERLAP FIX
    ========================================================================== */
+body.is-loading #custom-owl-cursor,
+body.is-loading .custom-cursor {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
 #preloader {
   position: fixed;
   inset: 0;
@@ -44,17 +52,16 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.5s ease, visibility 0.5s ease !important;
   pointer-events: all;
   will-change: transform, opacity;
   transform: translateZ(0);
-  backface-visibility: hidden;
 }
 
 #preloader.loaded {
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .preloader-inner {
@@ -145,7 +152,6 @@ html, body {
 
 /* Custom Owl Cursor */
 #custom-owl-cursor {
-  display: none;
   pointer-events: none !important;
   position: fixed;
   top: 0;
@@ -182,7 +188,7 @@ html, body {
 }
 
 /* ==========================================================================
-   4. MENU CONTRAST & VISIBILITY FIX (#menu)
+   4. MENU CONTRAST & VISIBILITY (#menu)
    ========================================================================== */
 #menu, .menu-category-section, .menu-item-card, .menu-section, .menu-layout {
   background-color: #120d0b !important;
@@ -235,10 +241,10 @@ html, body {
   min-width: 0;
 }
 
-.menu-item-name, .menu-item-name-clean, .menu-item-card h4 {
+.menu-item-title, .menu-item-name, .menu-item-name-clean, .menu-item-card h4 {
   color: #FFFFFF !important;
-  font-weight: 700 !important;
   font-size: 1.05rem !important;
+  font-weight: 700 !important;
   font-family: 'Cinzel', serif !important;
   letter-spacing: 0.5px !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8) !important;
@@ -254,7 +260,7 @@ html, body {
 }
 
 .menu-item-desc, .menu-item-desc-clean, .menu-item-card p {
-  color: rgba(255, 248, 239, 0.75) !important;
+  color: rgba(255, 248, 239, 0.8) !important;
   font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
   font-size: 0.85rem !important;
   line-height: 1.45 !important;
@@ -345,16 +351,16 @@ html, body {
 }
 
 /* ==========================================================================
-   5. THE OBREGADO ATMOSPHERE — VERTICAL & STATIC (#experience)
+   5. THE OBREGADO ATMOSPHERE — VERTICAL STATIC LAYOUT (#experience)
    ========================================================================== */
-.showcase-grid, .atmosphere-subsection {
+.atmosphere-subsection, .showcase-grid {
   display: flex !important;
   flex-direction: column !important;
   gap: 1.5rem !important;
   width: 100% !important;
 }
 
-.showcase-card {
+.atmosphere-card, .showcase-card {
   width: 100% !important;
   height: auto !important;
   border-radius: 12px !important;
@@ -363,13 +369,14 @@ html, body {
   position: relative !important;
 }
 
-.showcase-card img {
+.atmosphere-card img, .showcase-card img {
   width: 100% !important;
   height: auto !important;
   border-radius: 12px !important;
-  max-height: 520px !important;
   object-fit: cover !important;
   display: block !important;
+  border: 1px solid rgba(212, 175, 55, 0.25) !important;
+  max-height: 520px !important;
 }
 
 .showcase-card-overlay {
@@ -406,7 +413,7 @@ html, body {
 }
 
 /* ==========================================================================
-   6. COMMUNITY & EVENTS MARQUEE & ARROWS (#community-events)
+   6. COMMUNITY & EVENTS SMOOTH HORIZONTAL MARQUEE (#community-events)
    ========================================================================== */
 @keyframes smoothMarquee {
   0% { transform: translateX(0); }
@@ -419,7 +426,12 @@ html, body {
 }
 
 .events-marquee-track {
-  animation: smoothMarquee 14s linear infinite !important;
+  animation: marquee-scroll 14s linear infinite !important;
+  will-change: transform;
+  transform: translate3d(0,0,0);
+  display: flex;
+  gap: 1.25rem;
+  width: max-content;
   touch-action: pan-x;
   -webkit-overflow-scrolling: touch;
 }
@@ -489,52 +501,103 @@ html, body {
 }
 
 /* ==========================================================================
-   8. REVIEWS SECTION — DARK CONTRAST & AUTO-SCROLL (#reviews)
+   8. REVIEWS SECTION — CLEAN WHITE BACKGROUND & CAROUSEL (#reviews)
    ========================================================================== */
 #reviews, .reviews-section {
-  background-color: #120d0b !important;
-  color: #FFF8EF !important;
+  background-color: #FFFFFF !important;
+  color: #120d0b !important;
+  padding: 4rem 1rem !important;
 }
 
-.reviews-marquee-outer,
-.carousel-window {
+#reviews .section-title,
+#reviews .section-tag,
+.reviews-section .section-title {
+  color: #120d0b !important;
+  font-family: 'Cinzel', serif !important;
+}
+
+#reviews .section-desc {
+  color: #4A4441 !important;
+}
+
+#reviews .reviews-stats-pill {
+  background: rgba(18, 13, 11, 0.05) !important;
+  color: #120d0b !important;
+  border: 1px solid rgba(18, 13, 11, 0.12) !important;
+}
+
+#reviews .reviews-stats-pill i {
+  color: #D4AF37 !important;
+}
+
+#reviews .carousel-btn {
+  background: rgba(18, 13, 11, 0.06) !important;
+  border: 1.5px solid #120d0b !important;
+  color: #120d0b !important;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+#reviews .carousel-btn:hover {
+  background: #120d0b !important;
+  color: #FFFFFF !important;
+  transform: scale(1.08);
+}
+
+.reviews-carousel {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  display: flex;
+  gap: 1.25rem;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem;
   width: 100vw;
   max-width: 100%;
-  overflow: hidden;
   box-sizing: border-box;
-  position: relative;
 }
 
 .reviews-track, .reviews-marquee-track {
-  animation: marquee-scroll 20s linear infinite !important;
   display: flex !important;
-  gap: 1.5rem !important;
+  gap: 1.25rem !important;
   width: max-content !important;
 }
 
-.reviews-track:hover, .reviews-marquee-track:hover,
-.reviews-track:active, .reviews-marquee-track:active {
-  animation-play-state: paused !important;
-}
-
 .review-card {
-  background: rgba(255, 255, 255, 0.04) !important;
-  border: 1px solid rgba(212, 175, 55, 0.2) !important;
-  border-radius: 14px !important;
-  flex: 0 0 380px;
-  width: 380px;
-  box-sizing: border-box;
+  background-color: #F9F8F6 !important;
+  border: 1px solid rgba(18, 13, 11, 0.1) !important;
+  border-radius: 16px !important;
+  padding: 1.75rem !important;
+  color: #120d0b !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05) !important;
+  min-width: 300px !important;
+  max-width: 340px !important;
+  min-height: 220px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  flex: 0 0 320px !important;
 }
 
 .review-text {
-  color: rgba(255, 248, 239, 0.9) !important;
+  color: #332C27 !important;
   font-size: 0.95rem !important;
-  line-height: 1.5 !important;
+  line-height: 1.6 !important;
+  font-style: italic !important;
+  white-space: normal !important;
+  overflow: visible !important;
 }
 
-.author-name, .author-source {
+.author-name, .author-source, .review-stars {
   color: #D4AF37 !important;
   font-weight: 700 !important;
+  font-size: 0.9rem !important;
 }
 
 /* ==========================================================================
@@ -611,7 +674,7 @@ html, body {
     padding: 0.95rem 0.85rem !important;
     gap: 0.9rem;
   }
-  .menu-item-name, .menu-item-name-clean {
+  .menu-item-title, .menu-item-name, .menu-item-name-clean {
     font-size: 1rem !important;
   }
   .menu-item-desc, .menu-item-desc-clean {
@@ -621,10 +684,10 @@ html, body {
     font-size: 1.1rem !important;
   }
 
-  .reviews-marquee-track .review-card,
-  .reviews-track .review-card {
-    flex: 0 0 310px !important;
-    width: 310px !important;
+  .review-card {
+    min-width: 280px !important;
+    max-width: 300px !important;
+    flex: 0 0 290px !important;
   }
 
   .partner-setup-card {
