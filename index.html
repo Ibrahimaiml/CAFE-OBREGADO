@@ -3252,9 +3252,11 @@
         }
     </style>
 <link rel="stylesheet" href="style.css?v=20261112">
+    <noscript><style>body.is-loading>*:not(#preloader){visibility:visible!important}#preloader{display:none!important}</style></noscript>
 </head>
 
 <body class="is-loading">
+    <script>setTimeout(function(){document.body.classList.remove('is-loading')},8000)</script>
 
     <!-- ==========================================================================
          1. PRELOADER WITH DIRECT-SYNC FLYING OWL
