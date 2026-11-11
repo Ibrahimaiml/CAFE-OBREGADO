@@ -30,8 +30,17 @@ html, body {
 }
 
 /* ==========================================================================
-   2. PRELOADER ANIMATION (0–100%)
+   2. PRELOADER ANIMATION (0–100%) & GLITCH-FREE GPU ACCELERATION
    ========================================================================== */
+#preloader,
+.preloader-inner,
+.flying-owl {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
 #preloader {
   position: fixed;
   inset: 0;
@@ -43,7 +52,6 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
   pointer-events: all;
 }
 
@@ -95,7 +103,7 @@ html, body {
   object-fit: cover;
   border: 2px solid #D4AF37;
   box-shadow: 0 0 25px rgba(212, 175, 55, 0.4), 0 8px 20px rgba(0, 0, 0, 0.6);
-  transform: translateX(-50%);
+  transform: translateZ(0) translateX(-50%);
   will-change: left, transform;
   z-index: 2;
   background-color: #120d0b;
@@ -234,11 +242,11 @@ html, body {
 .menu-item-name, .menu-item-name-clean {
   color: #FFFFFF !important;
   font-weight: 700 !important;
-  font-size: 1.1rem !important;
-  font-family: var(--font-heading, 'Cinzel', serif);
+  font-size: 1.05rem !important;
+  font-family: 'Cinzel', serif !important;
+  letter-spacing: 0.5px !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8) !important;
   margin: 0;
-  letter-spacing: 0.4px;
 }
 
 .menu-item-name-wrap {
@@ -250,34 +258,36 @@ html, body {
 }
 
 .menu-item-desc, .menu-item-desc-clean {
-  color: rgba(255, 248, 239, 0.8) !important;
+  color: rgba(255, 248, 239, 0.75) !important;
   font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
-  font-size: 0.88rem !important;
-  line-height: 1.5 !important;
-  margin-top: 0.3rem !important;
+  font-size: 0.85rem !important;
+  line-height: 1.45 !important;
+  margin-top: 4px !important;
 }
 
 .menu-item-price, .menu-item-price-clean {
   color: #D4AF37 !important;
   font-weight: 700 !important;
-  font-size: 1.18rem !important;
-  font-family: var(--font-heading, 'Cinzel', serif);
+  font-size: 1.1rem !important;
+  font-family: 'Cinzel', serif !important;
   white-space: nowrap;
   flex-shrink: 0;
   letter-spacing: 0.5px;
   padding-top: 2px;
+  min-width: 60px;
+  text-align: right;
 }
 
 .item-badge, .menu-item-badge-clean, .item-badge.bestseller {
-  background: rgba(212, 175, 55, 0.15) !important;
+  background: rgba(212, 175, 55, 0.12) !important;
   color: #D4AF37 !important;
-  border: 1px solid rgba(212, 175, 55, 0.4) !important;
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
+  font-size: 0.7rem !important;
+  border-radius: 4px !important;
+  padding: 2px 6px !important;
   font-weight: 700 !important;
-  font-size: 0.68rem !important;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
-  padding: 0.2rem 0.6rem;
-  border-radius: 12px;
 }
 
 /* Sticky Category Pills Bar */
@@ -352,7 +362,9 @@ html, body {
 }
 
 .events-marquee-track {
-  animation: smoothMarquee 16s linear infinite !important;
+  animation: smoothMarquee 12s linear infinite !important;
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
 }
 
 .ambiance-marquee-outer {
@@ -406,7 +418,7 @@ html, body {
   display: flex;
   gap: 1.5rem;
   width: max-content;
-  animation: smoothMarquee 22s linear infinite !important;
+  animation: marquee-scroll 18s linear infinite !important;
   will-change: transform;
 }
 
