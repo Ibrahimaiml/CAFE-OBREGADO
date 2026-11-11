@@ -1,7 +1,7 @@
 /**
  * CAFÉ OBREGATO — CONTROLLER
  * Full 0-100% Luxury Preloader, Mobile & Desktop Animated Owl Cursor,
- * and Sticky Category Navigation.
+ * Community Events & Reviews Carousel Controls, and Sticky Category Navigation.
  */
 
 (function () {
@@ -11,37 +11,46 @@
         initLuxuryPreloader();
         initOwlCursor();
         initStickyMenuNavigation();
+        initMarqueeNavButtons();
     });
 
     /**
-     * 1. FULL 0-100% LUXURY PRELOADER ANIMATION (~1.2s)
+     * 1. FULL 0-100% LUXURY PRELOADER ANIMATION
      */
     function initLuxuryPreloader() {
         const percentDisplay = document.getElementById('loaderPercent');
         const progressBar = document.getElementById('loaderBar');
         const preloader = document.getElementById('preloader');
         const flyingOwl = document.getElementById('flyingOwl');
-        if (!preloader) return;
+        const customCursor = document.getElementById('custom-owl-cursor');
 
-        let percent = 0;
-        const intervalTime = 12; // 12ms * 100 = 1.2s
+        // Hide custom cursor during preloader animation
+        if (customCursor) customCursor.style.display = 'none';
+
+        if (!preloader) {
+            if (customCursor) customCursor.style.display = 'block';
+            return;
+        }
+
+        let current = 0;
         const timer = setInterval(() => {
-            percent += 1;
-            if (percentDisplay) percentDisplay.textContent = percent;
-            if (progressBar) progressBar.style.width = `${percent}%`;
+            current = Math.min(current + 1, 100); // strictly increments forward up to 100
+            if (percentDisplay) percentDisplay.textContent = current;
+            if (progressBar) progressBar.style.width = `${current}%`;
             if (flyingOwl) {
-                flyingOwl.style.left = `${percent}%`;
-                const verticalSine = Math.sin(percent * 0.18) * 8;
+                flyingOwl.style.left = `${current}%`;
+                const verticalSine = Math.sin(current * 0.18) * 8;
                 flyingOwl.style.transform = `translateX(-50%) translateY(${verticalSine}px)`;
             }
 
-            if (percent >= 100) {
+            if (current >= 100) {
                 clearInterval(timer);
                 setTimeout(() => {
                     preloader.classList.add('loaded');
-                }, 180);
+                    if (customCursor) customCursor.style.display = 'block';
+                }, 200);
             }
-        }, intervalTime);
+        }, 12);
     }
 
     /**
@@ -78,7 +87,42 @@
     }
 
     /**
-     * 3. STICKY HORIZONTALLY-SCROLLABLE CATEGORY NAVIGATION BAR
+     * 3. COMMUNITY & EVENTS ARROWS & REVIEWS CAROUSEL BUTTONS
+     */
+    function initMarqueeNavButtons() {
+        // Community & Events navigation buttons
+        const evtPrev = document.getElementById('evtPrev') || document.querySelector('.events-nav-prev');
+        const evtNext = document.getElementById('evtNext') || document.querySelector('.events-nav-next');
+        const eventsOuter = document.querySelector('.events-marquee-outer') || document.getElementById('eventsTrack');
+        if (evtPrev && eventsOuter) {
+            evtPrev.addEventListener('click', () => {
+                eventsOuter.scrollBy({ left: -320, behavior: 'smooth' });
+            });
+        }
+        if (evtNext && eventsOuter) {
+            evtNext.addEventListener('click', () => {
+                eventsOuter.scrollBy({ left: 320, behavior: 'smooth' });
+            });
+        }
+
+        // Reviews section carousel buttons
+        const revPrev = document.querySelector('.carousel-btn:first-child') || document.querySelector('.reviews-prev');
+        const revNext = document.querySelector('.carousel-btn:last-child') || document.querySelector('.reviews-next');
+        const revWindow = document.getElementById('reviewsWindow') || document.querySelector('.reviews-track');
+        if (revPrev && revWindow) {
+            revPrev.addEventListener('click', () => {
+                revWindow.scrollBy({ left: -340, behavior: 'smooth' });
+            });
+        }
+        if (revNext && revWindow) {
+            revNext.addEventListener('click', () => {
+                revWindow.scrollBy({ left: 340, behavior: 'smooth' });
+            });
+        }
+    }
+
+    /**
+     * 4. STICKY HORIZONTALLY-SCROLLABLE CATEGORY NAVIGATION BAR
      */
     function initStickyMenuNavigation() {
         const catBar = document.getElementById('menuCategoriesBar');

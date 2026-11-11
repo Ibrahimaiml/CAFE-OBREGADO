@@ -17,6 +17,7 @@ html, body {
 .events-marquee-outer,
 .ambiance-marquee-outer,
 .reviews-marquee-outer,
+.partner-setup-outer,
 .setup-gallery-grid,
 .partner-setup-grid,
 .reviews-track,
@@ -30,17 +31,8 @@ html, body {
 }
 
 /* ==========================================================================
-   2. PRELOADER ANIMATION (0–100%) & GLITCH-FREE GPU ACCELERATION
+   2. PRELOADER ANIMATION (0–100%) & OWL CURSOR FIX
    ========================================================================== */
-#preloader,
-.preloader-inner,
-.flying-owl {
-  will-change: transform, opacity;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
 #preloader {
   position: fixed;
   inset: 0;
@@ -52,13 +44,17 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  transition: opacity 0.5s ease, visibility 0.5s ease !important;
   pointer-events: all;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 #preloader.loaded {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 .preloader-inner {
@@ -67,6 +63,7 @@ html, body {
   align-items: center;
   width: min(90vw, 420px);
   text-align: center;
+  will-change: transform, opacity;
 }
 
 .preloader-brand {
@@ -146,16 +143,15 @@ html, body {
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* ==========================================================================
-   3. ANIMATED OWL CURSOR (Desktop & Mobile)
-   ========================================================================== */
+/* Custom Owl Cursor */
 #custom-owl-cursor {
+  display: none;
+  pointer-events: none !important;
   position: fixed;
   top: 0;
   left: 0;
   width: 36px;
   height: 36px;
-  pointer-events: none !important;
   z-index: 999999;
   will-change: transform;
   filter: drop-shadow(0px 2px 8px rgba(212, 175, 55, 0.8));
@@ -168,7 +164,7 @@ html, body {
 }
 
 /* ==========================================================================
-   4. FRANCHISE SECTION BACKGROUND INTEGRATION
+   3. HERO VIDEO & MOBILE VIEWPORT
    ========================================================================== */
 .partner-cta-box {
   background: linear-gradient(rgba(18, 13, 11, 0.88), rgba(18, 13, 11, 0.95)), url('CAFE 2.jpeg') center/cover no-repeat !important;
@@ -186,7 +182,7 @@ html, body {
 }
 
 /* ==========================================================================
-   5. MENU CONTRAST & VISIBILITY FIX (#menu)
+   4. MENU CONTRAST & VISIBILITY FIX (#menu)
    ========================================================================== */
 #menu, .menu-section {
   background-color: #120d0b !important;
@@ -349,7 +345,66 @@ html, body {
 }
 
 /* ==========================================================================
-   6. MARQUEE SPEEDS & INFINITE SCROLL
+   5. THE OBREGADO ATMOSPHERE — VERTICAL & STATIC (#experience)
+   ========================================================================== */
+.showcase-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.8rem !important;
+}
+
+.showcase-card {
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(212, 175, 55, 0.25) !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+.showcase-card img {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 520px !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.showcase-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(17, 14, 12, 0.92) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2.2rem;
+  z-index: 2;
+}
+
+.showcase-card-tag {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent-gold-light, #DFC18A);
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.showcase-card-title {
+  font-family: var(--font-heading, 'Cinzel', serif);
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-bottom: 0.4rem;
+}
+
+.showcase-card-desc {
+  font-size: 0.86rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ==========================================================================
+   6. COMMUNITY & EVENTS MARQUEE & ARROWS (#community-events)
    ========================================================================== */
 @keyframes smoothMarquee {
   0% { transform: translateX(0); }
@@ -362,46 +417,81 @@ html, body {
 }
 
 .events-marquee-track {
-  animation: smoothMarquee 12s linear infinite !important;
+  animation: smoothMarquee 14s linear infinite !important;
   touch-action: pan-x;
   -webkit-overflow-scrolling: touch;
 }
 
-.ambiance-marquee-outer {
+.events-marquee-track:hover,
+.events-marquee-track:active {
+  animation-play-state: paused !important;
+}
+
+.events-nav-btn, .events-nav-prev, .events-nav-next {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.15);
+  border: 1.5px solid #D4AF37;
+  color: #D4AF37;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  z-index: 10;
+}
+
+.events-nav-btn:hover, .events-nav-prev:hover, .events-nav-next:hover {
+  background: #D4AF37;
+  color: #120d0b;
+  transform: scale(1.08);
+}
+
+/* ==========================================================================
+   7. OUR CAFÉ SETUP & AMBIANCE — HORIZONTAL AUTO-SCROLL
+   ========================================================================== */
+.partner-setup-outer {
   width: 100vw;
   max-width: 100%;
   overflow: hidden;
   box-sizing: border-box;
-  padding: 1.5rem 0 2rem;
+  margin-bottom: 4rem;
   position: relative;
 }
 
-.ambiance-marquee-track {
-  display: flex;
-  gap: 1.5rem;
-  width: max-content;
-  animation: smoothMarquee 20s linear infinite !important;
-  will-change: transform;
+.partner-setup-grid, .ambiance-marquee-track {
+  display: flex !important;
+  gap: 1.2rem !important;
+  width: max-content !important;
+  animation: marquee-scroll 18s linear infinite !important;
 }
 
-.ambiance-marquee-track .showcase-card {
-  flex: 0 0 380px;
-  height: 440px;
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.partner-setup-grid:hover, .ambiance-marquee-track:hover,
+.partner-setup-grid:active, .ambiance-marquee-track:active {
+  animation-play-state: paused !important;
 }
 
-.ambiance-marquee-track .showcase-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.65s ease;
+.partner-setup-card {
+  width: 280px !important;
+  height: 360px !important;
+  flex: 0 0 280px !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
 }
 
-.ambiance-marquee-track .showcase-card:hover img {
-  transform: scale(1.06);
+.partner-setup-card img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* ==========================================================================
+   8. REVIEWS SECTION — DARK CONTRAST & AUTO-SCROLL (#reviews)
+   ========================================================================== */
+#reviews, .reviews-section {
+  background-color: #120d0b !important;
+  color: #FFF8EF !important;
 }
 
 .reviews-marquee-outer,
@@ -413,36 +503,40 @@ html, body {
   position: relative;
 }
 
-.reviews-marquee-track,
-.reviews-track {
-  display: flex;
-  gap: 1.5rem;
-  width: max-content;
-  animation: marquee-scroll 18s linear infinite !important;
-  will-change: transform;
+.reviews-track, .reviews-marquee-track {
+  display: flex !important;
+  gap: 1.5rem !important;
+  width: max-content !important;
+  animation: marquee-scroll 20s linear infinite !important;
 }
 
-.reviews-marquee-track .review-card,
-.reviews-track .review-card {
+.reviews-track:hover, .reviews-marquee-track:hover,
+.reviews-track:active, .reviews-marquee-track:active {
+  animation-play-state: paused !important;
+}
+
+.review-card {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(212, 175, 55, 0.2) !important;
+  border-radius: 14px !important;
   flex: 0 0 380px;
   width: 380px;
   box-sizing: border-box;
 }
 
-/* Pause marquee on hover and active touch */
-.events-marquee-track:hover,
-.events-marquee-track:active,
-.ambiance-marquee-track:hover,
-.ambiance-marquee-track:active,
-.reviews-marquee-track:hover,
-.reviews-marquee-track:active,
-.reviews-track:hover,
-.reviews-track:active {
-  animation-play-state: paused !important;
+.review-text {
+  color: rgba(255, 248, 239, 0.9) !important;
+  font-size: 0.95rem !important;
+  line-height: 1.5 !important;
+}
+
+.author-name, .author-source {
+  color: #D4AF37 !important;
+  font-weight: 700 !important;
 }
 
 /* ==========================================================================
-   7. MOBILE BREAKPOINTS (max-width: 768px)
+   9. MOBILE BREAKPOINTS (max-width: 768px)
    ========================================================================== */
 @media (max-width: 768px) {
   .hero-overlay {
@@ -476,7 +570,6 @@ html, body {
     font-weight: 700 !important;
   }
 
-  /* Hide middle paragraph overlay so center video is completely clear */
   .hero-subtitle {
     display: none !important;
   }
@@ -526,16 +619,16 @@ html, body {
     font-size: 1.1rem !important;
   }
 
-  /* Mobile Marquee Sizing */
-  .ambiance-marquee-track .showcase-card {
-    flex: 0 0 300px !important;
-    height: 380px !important;
-  }
-
   .reviews-marquee-track .review-card,
   .reviews-track .review-card {
     flex: 0 0 310px !important;
     width: 310px !important;
+  }
+
+  .partner-setup-card {
+    width: 240px !important;
+    height: 320px !important;
+    flex: 0 0 240px !important;
   }
 
   /* Floating CTAs & Mobile Touch Safe Zones */
@@ -551,19 +644,5 @@ html, body {
 
   .irish-footer, footer {
     padding-bottom: 80px !important;
-  }
-
-  .partner-setup-grid {
-    display: flex !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x mandatory !important;
-    gap: 1rem !important;
-    padding-bottom: 1rem !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-
-  .partner-setup-card {
-    flex: 0 0 80% !important;
-    scroll-snap-align: center !important;
   }
 }
