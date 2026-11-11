@@ -2491,6 +2491,298 @@
             letter-spacing: 0.5px;
         }
 
+        /* ==========================================================================
+           FRANCHISE HERO SLIDER & SETUP GALLERY
+           ========================================================================== */
+        .partner-hero-slider {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 380px;
+            border: 1px solid rgba(200, 157, 84, 0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .partner-slide-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out, transform 6s ease-out;
+            transform: scale(1.05);
+        }
+
+        .partner-slide-bg.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .partner-slide-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(17, 14, 12, 0.6) 0%, rgba(17, 14, 12, 0.85) 100%);
+            z-index: 1;
+        }
+
+        .partner-slider-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+        }
+
+        .partner-slider-content .tagline-icon {
+            font-size: 2.4rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6));
+        }
+
+        .partner-slider-content h3 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            color: #FFFFFF;
+            line-height: 1.4;
+            letter-spacing: 1px;
+        }
+
+        /* Setup Ambiance Gallery Grid */
+        .partner-gallery-header {
+            text-align: center;
+            margin: 4.5rem 0 2rem;
+        }
+
+        .partner-gallery-title {
+            font-family: var(--font-heading);
+            font-size: clamp(1.6rem, 2.8vw, 2.3rem);
+            color: #FFFFFF;
+            margin-bottom: 0.5rem;
+        }
+
+        .partner-gallery-sub {
+            color: var(--text-light-muted);
+            font-size: 0.95rem;
+        }
+
+        .partner-setup-grid,
+        .setup-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .partner-setup-card,
+        .setup-gallery-card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            height: 260px;
+            cursor: pointer;
+            border: 1px solid rgba(200, 157, 84, 0.2);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .partner-setup-card:hover,
+        .setup-gallery-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 14px 30px rgba(200, 157, 84, 0.25);
+        }
+
+        .partner-setup-card img,
+        .setup-gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .partner-setup-card:hover img,
+        .setup-gallery-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .partner-setup-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(17, 14, 12, 0.85) 0%, rgba(17, 14, 12, 0.1) 60%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.2rem;
+            color: #FFFFFF;
+        }
+
+        .partner-setup-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-gold-light);
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .partner-setup-label {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+
+        /* Lightbox Modal */
+        .franchise-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 10001;
+            background: rgba(10, 8, 7, 0.94);
+            backdrop-filter: blur(12px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .franchise-lightbox.active {
+            display: flex;
+        }
+
+        .franchise-lightbox-inner {
+            position: relative;
+            max-width: 850px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .franchise-lightbox-close {
+            position: absolute;
+            top: -45px;
+            right: 0;
+            background: none;
+            border: none;
+            color: #FFFFFF;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .franchise-lightbox-close:hover {
+            color: var(--accent-gold);
+        }
+
+        .franchise-lightbox-img {
+            max-width: 100%;
+            max-height: 70vh;
+            border-radius: 12px;
+            border: 1px solid var(--accent-gold);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            object-fit: contain;
+            margin: 0 auto;
+        }
+
+        .franchise-lightbox-caption {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            color: #FFFFFF;
+            margin: 1.2rem 0 1.5rem;
+        }
+
+        .btn-franchise-inquire {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #25D366;
+            color: #FFFFFF;
+            padding: 0.9rem 2.2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 8px 24px rgba(37,211,102,0.35);
+        }
+
+        .btn-franchise-inquire:hover {
+            background: #20BA5A;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(37,211,102,0.45);
+        }
+
+        /* ==========================================================================
+           COMMUNITY & EVENTS MARQUEE SLIDER
+           ========================================================================== */
+        .events-marquee-outer {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            padding: 1.5rem 0 2.5rem;
+            margin: 1.5rem 0 2rem;
+        }
+
+        .events-marquee-track {
+            display: flex;
+            gap: 1.5rem;
+            width: max-content;
+            animation: smoothMarquee 35s linear infinite;
+            will-change: transform;
+        }
+
+        .events-marquee-track:hover,
+        .events-marquee-track:active {
+            animation-play-state: paused;
+        }
+
+        .events-marquee-track .event-card {
+            opacity: 1 !important;
+            transform: none;
+            flex: 0 0 340px;
+            height: 480px;
+        }
+
+        .events-marquee-track .event-card:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+
+        @keyframes smoothMarquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 1024px) {
+            .partner-setup-grid,
+            .setup-gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .partner-intro-block {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .partner-setup-grid,
+            .setup-gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            .partner-setup-card,
+            .setup-gallery-card {
+                height: 220px;
+            }
+            .partner-hero-slider {
+                height: 300px;
+            }
+            .events-marquee-track {
+                animation-duration: 25s;
+            }
+        }
+
         .partner-why-title {
             font-family: var(--font-heading);
             font-size: clamp(1.6rem, 2.8vw, 2.3rem);
@@ -3875,19 +4167,12 @@
             <p class="section-desc">Bringing People Together Through Coffee, Culture &amp; Experiences</p>
         </div>
 
-        <div class="events-scroll-outer">
-            <!-- Prev / Next nav buttons -->
-            <button class="events-nav-btn prev" id="evtPrev" aria-label="Scroll left">
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
-            <button class="events-nav-btn next" id="evtNext" aria-label="Scroll right">
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
+        <div class="events-marquee-outer">
+            <div class="events-marquee-track">
 
-            <div class="events-scroll-track" id="eventsTrack">
-
+                <!-- SET 1: 10 EVENT CARDS -->
                 <!-- CARD 1: Artisan Pottery & Clay Crafts -->
-                <div class="event-card event-card-item event-card-scroll-reveal" onclick="openGalleryModal('ceramic')">
+                <div class="event-card event-card-item" onclick="openGalleryModal('ceramic')">
                     <div class="event-card-bg" style="background-image:url('pottery_1.jpeg');"></div>
                     <div class="event-card-gradient"></div>
                     <div class="event-card-body">
@@ -3902,7 +4187,7 @@
                 </div>
 
                 <!-- CARD 2: Creative Painting & Canvas Sessions -->
-                <div class="event-card event-card-item event-card-scroll-reveal" onclick="openGalleryModal('painting')">
+                <div class="event-card event-card-item" onclick="openGalleryModal('painting')">
                     <div class="event-card-bg" style="background-image:url('painting.jpeg');"></div>
                     <div class="event-card-gradient"></div>
                     <div class="event-card-body">
@@ -3917,7 +4202,7 @@
                 </div>
 
                 <!-- CARD 3: Private Birthday Celebrations -->
-                <div class="event-card event-card-item event-card-scroll-reveal" onclick="openGalleryModal('birthday')">
+                <div class="event-card event-card-item" onclick="openGalleryModal('birthday')">
                     <div class="event-card-bg" style="background-image:url('birthday_party_3.jpeg');"></div>
                     <div class="event-card-gradient"></div>
                     <div class="event-card-body">
@@ -3932,7 +4217,7 @@
                 </div>
 
                 <!-- CARD 4: Dance & Performing Arts Showcase -->
-                <div class="event-card event-card-item event-card-scroll-reveal" onclick="openGalleryModal('dance')">
+                <div class="event-card event-card-item" onclick="openGalleryModal('dance')">
                     <div class="event-card-bg" style="background-image:url('dance_performance_1.jpeg');"></div>
                     <div class="event-card-gradient"></div>
                     <div class="event-card-body">
@@ -3947,7 +4232,7 @@
                 </div>
 
                 <!-- CARD 5: Plant Potting & Botanical Living -->
-                <div class="event-card event-card-item event-card-scroll-reveal" onclick="openGalleryModal('greenlife')">
+                <div class="event-card event-card-item" onclick="openGalleryModal('greenlife')">
                     <div class="event-card-bg" style="background-image:url('pottery_5.jpeg');"></div>
                     <div class="event-card-gradient"></div>
                     <div class="event-card-body">
@@ -3962,7 +4247,7 @@
                 </div>
 
                 <!-- CARD 6: Christmas & Seasonal Celebrations -->
-                <div class="event-card event-card-item event-card-scroll-reveal" onclick="openGalleryModal('christmas')">
+                <div class="event-card event-card-item" onclick="openGalleryModal('christmas')">
                     <div class="event-card-bg" style="background-image:url('christmas_activity.jpeg');"></div>
                     <div class="event-card-gradient"></div>
                     <div class="event-card-body">
@@ -3977,7 +4262,7 @@
                 </div>
 
                 <!-- CARD 7: Mahjong Social Game Nights -->
-                <div class="event-card event-card-item event-card-scroll-reveal" onclick="openGalleryModal('mahjong')">
+                <div class="event-card event-card-item" onclick="openGalleryModal('mahjong')">
                     <div class="event-card-bg" style="background-image:url('mahjong_game.jpeg');"></div>
                     <div class="event-card-gradient"></div>
                     <div class="event-card-body">
@@ -3992,7 +4277,7 @@
                 </div>
 
                 <!-- CARD 8: Halloween Theme Parties -->
-                <div class="event-card event-card-item event-card-scroll-reveal" onclick="openGalleryModal('halloween')">
+                <div class="event-card event-card-item" onclick="openGalleryModal('halloween')">
                     <div class="event-card-bg" style="background-image:url('halloween_party_1.jpeg');"></div>
                     <div class="event-card-gradient"></div>
                     <div class="event-card-body">
@@ -4007,7 +4292,7 @@
                 </div>
 
                 <!-- CARD 9: Women's Health & Wellness Seminars -->
-                <div class="event-card event-card-item event-card-scroll-reveal" onclick="openGalleryModal('wellness')">
+                <div class="event-card event-card-item" onclick="openGalleryModal('wellness')">
                     <div class="event-card-bg" style="background-image:url('women_health_workshop.jpeg');"></div>
                     <div class="event-card-gradient"></div>
                     <div class="event-card-body">
@@ -4022,7 +4307,7 @@
                 </div>
 
                 <!-- CARD 10: Live Music, Jamming & Film Shoots -->
-                <div class="event-card event-card-item event-card-scroll-reveal" onclick="openGalleryModal('livemusic')">
+                <div class="event-card event-card-item" onclick="openGalleryModal('livemusic')">
                     <div class="event-card-bg" style="background-image:url('live_music_jamming_1.jpeg');"></div>
                     <div class="event-card-gradient"></div>
                     <div class="event-card-body">
@@ -4036,8 +4321,159 @@
                     </div>
                 </div>
 
-            </div><!-- /events-scroll-track -->
-        </div><!-- /events-scroll-outer -->
+                <!-- SET 2: DUPLICATE CARDS FOR SEAMLESS -50% INFINITE MARQUEE LOOP -->
+                <!-- CARD 1 DUPLICATE -->
+                <div class="event-card event-card-item" aria-hidden="true" onclick="openGalleryModal('ceramic')">
+                    <div class="event-card-bg" style="background-image:url('pottery_1.jpeg');"></div>
+                    <div class="event-card-gradient"></div>
+                    <div class="event-card-body">
+                        <div class="event-card-footer">
+                            <div class="event-card-subtitle">CRAFT WORKSHOP</div>
+                            <h3 class="event-card-title">Pottery &amp; Ceramic Crafts</h3>
+                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('ceramic')">
+                                VIEW GALLERY &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 2 DUPLICATE -->
+                <div class="event-card event-card-item" aria-hidden="true" onclick="openGalleryModal('painting')">
+                    <div class="event-card-bg" style="background-image:url('painting.jpeg');"></div>
+                    <div class="event-card-gradient"></div>
+                    <div class="event-card-body">
+                        <div class="event-card-footer">
+                            <div class="event-card-subtitle">CREATIVE WORKSHOP</div>
+                            <h3 class="event-card-title">Painting &amp; Canvas Workshops</h3>
+                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('painting')">
+                                VIEW GALLERY &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 3 DUPLICATE -->
+                <div class="event-card event-card-item" aria-hidden="true" onclick="openGalleryModal('birthday')">
+                    <div class="event-card-bg" style="background-image:url('birthday_party_3.jpeg');"></div>
+                    <div class="event-card-gradient"></div>
+                    <div class="event-card-body">
+                        <div class="event-card-footer">
+                            <div class="event-card-subtitle">PRIVATE EVENTS</div>
+                            <h3 class="event-card-title">Birthday Parties &amp; Private Dinners</h3>
+                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('birthday')">
+                                VIEW GALLERY &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 4 DUPLICATE -->
+                <div class="event-card event-card-item" aria-hidden="true" onclick="openGalleryModal('dance')">
+                    <div class="event-card-bg" style="background-image:url('dance_performance_1.jpeg');"></div>
+                    <div class="event-card-gradient"></div>
+                    <div class="event-card-body">
+                        <div class="event-card-footer">
+                            <div class="event-card-subtitle">PERFORMING ARTS</div>
+                            <h3 class="event-card-title">Dance Group Performances</h3>
+                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('dance')">
+                                VIEW GALLERY &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 5 DUPLICATE -->
+                <div class="event-card event-card-item" aria-hidden="true" onclick="openGalleryModal('greenlife')">
+                    <div class="event-card-bg" style="background-image:url('pottery_5.jpeg');"></div>
+                    <div class="event-card-gradient"></div>
+                    <div class="event-card-body">
+                        <div class="event-card-footer">
+                            <div class="event-card-subtitle">GREEN LIVING</div>
+                            <h3 class="event-card-title">Plant Potting &amp; Green Living</h3>
+                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('greenlife')">
+                                VIEW GALLERY &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 6 DUPLICATE -->
+                <div class="event-card event-card-item" aria-hidden="true" onclick="openGalleryModal('christmas')">
+                    <div class="event-card-bg" style="background-image:url('christmas_activity.jpeg');"></div>
+                    <div class="event-card-gradient"></div>
+                    <div class="event-card-body">
+                        <div class="event-card-footer">
+                            <div class="event-card-subtitle">SEASONAL EVENT</div>
+                            <h3 class="event-card-title">Christmas &amp; Letter to Santa Activity</h3>
+                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('christmas')">
+                                VIEW GALLERY &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 7 DUPLICATE -->
+                <div class="event-card event-card-item" aria-hidden="true" onclick="openGalleryModal('mahjong')">
+                    <div class="event-card-bg" style="background-image:url('mahjong_game.jpeg');"></div>
+                    <div class="event-card-gradient"></div>
+                    <div class="event-card-body">
+                        <div class="event-card-footer">
+                            <div class="event-card-subtitle">GAME NIGHT</div>
+                            <h3 class="event-card-title">Mahjong Game Nights</h3>
+                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('mahjong')">
+                                VIEW GALLERY &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 8 DUPLICATE -->
+                <div class="event-card event-card-item" aria-hidden="true" onclick="openGalleryModal('halloween')">
+                    <div class="event-card-bg" style="background-image:url('halloween_party_1.jpeg');"></div>
+                    <div class="event-card-gradient"></div>
+                    <div class="event-card-body">
+                        <div class="event-card-footer">
+                            <div class="event-card-subtitle">THEME NIGHT</div>
+                            <h3 class="event-card-title">Halloween Party Gathering</h3>
+                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('halloween')">
+                                VIEW GALLERY &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 9 DUPLICATE -->
+                <div class="event-card event-card-item" aria-hidden="true" onclick="openGalleryModal('wellness')">
+                    <div class="event-card-bg" style="background-image:url('women_health_workshop.jpeg');"></div>
+                    <div class="event-card-gradient"></div>
+                    <div class="event-card-body">
+                        <div class="event-card-footer">
+                            <div class="event-card-subtitle">WELLNESS WORKSHOP</div>
+                            <h3 class="event-card-title">Women's Health &amp; Wellness</h3>
+                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('wellness')">
+                                VIEW GALLERY &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 10 DUPLICATE -->
+                <div class="event-card event-card-item" aria-hidden="true" onclick="openGalleryModal('livemusic')">
+                    <div class="event-card-bg" style="background-image:url('live_music_jamming_1.jpeg');"></div>
+                    <div class="event-card-gradient"></div>
+                    <div class="event-card-body">
+                        <div class="event-card-footer">
+                            <div class="event-card-subtitle">MUSIC &amp; FILM LOCATION</div>
+                            <h3 class="event-card-title">Live Music, Jamming &amp; Film Shoots</h3>
+                            <button class="btn-view-gallery" onclick="event.stopPropagation(); openGalleryModal('livemusic')">
+                                VIEW GALLERY &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /events-marquee-track -->
+        </div><!-- /events-marquee-outer -->
 
         <!-- ACCORDION GALLERY STRIP — “THROUGH OUR EYES” -->
         <p class="gallery-strip-heading">Through <span>Our Eyes</span></p>
@@ -4123,9 +4559,14 @@
                     <span>Explore Franchise Opportunities</span>
                 </a>
             </div>
-            <div class="partner-tagline-block">
-                <div class="tagline-icon"><i class="fa-solid fa-mug-hot"></i></div>
-                <h3>Coffee. Community. Culture.<br><span style="color:var(--accent-gold); font-style:italic;">One Shared Vision.</span></h3>
+            <div class="partner-hero-slider" id="partnerHeroSlider">
+                <div class="partner-slide-bg active" style="background-image:url('franchaise1.png');"></div>
+                <div class="partner-slide-bg" style="background-image:url('franchaise2.png');"></div>
+                <div class="partner-slide-overlay"></div>
+                <div class="partner-slider-content">
+                    <div class="tagline-icon"><i class="fa-solid fa-mug-hot"></i></div>
+                    <h3>COFFEE. COMMUNITY. CULTURE.<br><span style="color:var(--accent-gold); font-style:italic;">ONE SHARED VISION.</span></h3>
+                </div>
             </div>
         </div>
 
@@ -4156,6 +4597,58 @@
                 <div class="partner-feature-number">05</div>
                 <h4>A Brand With Room to Grow</h4>
                 <p>We are looking to connect with the right partners who share our vision and want to build memorable café experiences in their own cities.</p>
+            </div>
+        </div>
+
+        <!-- OUR CAFÉ SETUP & AMBIANCE GALLERY GRID -->
+        <div class="partner-gallery-header">
+            <div class="section-tag" style="color:var(--accent-gold-light);">Visual Experience</div>
+            <h3 class="partner-gallery-title">OUR CAFÉ SETUP &amp; AMBIANCE</h3>
+            <p class="partner-gallery-sub">Explore our thoughtfully crafted café architecture, cozy dining spaces, and artisanal coffee bar.</p>
+        </div>
+
+        <div class="partner-setup-grid setup-gallery-grid">
+            <div class="partner-setup-card setup-gallery-card" onclick="openFranchiseLightbox('franchaise3.png', 'Indoor Seating Setup')">
+                <img src="franchaise3.png" alt="Indoor Seating Setup" loading="lazy">
+                <div class="partner-setup-overlay">
+                    <span class="partner-setup-tag">Atmosphere</span>
+                    <span class="partner-setup-label">Indoor Seating Setup</span>
+                </div>
+            </div>
+            <div class="partner-setup-card setup-gallery-card" onclick="openFranchiseLightbox('franchaise5.png', 'Counter & Coffee Bar')">
+                <img src="franchaise5.png" alt="Counter and Coffee Bar" loading="lazy">
+                <div class="partner-setup-overlay">
+                    <span class="partner-setup-tag">Barista Station</span>
+                    <span class="partner-setup-label">Counter &amp; Coffee Bar</span>
+                </div>
+            </div>
+            <div class="partner-setup-card setup-gallery-card" onclick="openFranchiseLightbox('franchaise7.png', 'Alfresco Evening Lighting')">
+                <img src="franchaise7.png" alt="Alfresco Evening Lighting" loading="lazy">
+                <div class="partner-setup-overlay">
+                    <span class="partner-setup-tag">Evening Glow</span>
+                    <span class="partner-setup-label">Alfresco Evening Lighting</span>
+                </div>
+            </div>
+            <div class="partner-setup-card setup-gallery-card" onclick="openFranchiseLightbox('franchaise8.png', 'Dining & Warm Aesthetics')">
+                <img src="franchaise8.png" alt="Dining Corners" loading="lazy">
+                <div class="partner-setup-overlay">
+                    <span class="partner-setup-tag">Interiors</span>
+                    <span class="partner-setup-label">Dining &amp; Warm Aesthetics</span>
+                </div>
+            </div>
+            <div class="partner-setup-card setup-gallery-card" onclick="openFranchiseLightbox('franchaise9.png', 'Aesthetic Seating Corners')">
+                <img src="franchaise9.png" alt="Aesthetic Ambience" loading="lazy">
+                <div class="partner-setup-overlay">
+                    <span class="partner-setup-tag">Cozy Spaces</span>
+                    <span class="partner-setup-label">Aesthetic Seating Corners</span>
+                </div>
+            </div>
+            <div class="partner-setup-card setup-gallery-card" onclick="openFranchiseLightbox('franchaise10.png', 'Courtyard & Dining Ambiance')">
+                <img src="franchaise10.png" alt="Café Interior" loading="lazy">
+                <div class="partner-setup-overlay">
+                    <span class="partner-setup-tag">Courtyard</span>
+                    <span class="partner-setup-label">Courtyard &amp; Dining Ambiance</span>
+                </div>
             </div>
         </div>
 
@@ -4800,8 +5293,64 @@ Kindly confirm availability. Looking forward to dining with you!`;
                 }
             });
 
+            /* ----------------------------------------------------------------------
+               9. FRANCHISE HERO SLIDER & LIGHTBOX MODAL
+               ---------------------------------------------------------------------- */
+            let currentSlide = 0;
+            const partnerSlides = document.querySelectorAll('.partner-slide-bg');
+            if (partnerSlides.length > 1) {
+                setInterval(() => {
+                    partnerSlides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide + 1) % partnerSlides.length;
+                    partnerSlides[currentSlide].classList.add('active');
+                }, 4500);
+            }
+
+            window.openFranchiseLightbox = function(src, caption) {
+                const lb = document.getElementById('franchiseLightbox');
+                const img = document.getElementById('franchiseLightboxImg');
+                const cap = document.getElementById('franchiseLightboxCaption');
+                if (lb && img && cap) {
+                    img.src = src;
+                    cap.textContent = caption;
+                    lb.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            };
+
+            window.closeFranchiseLightbox = function(e) {
+                if (e && e.target && e.target.closest('.franchise-lightbox-inner') && !e.target.classList.contains('franchise-lightbox-close')) return;
+                const lb = document.getElementById('franchiseLightbox');
+                if (lb) {
+                    lb.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            };
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    const lb = document.getElementById('franchiseLightbox');
+                    if (lb && lb.classList.contains('active')) {
+                        closeFranchiseLightbox();
+                    }
+                }
+            });
+
         });
     </script>
+
+    <!-- FRANCHISE & AMBIANCE LIGHTBOX MODAL -->
+    <div class="franchise-lightbox" id="franchiseLightbox" onclick="closeFranchiseLightbox(event)">
+        <div class="franchise-lightbox-inner" onclick="event.stopPropagation()">
+            <button class="franchise-lightbox-close" onclick="closeFranchiseLightbox()" aria-label="Close Lightbox">&times;</button>
+            <img class="franchise-lightbox-img" id="franchiseLightboxImg" src="" alt="Franchise Preview">
+            <div class="franchise-lightbox-caption" id="franchiseLightboxCaption"></div>
+            <a id="franchiseLightboxWaBtn" href="https://wa.me/919819544999?text=Hi%20Caf%C3%A9%20Obregado%21%20I%27m%20inquiring%20about%20a%20franchise%20opportunity%20after%20viewing%20your%20caf%C3%A9%20setup." target="_blank" rel="noopener noreferrer" class="btn-franchise-inquire">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>Inquire For Franchise</span>
+            </a>
+        </div>
+    </div>
 
     <div id="custom-owl-cursor">
       <svg viewBox="0 0 500 500" width="36" height="36" xmlns="http://www.w3.org/2000/svg">
