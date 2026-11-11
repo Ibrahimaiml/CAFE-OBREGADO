@@ -1,6 +1,6 @@
 /**
  * CAFÉ OBREGATO — CONTROLLER
- * Preloader Logic, Custom Owl Cursor, Community Events, Reviews Carousel, and Sticky Menu
+ * Preloader, Custom Owl Cursor, Community Events, Reviews Carousel, and Sticky Menu
  */
 
 (function () {
@@ -14,7 +14,7 @@
     });
 
     /**
-     * 1. PRELOADER COUNTER LOOP & CURSOR STATE
+     * 1. DETERMINISTIC PRELOADER LOOP & CURSOR HIDE STATE
      */
     function initPreloader() {
         let progress = 0;
@@ -80,7 +80,7 @@
     }
 
     /**
-     * 3. COMMUNITY & EVENTS AND REVIEWS ARROW CONTROLS
+     * 3. COMMUNITY & EVENTS AND REVIEWS ARROW CONTROLS (±320px)
      */
     function initCarouselControls() {
         // Community & Events Golden Arrow Controls (±320px)
