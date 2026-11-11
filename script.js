@@ -14,42 +14,85 @@
     });
 
     /**
-     * 1. DETERMINISTIC PRELOADER LOOP & CURSOR HIDE STATE
+     * 1. DETERMINISTIC PRELOADER LOOP & CURSOR HIDE STATE (SINGLE SOURCE OF TRUTH)
      */
     function initPreloader() {
         let progress = 0;
+        let shown = 0;
+        let done = false;
+
         const counterEl = document.getElementById('preloader-counter') || document.getElementById('loaderPercent');
         const barEl = document.getElementById('preloader-bar') || document.getElementById('loaderBar');
         const preloaderEl = document.getElementById('preloader');
         const flyingOwl = document.getElementById('flyingOwl');
 
-        // Disable custom cursor during preload
-        document.body.classList.add('is-loading');
+        function render() {
+            shown = Math.max(shown, progress);
+            if (counterEl) {
+                counterEl.textContent = shown + '%';
+            }
+            if (barEl) {
+                barEl.style.transformOrigin = 'left';
+                barEl.style.transform = `scaleX(${shown / 100})`;
+            }
+            if (flyingOwl) {
+                const track = flyingOwl.parentElement;
+                const trackW = track ? track.clientWidth : 0;
+                const verticalSine = Math.sin(shown * 0.18) * 6;
+                if (trackW > 0) {
+                    const x = (shown / 100) * trackW;
+                    flyingOwl.style.left = '0px';
+                    flyingOwl.style.transform = `translate3d(${x}px, ${verticalSine}px, 0) translateX(-50%)`;
+                } else {
+                    flyingOwl.style.left = shown + '%';
+                    flyingOwl.style.transform = `translate3d(0, ${verticalSine}px, 0) translateX(-50%)`;
+                }
+            }
+        }
+
+        render();
+
+        const failsafe = setTimeout(() => {
+            finish();
+        }, 6000);
 
         const interval = setInterval(() => {
             progress += Math.floor(Math.random() * 4) + 2;
             if (progress >= 100) {
                 progress = 100;
-                clearInterval(interval);
-                setTimeout(() => {
-                    if (preloaderEl) preloaderEl.classList.add('loaded');
-                    document.body.classList.remove('is-loading');
-                }, 300);
-            }
-            if (counterEl) counterEl.textContent = progress + '%';
-            if (barEl) barEl.style.width = progress + '%';
-            if (flyingOwl) {
-                flyingOwl.style.left = progress + '%';
-                const verticalSine = Math.sin(progress * 0.18) * 8;
-                flyingOwl.style.transform = `translateX(-50%) translateY(${verticalSine}px)`;
+                finish();
+            } else {
+                render();
             }
         }, 30);
+
+        function finish() {
+            if (done) return;
+            done = true;
+            clearInterval(interval);
+            clearTimeout(failsafe);
+            progress = 100;
+            shown = 100;
+            render();
+            setTimeout(() => {
+                if (preloaderEl) {
+                    preloaderEl.classList.add('loaded');
+                }
+                setTimeout(() => {
+                    document.body.classList.remove('is-loading');
+                }, 500);
+            }, 250);
+        }
     }
 
     /**
-     * 2. ANIMATED OWL CURSOR (Desktop & Touch)
+     * 2. ANIMATED OWL CURSOR (Desktop Only)
      */
     function initOwlCursor() {
+        if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            return;
+        }
+
         const owlCursor = document.getElementById('custom-owl-cursor');
         if (!owlCursor) return;
 
@@ -61,13 +104,6 @@
         window.addEventListener('mousemove', (e) => {
             targetX = e.clientX;
             targetY = e.clientY;
-        }, { passive: true });
-
-        window.addEventListener('touchmove', (e) => {
-            if (e.touches && e.touches[0]) {
-                targetX = e.touches[0].clientX;
-                targetY = e.touches[0].clientY;
-            }
         }, { passive: true });
 
         function animCursor() {
@@ -83,18 +119,59 @@
      * 3. COMMUNITY & EVENTS AND REVIEWS ARROW CONTROLS (±320px)
      */
     function initCarouselControls() {
-        // Community & Events Golden Arrow Controls (±320px)
+        // Community & Events Golden Arrow Controls (±320px & 14s loop)
         const evtPrev = document.getElementById('evtPrev');
         const evtNext = document.getElementById('evtNext');
         const eventsOuter = document.querySelector('.events-marquee-outer');
 
+        let isEvtPaused = false;
+        let evtPauseTimer = null;
+
+        function pauseEvents(duration = 3000) {
+            isEvtPaused = true;
+            clearTimeout(evtPauseTimer);
+            evtPauseTimer = setTimeout(() => {
+                isEvtPaused = false;
+            }, duration);
+        }
+
+        if (eventsOuter) {
+            let lastEvtTime = performance.now();
+            function stepEventsMarquee(now) {
+                const dt = Math.min(now - lastEvtTime, 100);
+                lastEvtTime = now;
+
+                if (!isEvtPaused && eventsOuter) {
+                    const halfWidth = eventsOuter.scrollWidth / 2;
+                    if (halfWidth > 0) {
+                        const pixelsPerMs = halfWidth / 14000;
+                        eventsOuter.scrollLeft += pixelsPerMs * dt;
+
+                        if (eventsOuter.scrollLeft >= halfWidth) {
+                            eventsOuter.scrollLeft -= halfWidth;
+                        } else if (eventsOuter.scrollLeft <= 0) {
+                            eventsOuter.scrollLeft += halfWidth;
+                        }
+                    }
+                }
+                requestAnimationFrame(stepEventsMarquee);
+            }
+            requestAnimationFrame(stepEventsMarquee);
+
+            eventsOuter.addEventListener('mouseenter', () => { isEvtPaused = true; });
+            eventsOuter.addEventListener('mouseleave', () => { isEvtPaused = false; });
+            eventsOuter.addEventListener('touchstart', () => { pauseEvents(3000); }, { passive: true });
+        }
+
         if (evtPrev && eventsOuter) {
             evtPrev.addEventListener('click', () => {
+                pauseEvents(3000);
                 eventsOuter.scrollBy({ left: -320, behavior: 'smooth' });
             });
         }
         if (evtNext && eventsOuter) {
             evtNext.addEventListener('click', () => {
+                pauseEvents(3000);
                 eventsOuter.scrollBy({ left: 320, behavior: 'smooth' });
             });
         }
@@ -104,13 +181,50 @@
         const revNext = document.getElementById('revNext');
         const revCarousel = document.querySelector('.reviews-carousel') || document.getElementById('reviewsWindow') || document.querySelector('.reviews-track');
 
+        let isRevPaused = false;
+        let revPauseTimer = null;
+
+        function pauseReviews(duration = 3000) {
+            isRevPaused = true;
+            clearTimeout(revPauseTimer);
+            revPauseTimer = setTimeout(() => {
+                isRevPaused = false;
+            }, duration);
+        }
+
+        if (revCarousel) {
+            let lastRevTime = performance.now();
+            function stepReviewsScroll(now) {
+                const dt = Math.min(now - lastRevTime, 100);
+                lastRevTime = now;
+
+                if (!isRevPaused && revCarousel) {
+                    const maxScroll = revCarousel.scrollWidth - revCarousel.clientWidth;
+                    if (maxScroll > 10) {
+                        revCarousel.scrollLeft += 0.04 * dt;
+                        if (revCarousel.scrollLeft >= maxScroll - 2) {
+                            revCarousel.scrollLeft = 0;
+                        }
+                    }
+                }
+                requestAnimationFrame(stepReviewsScroll);
+            }
+            requestAnimationFrame(stepReviewsScroll);
+
+            revCarousel.addEventListener('mouseenter', () => { isRevPaused = true; });
+            revCarousel.addEventListener('mouseleave', () => { isRevPaused = false; });
+            revCarousel.addEventListener('touchstart', () => { pauseReviews(3000); }, { passive: true });
+        }
+
         if (revPrev && revCarousel) {
             revPrev.addEventListener('click', () => {
+                pauseReviews(3000);
                 revCarousel.scrollBy({ left: -320, behavior: 'smooth' });
             });
         }
         if (revNext && revCarousel) {
             revNext.addEventListener('click', () => {
+                pauseReviews(3000);
                 revCarousel.scrollBy({ left: 320, behavior: 'smooth' });
             });
         }

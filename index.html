@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20261112">
 
     <style>
         /* ==========================================================================
@@ -3220,10 +3220,10 @@
             display: block;
         }
     </style>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=20261112">
 </head>
 
-<body>
+<body class="is-loading">
 
     <!-- ==========================================================================
          1. PRELOADER WITH DIRECT-SYNC FLYING OWL
@@ -5329,38 +5329,9 @@
         document.addEventListener('DOMContentLoaded', () => {
 
             /* ----------------------------------------------------------------------
-               1. PRELOADER ENGINE (DIRECT 0% TO 100% SYNCED FLYING OWL)
+               1. PRELOADER ENGINE
+               Handled centrally in script.js (Single Source of Truth)
                ---------------------------------------------------------------------- */
-            let currentPercent = 0;
-            const percentDisplay = document.getElementById('loaderPercent');
-            const progressFill = document.getElementById('loaderBar');
-            const flyingOwl = document.getElementById('flyingOwl');
-            const preloaderElem = document.getElementById('preloader');
-
-            // Handled by script.js initLuxuryPreloader
-            const loaderTimer_disabled = setInterval(() => {
-                currentPercent += 1;
-
-                // Sync numerical counter and progress bar width
-                if (percentDisplay) percentDisplay.textContent = currentPercent;
-                if (progressFill) progressFill.style.width = currentPercent + '%';
-
-                // Physical translation across track strictly matching 0% -> 100%
-                if (flyingOwl) {
-                    flyingOwl.style.left = currentPercent + '%';
-
-                    // Sine-wave active flying/flapping motion
-                    const verticalSine = Math.sin(currentPercent * 0.18) * 9;
-                    flyingOwl.style.transform = `translateX(-50%) translateY(${verticalSine}px)`;
-                }
-
-                if (currentPercent >= 100) {
-                    clearInterval(loaderTimer);
-                    setTimeout(() => {
-                        preloaderElem.classList.add('loaded');
-                    }, 320);
-                }
-            }, 25);
 
             /* ----------------------------------------------------------------------
                2. NAVBAR SCROLL EFFECT
@@ -5814,7 +5785,7 @@ Kindly confirm availability. Looking forward to dining with you!`;
     </div>
 
     <!-- Script.js Engine: Complete Menu Interaction Controller -->
-    <script src="script.js"></script>
+    <script src="script.js?v=20261112"></script>
 
     <div id="custom-owl-cursor">
       <svg viewBox="0 0 500 500" width="36" height="36" xmlns="http://www.w3.org/2000/svg">
