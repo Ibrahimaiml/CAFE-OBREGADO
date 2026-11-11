@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -3822,342 +3822,6 @@
     </section>
 
     <!-- ==========================================================================
-         7. REVIEWS SECTION (CONTINUOUS AUTO-MOVING CAROUSEL WITH PAUSE-ON-HOVER)
-         ========================================================================== -->
-    <section class="reviews-section" id="reviews">
-        <div class="reviews-header-wrap">
-            <div>
-                <div class="section-tag">Community Voices</div>
-                <h2 class="section-title">What Our Guests Say</h2>
-                <div class="reviews-stats-pill">
-                    <i class="fa-solid fa-star"></i>
-                    <span>4.5 / 5.0 Rating across Google & EazyDiner</span>
-                </div>
-            </div>
-
-            <div class="carousel-controls">
-                <button type="button" class="carousel-btn" onclick="slideReviews(-1)" aria-label="Previous Reviews">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </button>
-                <button type="button" class="carousel-btn" onclick="slideReviews(1)" aria-label="Next Reviews">
-                    <i class="fa-solid fa-arrow-right"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Continuous Smooth Auto-Moving Carousel with Pause on Hover -->
-        <div class="carousel-window" id="reviewsWindow">
-            <div class="reviews-track" id="reviewsTrack">
-
-                <!-- REVIEW CARD 1 -->
-                <div class="review-card">
-                    <div>
-                        <div class="review-stars">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="review-text">
-                            "We had ordered the Raw Mango Prawns Curry with Rice and Chicken Xacuti with Poee. Absolute culinary perfection! The balanced tanginess and authentic Goan spices made it exceptional."
-                        </p>
-                    </div>
-                    <div class="review-author-meta">
-                        <span class="author-name">Ananya Deshmukh</span>
-                        <span class="author-source"><i class="fa-brands fa-google"></i> Google Review</span>
-                    </div>
-                </div>
-
-                <!-- REVIEW CARD 2 -->
-                <div class="review-card">
-                    <div>
-                        <div class="review-stars">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="review-text">
-                            "The combination of distinct coffee flavours and the calm, cosy aesthetic makes Café Obregado a genuine gem in Thane. The Tiramisu Iced Latte is by far the best in the city!"
-                        </p>
-                    </div>
-                    <div class="review-author-meta">
-                        <span class="author-name">Rohan &amp; Sneha Patel</span>
-                        <span class="author-source"><i class="fa-solid fa-utensils"></i> Foodie Club</span>
-                    </div>
-                </div>
-
-                <!-- REVIEW CARD 3 -->
-                <div class="review-card">
-                    <div>
-                        <div class="review-stars">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="review-text">
-                            "The food was incredibly fresh, hearty, and filling. The staff served everything with genuine warmth and hospitality. Love having a world-class cafe in Hiranandani Estate."
-                        </p>
-                    </div>
-                    <div class="review-author-meta">
-                        <span class="author-name">Vikram Malhotra</span>
-                        <span class="author-source"><i class="fa-brands fa-google"></i> Local Resident</span>
-                    </div>
-                </div>
-
-                <!-- REVIEW CARD 4 -->
-                <div class="review-card">
-                    <div>
-                        <div class="review-stars">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="review-text">
-                            "Chicken Kheema Poee Pocket paired with the Spanish Latte was heaven on a rainy afternoon. The ambiance is peaceful, editorial, and beautifully designed."
-                        </p>
-                    </div>
-                    <div class="review-author-meta">
-                        <span class="author-name">Meera Sen</span>
-                        <span class="author-source"><i class="fa-solid fa-circle-check"></i> EazyDiner Verified</span>
-                    </div>
-                </div>
-
-                <!-- REVIEW CARD 5 -->
-                <div class="review-card">
-                    <div>
-                        <div class="review-stars">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="review-text">
-                            "As a specialty coffee purist, their single-origin Pour-Over blew me away. The extraction was spot-on, highlighting delicate floral citrus notes without bitterness. Highly recommended!"
-                        </p>
-                    </div>
-                    <div class="review-author-meta">
-                        <span class="author-name">Kabir Singhania</span>
-                        <span class="author-source"><i class="fa-solid fa-mug-hot"></i> Coffee Connoisseur</span>
-                    </div>
-                </div>
-
-                <!-- REVIEW CARD 6 -->
-                <div class="review-card">
-                    <div>
-                        <div class="review-stars">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="review-text">
-                            "The Ros Omelette served with piping-hot house-made Goan Poee took me straight back to Panjim. Authentic coastal flavours with upscale café refinement."
-                        </p>
-                    </div>
-                    <div class="review-author-meta">
-                        <span class="author-name">Dr. Shalini Joshi</span>
-                        <span class="author-source"><i class="fa-brands fa-google"></i> Google Review</span>
-                    </div>
-                </div>
-
-                <!-- REVIEW CARD 7 -->
-                <div class="review-card">
-                    <div>
-                        <div class="review-stars">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="review-text">
-                            "The Lotus Biscoff Frappe and Veg Poee Pocket are a dream pairing! The courtyard ambience is so relaxing you could sit here for hours with a good book."
-                        </p>
-                    </div>
-                    <div class="review-author-meta">
-                        <span class="author-name">Aarav &amp; Tanvi Mehta</span>
-                        <span class="author-source"><i class="fa-solid fa-heart"></i> Weekend Regulars</span>
-                    </div>
-                </div>
-
-                <!-- REVIEW CARD 8 -->
-                <div class="review-card">
-                    <div>
-                        <div class="review-stars">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="review-text">
-                            "Exceptional hospitality and attention to detail. From the welcoming warmth of the team to the aroma of freshly ground Arabica, Obregado sets a new benchmark in Thane."
-                        </p>
-                    </div>
-                    <div class="review-author-meta">
-                        <span class="author-name">Priya Sundaram</span>
-                        <span class="author-source"><i class="fa-solid fa-award"></i> Zomato Gold</span>
-                    </div>
-                </div>
-
-                <!-- DUPLICATE SET OF 8 REVIEWS FOR SEAMLESS INFINITE LOOP TICKER -->
-                <div class="review-card" aria-hidden="true">
-                    <div>
-                        <div class="review-stars">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="review-text">
-                            "We had ordered the Raw Mango Prawns Curry with Rice and Chicken Xacuti with Poee. Absolute culinary perfection! The balanced tanginess and authentic Goan spices made it exceptional."
-                        </p>
-                    </div>
-                    <div class="review-author-meta">
-                        <span class="author-name">Ananya Deshmukh</span>
-                        <span class="author-source"><i class="fa-brands fa-google"></i> Google Review</span>
-                    </div>
-                </div>
-
-                <div class="review-card" aria-hidden="true">
-                    <div>
-                        <div class="review-stars">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="review-text">
-                            "The combination of distinct coffee flavours and the calm, cosy aesthetic makes Café Obregado a genuine gem in Thane. The Tiramisu Iced Latte is by far the best in the city!"
-                        </p>
-                    </div>
-                    <div class="review-author-meta">
-                        <span class="author-name">Rohan &amp; Sneha Patel</span>
-                        <span class="author-source"><i class="fa-solid fa-utensils"></i> Foodie Club</span>
-                    </div>
-                </div>
-
-                <div class="review-card" aria-hidden="true">
-                    <div>
-                        <div class="review-stars">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="review-text">
-                            "The food was incredibly fresh, hearty, and filling. The staff served everything with genuine warmth and hospitality. Love having a world-class cafe in Hiranandani Estate."
-                        </p>
-                    </div>
-                    <div class="review-author-meta">
-                        <span class="author-name">Vikram Malhotra</span>
-                        <span class="author-source"><i class="fa-brands fa-google"></i> Local Resident</span>
-                    </div>
-                </div>
-
-                <div class="review-card" aria-hidden="true">
-                    <div>
-                        <div class="review-stars">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="review-text">
-                            "Chicken Kheema Poee Pocket paired with the Spanish Latte was heaven on a rainy afternoon. The ambiance is peaceful, editorial, and beautifully designed."
-                        </p>
-                    </div>
-                    <div class="review-author-meta">
-                        <span class="author-name">Meera Sen</span>
-                        <span class="author-source"><i class="fa-solid fa-circle-check"></i> EazyDiner Verified</span>
-                    </div>
-                </div>
-
-                <div class="review-card" aria-hidden="true">
-                    <div>
-                        <div class="review-stars">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="review-text">
-                            "As a specialty coffee purist, their single-origin Pour-Over blew me away. The extraction was spot-on, highlighting delicate floral citrus notes without bitterness. Highly recommended!"
-                        </p>
-                    </div>
-                    <div class="review-author-meta">
-                        <span class="author-name">Kabir Singhania</span>
-                        <span class="author-source"><i class="fa-solid fa-mug-hot"></i> Coffee Connoisseur</span>
-                    </div>
-                </div>
-
-                <div class="review-card" aria-hidden="true">
-                    <div>
-                        <div class="review-stars">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="review-text">
-                            "The Ros Omelette served with piping-hot house-made Goan Poee took me straight back to Panjim. Authentic coastal flavours with upscale café refinement."
-                        </p>
-                    </div>
-                    <div class="review-author-meta">
-                        <span class="author-name">Dr. Shalini Joshi</span>
-                        <span class="author-source"><i class="fa-brands fa-google"></i> Google Review</span>
-                    </div>
-                </div>
-
-                <div class="review-card" aria-hidden="true">
-                    <div>
-                        <div class="review-stars">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="review-text">
-                            "The Lotus Biscoff Frappe and Veg Poee Pocket are a dream pairing! The courtyard ambience is so relaxing you could sit here for hours with a good book."
-                        </p>
-                    </div>
-                    <div class="review-author-meta">
-                        <span class="author-name">Aarav &amp; Tanvi Mehta</span>
-                        <span class="author-source"><i class="fa-solid fa-heart"></i> Weekend Regulars</span>
-                    </div>
-                </div>
-
-                <div class="review-card" aria-hidden="true">
-                    <div>
-                        <div class="review-stars">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="review-text">
-                            "Exceptional hospitality and attention to detail. From the welcoming warmth of the team to the aroma of freshly ground Arabica, Obregado sets a new benchmark in Thane."
-                        </p>
-                    </div>
-                    <div class="review-author-meta">
-                        <span class="author-name">Priya Sundaram</span>
-                        <span class="author-source"><i class="fa-solid fa-award"></i> Zomato Gold</span>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ==========================================================================
-         8. LOCATION & CONTACT SECTION
-         ========================================================================== -->
-    <section class="contact-section" id="contact">
-        <div class="contact-grid">
-            <div>
-                <div class="section-tag">Find Your Sanctuary</div>
-                <h2 class="section-title">Visit Café Obregado</h2>
-                <p class="section-desc">Located in the prestigious Hiranandani Estate in Thane West. We are ready to brew your favorite cup.</p>
-
-                <ul class="contact-info-list">
-                    <li class="contact-info-item">
-                        <div class="contact-info-icon"><i class="fa-solid fa-location-dot"></i></div>
-                        <div class="contact-info-content">
-                            <strong>Our Address</strong>
-                            <p>Mhatre Compound, Plot no 1, Queens St, adjacent to Aranya banquet, next to Platinum Heritage, Hiranandani Estate, Thane West, Maharashtra 400607</p>
-                        </div>
-                    </li>
-
-                    <li class="contact-info-item">
-                        <div class="contact-info-icon"><i class="fa-solid fa-phone"></i></div>
-                        <div class="contact-info-content">
-                            <strong>Telephone Inquiries & Bookings</strong>
-                            <p><a href="tel:09819544999" class="contact-phone-link">098195 44999</a> &bull; <a href="tel:09819544999" class="contact-phone-link">+91 98195 44999</a></p>
-                        </div>
-                    </li>
-
-                    <li class="contact-info-item">
-                        <div class="contact-info-icon"><i class="fa-solid fa-clock"></i></div>
-                        <div class="contact-info-content">
-                            <strong>Operating Hours</strong>
-                            <p>Opens Daily at 11:30 AM &bull; Open throughout the week including public holidays</p>
-                        </div>
-                    </li>
-                </ul>
-
-                <div class="contact-actions">
-                    <a href="tel:09819544999" class="btn-call-direct" title="Tap to Call Immediately">
-                        <i class="fa-solid fa-phone"></i>
-                        <span>Call 098195 44999</span>
-                    </a>
-
-                    <a href="https://www.instagram.com/cafe_obregado?stkn=NmgwMGpvM2lrMW56" target="_blank" rel="noopener noreferrer" class="btn-instagram">
-                        <i class="fa-brands fa-instagram"></i>
-                        <span>Follow @cafe_obregado</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="contact-image-wrap">
-                <img src="CAFE 5.jpeg" alt="Café Obregado Welcoming Dining Space and Interior">
-            </div>
-        </div>
-    </section>
-
-    <!-- ==========================================================================
          COMMUNITY & EVENTS SECTION
          ========================================================================== -->
     <section class="community-section" id="community-events">
@@ -4680,6 +4344,342 @@
                 <span>Partner With Café Obregado</span>
             </a>
             <p class="partner-disclaimer">*All franchise and partnership opportunities are subject to evaluation, commercial discussions and a mutually agreed arrangement.</p>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         7. REVIEWS SECTION (CONTINUOUS AUTO-MOVING CAROUSEL WITH PAUSE-ON-HOVER)
+         ========================================================================== -->
+    <section class="reviews-section" id="reviews">
+        <div class="reviews-header-wrap">
+            <div>
+                <div class="section-tag">Community Voices</div>
+                <h2 class="section-title">What Our Guests Say</h2>
+                <div class="reviews-stats-pill">
+                    <i class="fa-solid fa-star"></i>
+                    <span>4.5 / 5.0 Rating across Google & EazyDiner</span>
+                </div>
+            </div>
+
+            <div class="carousel-controls">
+                <button type="button" class="carousel-btn" onclick="slideReviews(-1)" aria-label="Previous Reviews">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <button type="button" class="carousel-btn" onclick="slideReviews(1)" aria-label="Next Reviews">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Continuous Smooth Auto-Moving Carousel with Pause on Hover -->
+        <div class="carousel-window" id="reviewsWindow">
+            <div class="reviews-track" id="reviewsTrack">
+
+                <!-- REVIEW CARD 1 -->
+                <div class="review-card">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "We had ordered the Raw Mango Prawns Curry with Rice and Chicken Xacuti with Poee. Absolute culinary perfection! The balanced tanginess and authentic Goan spices made it exceptional."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Ananya Deshmukh</span>
+                        <span class="author-source"><i class="fa-brands fa-google"></i> Google Review</span>
+                    </div>
+                </div>
+
+                <!-- REVIEW CARD 2 -->
+                <div class="review-card">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "The combination of distinct coffee flavours and the calm, cosy aesthetic makes Café Obregado a genuine gem in Thane. The Tiramisu Iced Latte is by far the best in the city!"
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Rohan &amp; Sneha Patel</span>
+                        <span class="author-source"><i class="fa-solid fa-utensils"></i> Foodie Club</span>
+                    </div>
+                </div>
+
+                <!-- REVIEW CARD 3 -->
+                <div class="review-card">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "The food was incredibly fresh, hearty, and filling. The staff served everything with genuine warmth and hospitality. Love having a world-class cafe in Hiranandani Estate."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Vikram Malhotra</span>
+                        <span class="author-source"><i class="fa-brands fa-google"></i> Local Resident</span>
+                    </div>
+                </div>
+
+                <!-- REVIEW CARD 4 -->
+                <div class="review-card">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "Chicken Kheema Poee Pocket paired with the Spanish Latte was heaven on a rainy afternoon. The ambiance is peaceful, editorial, and beautifully designed."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Meera Sen</span>
+                        <span class="author-source"><i class="fa-solid fa-circle-check"></i> EazyDiner Verified</span>
+                    </div>
+                </div>
+
+                <!-- REVIEW CARD 5 -->
+                <div class="review-card">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "As a specialty coffee purist, their single-origin Pour-Over blew me away. The extraction was spot-on, highlighting delicate floral citrus notes without bitterness. Highly recommended!"
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Kabir Singhania</span>
+                        <span class="author-source"><i class="fa-solid fa-mug-hot"></i> Coffee Connoisseur</span>
+                    </div>
+                </div>
+
+                <!-- REVIEW CARD 6 -->
+                <div class="review-card">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "The Ros Omelette served with piping-hot house-made Goan Poee took me straight back to Panjim. Authentic coastal flavours with upscale café refinement."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Dr. Shalini Joshi</span>
+                        <span class="author-source"><i class="fa-brands fa-google"></i> Google Review</span>
+                    </div>
+                </div>
+
+                <!-- REVIEW CARD 7 -->
+                <div class="review-card">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "The Lotus Biscoff Frappe and Veg Poee Pocket are a dream pairing! The courtyard ambience is so relaxing you could sit here for hours with a good book."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Aarav &amp; Tanvi Mehta</span>
+                        <span class="author-source"><i class="fa-solid fa-heart"></i> Weekend Regulars</span>
+                    </div>
+                </div>
+
+                <!-- REVIEW CARD 8 -->
+                <div class="review-card">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "Exceptional hospitality and attention to detail. From the welcoming warmth of the team to the aroma of freshly ground Arabica, Obregado sets a new benchmark in Thane."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Priya Sundaram</span>
+                        <span class="author-source"><i class="fa-solid fa-award"></i> Zomato Gold</span>
+                    </div>
+                </div>
+
+                <!-- DUPLICATE SET OF 8 REVIEWS FOR SEAMLESS INFINITE LOOP TICKER -->
+                <div class="review-card" aria-hidden="true">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "We had ordered the Raw Mango Prawns Curry with Rice and Chicken Xacuti with Poee. Absolute culinary perfection! The balanced tanginess and authentic Goan spices made it exceptional."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Ananya Deshmukh</span>
+                        <span class="author-source"><i class="fa-brands fa-google"></i> Google Review</span>
+                    </div>
+                </div>
+
+                <div class="review-card" aria-hidden="true">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "The combination of distinct coffee flavours and the calm, cosy aesthetic makes Café Obregado a genuine gem in Thane. The Tiramisu Iced Latte is by far the best in the city!"
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Rohan &amp; Sneha Patel</span>
+                        <span class="author-source"><i class="fa-solid fa-utensils"></i> Foodie Club</span>
+                    </div>
+                </div>
+
+                <div class="review-card" aria-hidden="true">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "The food was incredibly fresh, hearty, and filling. The staff served everything with genuine warmth and hospitality. Love having a world-class cafe in Hiranandani Estate."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Vikram Malhotra</span>
+                        <span class="author-source"><i class="fa-brands fa-google"></i> Local Resident</span>
+                    </div>
+                </div>
+
+                <div class="review-card" aria-hidden="true">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "Chicken Kheema Poee Pocket paired with the Spanish Latte was heaven on a rainy afternoon. The ambiance is peaceful, editorial, and beautifully designed."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Meera Sen</span>
+                        <span class="author-source"><i class="fa-solid fa-circle-check"></i> EazyDiner Verified</span>
+                    </div>
+                </div>
+
+                <div class="review-card" aria-hidden="true">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "As a specialty coffee purist, their single-origin Pour-Over blew me away. The extraction was spot-on, highlighting delicate floral citrus notes without bitterness. Highly recommended!"
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Kabir Singhania</span>
+                        <span class="author-source"><i class="fa-solid fa-mug-hot"></i> Coffee Connoisseur</span>
+                    </div>
+                </div>
+
+                <div class="review-card" aria-hidden="true">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "The Ros Omelette served with piping-hot house-made Goan Poee took me straight back to Panjim. Authentic coastal flavours with upscale café refinement."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Dr. Shalini Joshi</span>
+                        <span class="author-source"><i class="fa-brands fa-google"></i> Google Review</span>
+                    </div>
+                </div>
+
+                <div class="review-card" aria-hidden="true">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "The Lotus Biscoff Frappe and Veg Poee Pocket are a dream pairing! The courtyard ambience is so relaxing you could sit here for hours with a good book."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Aarav &amp; Tanvi Mehta</span>
+                        <span class="author-source"><i class="fa-solid fa-heart"></i> Weekend Regulars</span>
+                    </div>
+                </div>
+
+                <div class="review-card" aria-hidden="true">
+                    <div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "Exceptional hospitality and attention to detail. From the welcoming warmth of the team to the aroma of freshly ground Arabica, Obregado sets a new benchmark in Thane."
+                        </p>
+                    </div>
+                    <div class="review-author-meta">
+                        <span class="author-name">Priya Sundaram</span>
+                        <span class="author-source"><i class="fa-solid fa-award"></i> Zomato Gold</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         8. LOCATION & CONTACT SECTION
+         ========================================================================== -->
+    <section class="contact-section" id="contact">
+        <div class="contact-grid">
+            <div>
+                <div class="section-tag">Find Your Sanctuary</div>
+                <h2 class="section-title">Visit Café Obregado</h2>
+                <p class="section-desc">Located in the prestigious Hiranandani Estate in Thane West. We are ready to brew your favorite cup.</p>
+
+                <ul class="contact-info-list">
+                    <li class="contact-info-item">
+                        <div class="contact-info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="contact-info-content">
+                            <strong>Our Address</strong>
+                            <p>Mhatre Compound, Plot no 1, Queens St, adjacent to Aranya banquet, next to Platinum Heritage, Hiranandani Estate, Thane West, Maharashtra 400607</p>
+                        </div>
+                    </li>
+
+                    <li class="contact-info-item">
+                        <div class="contact-info-icon"><i class="fa-solid fa-phone"></i></div>
+                        <div class="contact-info-content">
+                            <strong>Telephone Inquiries & Bookings</strong>
+                            <p><a href="tel:09819544999" class="contact-phone-link">098195 44999</a> &bull; <a href="tel:09819544999" class="contact-phone-link">+91 98195 44999</a></p>
+                        </div>
+                    </li>
+
+                    <li class="contact-info-item">
+                        <div class="contact-info-icon"><i class="fa-solid fa-clock"></i></div>
+                        <div class="contact-info-content">
+                            <strong>Operating Hours</strong>
+                            <p>Opens Daily at 11:30 AM &bull; Open throughout the week including public holidays</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="contact-actions">
+                    <a href="tel:09819544999" class="btn-call-direct" title="Tap to Call Immediately">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>Call 098195 44999</span>
+                    </a>
+
+                    <a href="https://www.instagram.com/cafe_obregado?stkn=NmgwMGpvM2lrMW56" target="_blank" rel="noopener noreferrer" class="btn-instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                        <span>Follow @cafe_obregado</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-image-wrap">
+                <img src="CAFE 5.jpeg" alt="Café Obregado Welcoming Dining Space and Interior">
+            </div>
         </div>
     </section>
 
