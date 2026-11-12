@@ -14,110 +14,107 @@
     });
 
     /**
-     * 1. DETERMINISTIC PRELOADER LOOP (SINGLE SOURCE OF TRUTH)
+     * 1. PRELOADER: OWL GLIDES SMOOTHLY FROM 0% TO 100% (ONE RAF LOOP)
      */
     function initPreloader() {
-        let progress = 0;
-        let shown = 0;
-        let done = false;
+        const pre = document.getElementById('preloader');
+        if (!pre) {
+            document.body.classList.remove('is-loading');
+            return;
+        }
 
         const counterEl = document.getElementById('preloader-counter') || document.getElementById('loaderPercent');
         const barEl = document.getElementById('preloader-bar') || document.getElementById('loaderBar');
-        const preloaderEl = document.getElementById('preloader');
-        const track = document.getElementById('crestTrack') || document.querySelector('.crest-track') || document.querySelector('.flight-track');
-        const mover = document.getElementById('crestMover') || document.querySelector('.crest-mover') || document.getElementById('flyingOwl');
+        const track = document.getElementById('crestTrack');
+        const mover = document.getElementById('crestMover');
 
-        let maxX = 0;
-        function updateMaxX() {
+        let target = 0, shown = 0, loaded = false, done = false, maxX = 0;
+        const t0 = performance.now();
+        let last = t0;
+
+        const measure = () => {
             if (track && mover) {
                 maxX = Math.max(0, track.clientWidth - mover.offsetWidth);
             }
+        };
+        measure();
+        window.addEventListener('resize', measure, { passive: true });
+        window.addEventListener('orientationchange', measure, { passive: true });
+
+        const ready = () => { loaded = true; };
+        if (document.readyState === 'complete') {
+            loaded = true;
+        } else {
+            window.addEventListener('load', ready, { once: true });
         }
-        updateMaxX();
-        window.addEventListener('resize', () => {
-            updateMaxX();
-            render();
-        }, { passive: true });
+        try {
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(ready).catch(() => {});
+            }
+        } catch (_) {}
+        setTimeout(ready, 5000);
 
         function render() {
-            shown = Math.max(shown, progress);
-            if (counterEl) {
-                counterEl.textContent = shown + '%';
-            }
+            if (counterEl) counterEl.textContent = Math.round(shown) + '%';
             if (barEl) {
                 barEl.style.transformOrigin = 'left';
-                barEl.style.transform = `scaleX(${shown / 100})`;
+                barEl.style.transform = 'scaleX(' + (shown / 100) + ')';
             }
-            if (mover && track) {
-                if (maxX <= 0) updateMaxX();
-                const x = (maxX * shown / 100).toFixed(1);
-                mover.style.transform = `translate3d(${x}px, 0, 0)`;
+            if (mover) {
+                mover.style.transform = 'translate3d(' + (maxX * shown / 100).toFixed(2) + 'px,0,0)';
             }
         }
-
-        render();
-
-        const failsafe = setTimeout(() => {
-            finish();
-        }, 6000);
-
-        const interval = setInterval(() => {
-            progress += Math.floor(Math.random() * 4) + 2;
-            if (progress >= 100) {
-                progress = 100;
-                finish();
-            } else {
-                render();
-            }
-        }, 30);
 
         function finish() {
             if (done) return;
             done = true;
-            clearInterval(interval);
-            clearTimeout(failsafe);
-            progress = 100;
             shown = 100;
             render();
-
             setTimeout(() => {
-                if (!preloaderEl) {
-                    completeTransition();
-                    return;
-                }
-
-                let transitionFinished = false;
-                function onTransitionEnd(e) {
-                    if (e && e.target !== preloaderEl) return;
-                    if (transitionFinished) return;
-                    transitionFinished = true;
-                    preloaderEl.removeEventListener('transitionend', onTransitionEnd);
-                    completeTransition();
-                }
-
-                preloaderEl.addEventListener('transitionend', onTransitionEnd);
-                setTimeout(onTransitionEnd, 600); // Failsafe fallback for transitionend
-
-                preloaderEl.classList.add('is-hidden');
-                preloaderEl.classList.add('loaded');
-            }, 250);
-
-            function completeTransition() {
-                document.body.classList.remove('is-loading');
-                if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-                    startOwlCursor();
-                }
-            }
+                pre.classList.add('is-hidden');
+                let ended = false;
+                const end = () => {
+                    if (ended) return;
+                    ended = true;
+                    document.body.classList.remove('is-loading');
+                    pre.style.display = 'none';
+                    document.dispatchEvent(new Event('preloader:done'));
+                };
+                pre.addEventListener('transitionend', end, { once: true });
+                setTimeout(end, 700);
+            }, 300);
         }
+
+        function frame(now) {
+            if (done) return;
+            const dt = Math.min(0.05, (now - last) / 1000);
+            last = now;
+            const p = Math.min(1, (now - t0) / 2800);
+            const eased = 1 - Math.pow(1 - p, 2.2);
+            target = Math.min(loaded ? 100 : 92, eased * 100);
+            const delta = Math.min(2.0, (target - shown) * (1 - Math.exp(-dt * 9)));
+            shown = Math.max(shown, shown + delta);
+            if (target >= 100 && shown > 99.5) shown = 100;
+            render();
+            if (shown >= 100) {
+                finish();
+                return;
+            }
+            requestAnimationFrame(frame);
+        }
+
+        setTimeout(() => {
+            if (!done) finish();
+        }, 8000); // hard failsafe
+
+        render();
+        requestAnimationFrame(frame);
     }
 
     /**
-     * 2. ANIMATED OWL CURSOR (Desktop Real Pointer Only - Starts only after preloader)
+     * 2. ANIMATED OWL CURSOR (Desktop Real Pointer Only - Starts after preloader:done)
      */
-    let startOwlCursor = function () {};
-
     function initOwlCursor() {
-        // Strict guard: Real pointer devices with hover only. Never on touch phones.
         if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
             return;
         }
@@ -156,21 +153,187 @@
         }
         animCursor();
 
-        startOwlCursor = function () {
+        function startOwlCursor() {
             cursorActive = true;
             if (hasMoved) {
                 owlCursor.style.display = 'block';
                 owlCursor.style.opacity = '1';
             }
-        };
+        }
 
+        document.addEventListener('preloader:done', startOwlCursor, { once: true });
         if (!document.body.classList.contains('is-loading')) {
             startOwlCursor();
         }
     }
 
     /**
-     * 3. COMMUNITY & EVENTS AND REVIEWS ARROW CONTROLS (±320px)
+     * 3. ONE REUSABLE TRANSFORM CAROUSEL (initCx)
+     */
+    function initCx(viewport, opts) {
+        opts = opts || {};
+        const speed = opts.speed || 60, step = opts.step || 320;
+        const track = viewport && viewport.querySelector('.cx-track');
+        if (!track || track.dataset.cx) return;
+        track.dataset.cx = '1';
+
+        const originals = Array.from(track.children);
+        let period = 0;
+        const measureFirst = () => {
+            period = 0;
+            const c = track.children[originals.length];
+            if (c) period = c.offsetLeft - originals[0].offsetLeft;
+        };
+
+        function fill() {
+            let guard = 0;
+            do {
+                originals.forEach(n => {
+                    const k = n.cloneNode(true);
+                    k.setAttribute('aria-hidden', 'true');
+                    k.querySelectorAll('a,button,input').forEach(e => e.tabIndex = -1);
+                    track.appendChild(k);
+                });
+                measureFirst();
+                guard++;
+            } while (period > 0 && track.scrollWidth < period + viewport.clientWidth && guard < 4);
+        }
+        fill();
+
+        let x = 0, last = 0, anim = null, dragging = false, hover = false, visible = true, resumeAt = 0, vel = 0, moved = false;
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const v = reduce ? speed / 2 : speed;
+
+        const apply = () => {
+            if (period > 0) {
+                const d = ((x % period) + period) % period;
+                track.style.transform = 'translate3d(' + (-d).toFixed(2) + 'px,0,0)';
+            }
+        };
+
+        const remeasure = () => {
+            measureFirst();
+            apply();
+        };
+
+        window.addEventListener('resize', remeasure, { passive: true });
+        window.addEventListener('orientationchange', remeasure, { passive: true });
+
+        track.querySelectorAll('img').forEach(i => {
+            if (!i.complete) i.addEventListener('load', remeasure, { once: true });
+        });
+
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(e => {
+                visible = e[0].isIntersecting;
+                last = 0;
+            }).observe(viewport);
+        }
+
+        document.addEventListener('visibilitychange', () => { last = 0; });
+
+        if (window.matchMedia('(hover:hover)').matches) {
+            viewport.addEventListener('mouseenter', () => hover = true);
+            viewport.addEventListener('mouseleave', () => hover = false);
+        }
+
+        function tick(now) {
+            if (!last) last = now;
+            const dt = Math.min(0.05, (now - last) / 1000);
+            last = now;
+
+            if (anim) {
+                const p = Math.min(1, (now - anim.t0) / anim.dur);
+                const e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+                x = anim.from + (anim.to - anim.from) * e;
+                if (p >= 1) {
+                    anim = null;
+                    resumeAt = now + 1500;
+                }
+            } else if (!dragging) {
+                if (Math.abs(vel) > 2) {
+                    x += vel * dt;
+                    vel *= Math.pow(0.04, dt);
+                } else if (visible && !document.hidden && !hover && now >= resumeAt) {
+                    x += v * dt;
+                }
+            }
+
+            apply();
+            requestAnimationFrame(tick);
+        }
+
+        // Drag / swipe (pointer events)
+        let sx = 0, sy = 0, sxPos = 0, lastX = 0, lastT = 0;
+
+        viewport.addEventListener('pointerdown', e => {
+            if (e.pointerType === 'mouse' && e.button !== 0) return;
+            sx = e.clientX;
+            sy = e.clientY;
+            sxPos = x;
+            lastX = e.clientX;
+            lastT = performance.now();
+            vel = 0;
+            anim = null;
+            moved = false;
+            viewport._down = true;
+        });
+
+        viewport.addEventListener('pointermove', e => {
+            if (!viewport._down) return;
+            const dx = e.clientX - sx;
+            if (!dragging && Math.abs(dx) > 6 && Math.abs(dx) > Math.abs(e.clientY - sy)) {
+                dragging = true;
+                moved = true;
+                try {
+                    viewport.setPointerCapture(e.pointerId);
+                } catch (_) {}
+            }
+            if (dragging) {
+                x = sxPos - dx;
+                const n = performance.now();
+                const dt = Math.max(1, n - lastT) / 1000;
+                vel = -(e.clientX - lastX) / dt;
+                lastX = e.clientX;
+                lastT = n;
+            }
+        });
+
+        const up = () => {
+            viewport._down = false;
+            if (dragging) {
+                dragging = false;
+                resumeAt = performance.now() + 1500;
+            }
+        };
+
+        viewport.addEventListener('pointerup', up);
+        viewport.addEventListener('pointercancel', up);
+        viewport.addEventListener('pointerleave', () => {
+            if (!dragging) viewport._down = false;
+        });
+
+        viewport.addEventListener('click', e => {
+            if (moved) {
+                e.preventDefault();
+                e.stopPropagation();
+                moved = false;
+            }
+        }, true);
+
+        function glide(d) {
+            vel = 0;
+            anim = { from: x, to: x + d, t0: performance.now(), dur: 400 };
+        }
+
+        if (opts.prev) opts.prev.addEventListener('click', () => glide(-step));
+        if (opts.next) opts.next.addEventListener('click', () => glide(step));
+
+        requestAnimationFrame(tick);
+    }
+
+    /**
+     * 4. COMMUNITY & EVENTS CONTROLS + CAROUSEL INITIALIZATION
      */
     function initCarouselControls() {
         // Community & Events Golden Arrow Controls (±320px & 14s loop)
@@ -230,62 +393,27 @@
             });
         }
 
-        // Reviews Section Carousel Arrow Controls (±320px)
-        const revPrev = document.getElementById('revPrev');
-        const revNext = document.getElementById('revNext');
-        const revCarousel = document.querySelector('.reviews-carousel') || document.getElementById('reviewsWindow') || document.querySelector('.reviews-track');
+        // Init Ambiance Gallery & Reviews Carousels via initCx
+        const galleryViewport = document.querySelector('.partner-setup-outer');
+        const reviewsViewport = document.getElementById('reviewsWindow') || document.querySelector('.reviews-carousel');
 
-        let isRevPaused = false;
-        let revPauseTimer = null;
-
-        function pauseReviews(duration = 3000) {
-            isRevPaused = true;
-            clearTimeout(revPauseTimer);
-            revPauseTimer = setTimeout(() => {
-                isRevPaused = false;
-            }, duration);
-        }
-
-        if (revCarousel) {
-            let lastRevTime = performance.now();
-            function stepReviewsScroll(now) {
-                const dt = Math.min(now - lastRevTime, 100);
-                lastRevTime = now;
-
-                if (!isRevPaused && revCarousel) {
-                    const maxScroll = revCarousel.scrollWidth - revCarousel.clientWidth;
-                    if (maxScroll > 10) {
-                        revCarousel.scrollLeft += 0.04 * dt;
-                        if (revCarousel.scrollLeft >= maxScroll - 2) {
-                            revCarousel.scrollLeft = 0;
-                        }
-                    }
-                }
-                requestAnimationFrame(stepReviewsScroll);
-            }
-            requestAnimationFrame(stepReviewsScroll);
-
-            revCarousel.addEventListener('mouseenter', () => { isRevPaused = true; });
-            revCarousel.addEventListener('mouseleave', () => { isRevPaused = false; });
-            revCarousel.addEventListener('touchstart', () => { pauseReviews(3000); }, { passive: true });
-        }
-
-        if (revPrev && revCarousel) {
-            revPrev.addEventListener('click', () => {
-                pauseReviews(3000);
-                revCarousel.scrollBy({ left: -320, behavior: 'smooth' });
+        if (galleryViewport) {
+            initCx(galleryViewport, {
+                speed: window.innerWidth < 768 ? 55 : 80
             });
         }
-        if (revNext && revCarousel) {
-            revNext.addEventListener('click', () => {
-                pauseReviews(3000);
-                revCarousel.scrollBy({ left: 320, behavior: 'smooth' });
+
+        if (reviewsViewport) {
+            initCx(reviewsViewport, {
+                speed: window.innerWidth < 768 ? 40 : 50,
+                prev: document.getElementById('revPrev'),
+                next: document.getElementById('revNext')
             });
         }
     }
 
     /**
-     * 4. STICKY HORIZONTALLY-SCROLLABLE CATEGORY NAVIGATION BAR
+     * 5. STICKY HORIZONTALLY-SCROLLABLE CATEGORY NAVIGATION BAR
      */
     function initStickyMenuNavigation() {
         const catBar = document.getElementById('menuCategoriesBar');

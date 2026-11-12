@@ -58,6 +58,7 @@ body.is-loading .custom-cursor {
   inset: 0;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   background: #120d0b !important;
   z-index: 99999 !important;
   display: flex;
@@ -120,6 +121,8 @@ body.is-loading .custom-cursor {
   width: 58px;
   height: 58px;
   will-change: transform !important;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
   transition: none !important;
   animation: none !important;
   z-index: 2;
@@ -527,7 +530,34 @@ body.is-loading .custom-cursor {
 }
 
 /* ==========================================================================
-   7. OUR CAFÉ SETUP & AMBIANCE — HORIZONTAL AUTO-SCROLL
+   7. REUSABLE TRANSFORM CAROUSEL (.cx-viewport / .cx-track)
+   ========================================================================== */
+.cx-viewport {
+  overflow: hidden !important;
+  width: 100% !important;
+  touch-action: pan-y !important;
+  scroll-snap-type: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  box-sizing: border-box !important;
+}
+
+.cx-track {
+  display: flex !important;
+  width: max-content !important;
+  will-change: transform !important;
+  transform: translate3d(0, 0, 0);
+  animation: none !important;
+}
+
+.cx-track img {
+  -webkit-user-drag: none !important;
+  user-drag: none !important;
+  pointer-events: none !important;
+}
+
+/* ==========================================================================
+   OUR CAFÉ SETUP & AMBIANCE — HORIZONTAL CAROUSEL
    ========================================================================== */
 .partner-setup-outer {
   width: 100vw;
@@ -538,16 +568,13 @@ body.is-loading .custom-cursor {
   position: relative;
 }
 
-.ambiance-marquee-track, .partner-setup-grid {
-  animation: marquee-scroll 18s linear infinite !important;
+/* Gallery track: flex container for JS transform carousel */
+.partner-setup-grid {
   display: flex !important;
   gap: 1rem !important;
   width: max-content !important;
-}
-
-.ambiance-marquee-track:hover, .partner-setup-grid:hover,
-.ambiance-marquee-track:active, .partner-setup-grid:active {
-  animation-play-state: paused !important;
+  will-change: transform;
+  animation: none !important;
 }
 
 .partner-setup-card {
@@ -556,6 +583,7 @@ body.is-loading .custom-cursor {
   border-radius: 12px !important;
   overflow: hidden !important;
   flex: 0 0 280px !important;
+  flex-shrink: 0 !important;
 }
 
 .partner-setup-card img {
@@ -615,17 +643,21 @@ body.is-loading .custom-cursor {
 }
 
 .reviews-carousel {
-  overflow-x: auto !important;
-  scroll-behavior: smooth;
-  display: flex !important;
-  gap: 1.25rem !important;
-  -webkit-overflow-scrolling: touch;
-  padding: 1rem 0 !important;
-  width: 100vw;
+  overflow: hidden !important;
+  display: block !important;
+  padding-block: 4px !important;
+  padding-inline: 0 !important;
+  width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  touch-action: pan-y;
+  user-select: none;
+  cursor: grab;
+  position: relative;
+}
+
+.reviews-carousel:active {
+  cursor: grabbing;
 }
 
 .reviews-carousel::-webkit-scrollbar {
@@ -636,6 +668,7 @@ body.is-loading .custom-cursor {
   display: flex !important;
   gap: 1.25rem !important;
   width: max-content !important;
+  will-change: transform;
 }
 
 .review-card {
@@ -757,9 +790,9 @@ body.is-loading .custom-cursor {
   }
 
   .review-card {
-    min-width: 280px !important;
-    max-width: 300px !important;
-    flex: 0 0 290px !important;
+    min-width: 300px !important;
+    max-width: 340px !important;
+    flex: 0 0 320px !important;
   }
 
   .partner-setup-card {
