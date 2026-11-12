@@ -172,37 +172,59 @@
      */
     function initCx(viewport, opts) {
         opts = opts || {};
-        const speed = opts.speed || 60, step = opts.step || 320;
+        const step = opts.step || 320;
         const track = viewport && viewport.querySelector('.cx-track');
         if (!track || track.dataset.cx) return;
         track.dataset.cx = '1';
 
         const originals = Array.from(track.children);
+        if (!originals.length) return;
         let period = 0;
-        const measureFirst = () => {
-            period = 0;
-            const c = track.children[originals.length];
-            if (c) period = c.offsetLeft - originals[0].offsetLeft;
-        };
 
-        function fill() {
-            let guard = 0;
-            do {
+        function getSpeed() {
+            const isPhone = window.innerWidth < 768;
+            const baseSpeed = opts.type === 'reviews'
+                ? (isPhone ? 40 : 50)
+                : (isPhone ? 55 : 80);
+            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            return reduce ? baseSpeed / 2 : baseSpeed;
+        }
+
+        function measurePeriod() {
+            if (track.children.length > originals.length) {
+                const firstOrig = originals[0];
+                const firstClone = track.children[originals.length];
+                const diff = firstClone.offsetLeft - firstOrig.offsetLeft;
+                if (diff > 0) {
+                    period = diff;
+                }
+            }
+        }
+
+        function ensureFilled() {
+            measurePeriod();
+            const vpWidth = Math.max(viewport.clientWidth, window.innerWidth);
+            let cloneSets = Math.round(track.children.length / originals.length) - 1;
+            while (cloneSets < 4) {
+                measurePeriod();
+                const totalWidth = track.scrollWidth;
+                if (period > 0 && cloneSets >= 2 && totalWidth >= period + vpWidth + 200) {
+                    break;
+                }
                 originals.forEach(n => {
                     const k = n.cloneNode(true);
                     k.setAttribute('aria-hidden', 'true');
                     k.querySelectorAll('a,button,input').forEach(e => e.tabIndex = -1);
                     track.appendChild(k);
                 });
-                measureFirst();
-                guard++;
-            } while (period > 0 && track.scrollWidth < period + viewport.clientWidth && guard < 4);
+                cloneSets++;
+                measurePeriod();
+            }
         }
-        fill();
+
+        ensureFilled();
 
         let x = 0, last = 0, anim = null, dragging = false, hover = false, visible = true, resumeAt = 0, vel = 0, moved = false;
-        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const v = reduce ? speed / 2 : speed;
 
         const apply = () => {
             if (period > 0) {
@@ -212,16 +234,22 @@
         };
 
         const remeasure = () => {
-            measureFirst();
+            ensureFilled();
+            measurePeriod();
             apply();
         };
 
         window.addEventListener('resize', remeasure, { passive: true });
         window.addEventListener('orientationchange', remeasure, { passive: true });
 
-        track.querySelectorAll('img').forEach(i => {
-            if (!i.complete) i.addEventListener('load', remeasure, { once: true });
-        });
+        function watchImages() {
+            track.querySelectorAll('img').forEach(i => {
+                if (!i.complete) {
+                    i.addEventListener('load', remeasure, { once: true });
+                }
+            });
+        }
+        watchImages();
 
         if ('IntersectionObserver' in window) {
             new IntersectionObserver(e => {
@@ -232,14 +260,14 @@
 
         document.addEventListener('visibilitychange', () => { last = 0; });
 
-        if (window.matchMedia('(hover:hover)').matches) {
+        if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
             viewport.addEventListener('mouseenter', () => hover = true);
             viewport.addEventListener('mouseleave', () => hover = false);
         }
 
         function tick(now) {
             if (!last) last = now;
-            const dt = Math.min(0.05, (now - last) / 1000);
+            const dt = Math.min(0.04, (now - last) / 1000);
             last = now;
 
             if (anim) {
@@ -252,10 +280,13 @@
                 }
             } else if (!dragging) {
                 if (Math.abs(vel) > 2) {
-                    x += vel * dt;
+                    const stepVel = Math.sign(vel) * Math.min(Math.abs(vel * dt), 2.5);
+                    x += stepVel;
                     vel *= Math.pow(0.04, dt);
                 } else if (visible && !document.hidden && !hover && now >= resumeAt) {
-                    x += v * dt;
+                    const speed = getSpeed();
+                    const dStep = Math.min(2.5, speed * dt);
+                    x += dStep;
                 }
             }
 
@@ -399,13 +430,15 @@
 
         if (galleryViewport) {
             initCx(galleryViewport, {
-                speed: window.innerWidth < 768 ? 55 : 80
+                type: 'gallery',
+                step: 320
             });
         }
 
         if (reviewsViewport) {
             initCx(reviewsViewport, {
-                speed: window.innerWidth < 768 ? 40 : 50,
+                type: 'reviews',
+                step: 320,
                 prev: document.getElementById('revPrev'),
                 next: document.getElementById('revNext')
             });

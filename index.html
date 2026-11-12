@@ -2575,9 +2575,9 @@
 
         .partner-setup-grid,
         .setup-gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            display: flex;
             gap: 1.5rem;
+            width: max-content;
             margin-bottom: 5rem;
         }
 
@@ -2761,10 +2761,6 @@
 
         /* Mobile Responsiveness */
         @media (max-width: 1024px) {
-            .partner-setup-grid,
-            .setup-gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
             .partner-intro-block {
                 grid-template-columns: 1fr;
                 gap: 3rem;
@@ -2772,14 +2768,6 @@
         }
 
         @media (max-width: 640px) {
-            .partner-setup-grid,
-            .setup-gallery-grid {
-                grid-template-columns: 1fr;
-            }
-            .partner-setup-card,
-            .setup-gallery-card {
-                height: 220px;
-            }
             .partner-hero-slider {
                 height: 300px;
             }
@@ -4751,14 +4739,14 @@
                 </div>
             </div>
             <div class="partner-setup-card setup-gallery-card" onclick="openFranchiseLightbox('franchaise9.png', 'Aesthetic Seating Corners')">
-                <img src="franchaise9.png" alt="Aesthetic Ambience" loading="lazy" width="280" height="360">
+                <img src="franchaise9.png" alt="Aesthetic Ambience" width="280" height="360">
                 <div class="partner-setup-overlay">
                     <span class="partner-setup-tag">Cozy Spaces</span>
                     <span class="partner-setup-label">Aesthetic Seating Corners</span>
                 </div>
             </div>
             <div class="partner-setup-card setup-gallery-card" onclick="openFranchiseLightbox('franchaise10.png', 'Courtyard & Dining Ambiance')">
-                <img src="franchaise10.png" alt="Café Interior" loading="lazy" width="280" height="360">
+                <img src="franchaise10.png" alt="Café Interior" width="280" height="360">
                 <div class="partner-setup-overlay">
                     <span class="partner-setup-tag">Courtyard</span>
                     <span class="partner-setup-label">Courtyard &amp; Dining Ambiance</span>

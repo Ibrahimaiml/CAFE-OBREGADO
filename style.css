@@ -13,19 +13,12 @@ html, body {
   background-color: #120d0b !important;
 }
 
-/* Wrap all scroll/marquee components with boundary protection */
+/* Wrap scroll components with boundary protection */
 .events-marquee-outer,
 .ambiance-marquee-outer,
-.reviews-marquee-outer,
-.partner-setup-outer,
-.setup-gallery-grid,
-.partner-setup-grid,
-.reviews-carousel,
-.reviews-track,
 .hero-content,
 .events-scroll-outer,
 .video-style-gallery-strip {
-  width: 100vw;
   max-width: 100%;
   overflow: hidden;
   box-sizing: border-box;
@@ -533,21 +526,50 @@ body.is-loading .custom-cursor {
    7. REUSABLE TRANSFORM CAROUSEL (.cx-viewport / .cx-track)
    ========================================================================== */
 .cx-viewport {
-  overflow: hidden !important;
+  display: block !important;
   width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  clip-path: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
   touch-action: pan-y !important;
+  isolation: isolate !important;
   scroll-snap-type: none !important;
   -webkit-user-select: none !important;
   user-select: none !important;
+  cursor: grab;
+  padding-block: 4px !important;
   box-sizing: border-box !important;
 }
 
 .cx-track {
   display: flex !important;
   width: max-content !important;
-  will-change: transform !important;
+  max-width: none !important;
+  overflow: visible !important;
+  flex-wrap: nowrap !important;
   transform: translate3d(0, 0, 0);
+  will-change: transform !important;
+  -webkit-backface-visibility: hidden !important;
+  backface-visibility: hidden !important;
   animation: none !important;
+}
+
+.cx-track > * {
+  flex: 0 0 auto !important;
+  position: relative !important;
+}
+
+.cx-track > *::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -1.5rem;
+  width: 1.5rem;
+  pointer-events: auto;
 }
 
 .cx-track img {
@@ -560,10 +582,17 @@ body.is-loading .custom-cursor {
    OUR CAFÉ SETUP & AMBIANCE — HORIZONTAL CAROUSEL
    ========================================================================== */
 .partner-setup-outer {
-  width: 100vw;
-  max-width: 100%;
-  overflow: hidden;
-  box-sizing: border-box;
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  clip-path: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  touch-action: pan-y !important;
+  isolation: isolate !important;
+  box-sizing: border-box !important;
   margin-bottom: 4rem;
   position: relative;
 }
@@ -573,7 +602,10 @@ body.is-loading .custom-cursor {
   display: flex !important;
   gap: 1rem !important;
   width: max-content !important;
-  will-change: transform;
+  max-width: none !important;
+  overflow: visible !important;
+  flex-wrap: nowrap !important;
+  will-change: transform !important;
   animation: none !important;
 }
 
@@ -581,15 +613,25 @@ body.is-loading .custom-cursor {
   width: 280px !important;
   height: 360px !important;
   border-radius: 12px !important;
-  overflow: hidden !important;
+  overflow: visible !important;
   flex: 0 0 280px !important;
   flex-shrink: 0 !important;
+  box-sizing: border-box !important;
+  position: relative !important;
 }
 
 .partner-setup-card img {
   width: 100% !important;
   height: 100% !important;
+  border-radius: 12px !important;
   object-fit: cover !important;
+  -webkit-user-drag: none !important;
+  user-drag: none !important;
+  pointer-events: none !important;
+}
+
+.partner-setup-overlay {
+  border-radius: 12px !important;
 }
 
 /* ==========================================================================
@@ -647,13 +689,18 @@ body.is-loading .custom-cursor {
   display: block !important;
   padding-block: 4px !important;
   padding-inline: 0 !important;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  touch-action: pan-y;
-  user-select: none;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  touch-action: pan-y !important;
+  user-select: none !important;
   cursor: grab;
   position: relative;
+  isolation: isolate !important;
+  clip-path: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
 }
 
 .reviews-carousel:active {
@@ -668,7 +715,14 @@ body.is-loading .custom-cursor {
   display: flex !important;
   gap: 1.25rem !important;
   width: max-content !important;
-  will-change: transform;
+  max-width: none !important;
+  overflow: visible !important;
+  flex-wrap: nowrap !important;
+  transform: translate3d(0, 0, 0);
+  will-change: transform !important;
+  -webkit-backface-visibility: hidden !important;
+  backface-visibility: hidden !important;
+  animation: none !important;
 }
 
 .review-card {
@@ -678,6 +732,7 @@ body.is-loading .custom-cursor {
   padding: 1.75rem !important;
   color: #120d0b !important;
   box-shadow: 0 4px 20px rgba(0,0,0,0.06) !important;
+  width: 320px !important;
   min-width: 300px !important;
   max-width: 340px !important;
   height: auto !important;
@@ -790,15 +845,19 @@ body.is-loading .custom-cursor {
   }
 
   .review-card {
-    min-width: 300px !important;
+    width: min(300px, 82vw) !important;
+    min-width: 0 !important;
     max-width: 340px !important;
-    flex: 0 0 320px !important;
+    min-height: 240px !important;
+    height: auto !important;
+    flex: 0 0 min(300px, 82vw) !important;
   }
 
   .partner-setup-card {
-    width: 240px !important;
-    height: 320px !important;
-    flex: 0 0 240px !important;
+    width: min(78vw, 320px) !important;
+    height: 360px !important;
+    border-radius: 12px !important;
+    flex: 0 0 min(78vw, 320px) !important;
   }
 
   /* Floating CTAs & Mobile Touch Safe Zones */
