@@ -1,3 +1,7 @@
 backup_before_fix/
 verify_frames/
 _bak/
+verify_*.js
+screenshots/
+logs/
+node_modules/

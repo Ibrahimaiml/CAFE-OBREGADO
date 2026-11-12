@@ -184,7 +184,7 @@
         function getSpeed() {
             const isPhone = window.innerWidth < 768;
             const baseSpeed = opts.type === 'reviews'
-                ? (isPhone ? 40 : 50)
+                ? (isPhone ? 45 : 50)
                 : (isPhone ? 55 : 80);
             const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             return reduce ? baseSpeed / 2 : baseSpeed;
