@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20261112_02">
+    <link rel="stylesheet" href="style.css?v=20261119_01">
 
     <style>
         /* ==========================================================================
@@ -3419,17 +3419,26 @@
          ========================================================================== -->
     <section class="about-section" id="about">
         <div class="about-grid">
-            <div class="about-image-composition">
-                <div class="about-main-img-wrap">
-                    <img src="CAFE 2.jpeg" alt="Café Obregado Warm Architecture & Courtyard">
+            <div class="about-image-composition about-image-stack">
+                <!-- Top card -->
+                <div class="about-stack-card">
+                    <img src="CAFE 3.jpeg" alt="Café Obregado Nursery Setting & Greenery" loading="eager">
                 </div>
-                <!-- Floating Badge -->
-                <div class="about-floating-badge">
-                    <div class="badge-icon"><i class="fa-solid fa-mug-hot"></i></div>
-                    <div class="badge-text">
-                        <strong>Artisan Roasted</strong>
-                        <span>100% Arabica Quality</span>
+                <!-- Middle card — existing image with floating badge -->
+                <div class="about-stack-card about-main-img-wrap" style="position:relative;">
+                    <img src="CAFE 2.jpeg" alt="Café Obregado Warm Architecture & Courtyard" loading="eager">
+                    <!-- Floating Badge -->
+                    <div class="about-floating-badge">
+                        <div class="badge-icon"><i class="fa-solid fa-mug-hot"></i></div>
+                        <div class="badge-text">
+                            <strong>Artisan Roasted</strong>
+                            <span>100% Arabica Quality</span>
+                        </div>
                     </div>
+                </div>
+                <!-- Bottom card -->
+                <div class="about-stack-card">
+                    <img src="CAFE 4.jpeg" alt="Café Obregado Interior & Dining Ambiance" loading="eager">
                 </div>
             </div>
 
@@ -3484,7 +3493,7 @@
                 <p>
                     Come hungry. Stay as long as you like.
                 </p>
-                <blockquote class="about-quote" style="margin-top:2rem; padding:1.5rem 2rem; border-left:3px solid var(--accent-gold); font-style:italic; color:rgba(255,255,255,0.75); font-size:1rem; line-height:1.75;">
+                <blockquote class="about-quote" style="margin-top:1.75rem; margin-bottom:0; padding:0.75rem 0 0.75rem 1.25rem; border-left:3px solid #C5A059; background:rgba(197,160,89,0.06); border-radius:0 12px 12px 0; font-style:italic; color:#1E1815; font-size:1.02rem; line-height:1.7;">
                     "The first question people ask us is… why a café inside a nursery? And honestly, that's exactly what we wanted. We didn't want Obregado to feel like just another café. We wanted it to feel like a little escape. You walk through the nursery, surrounded by all this green, and suddenly the city feels a little further away. Come for breakfast, stay for coffee, work for a couple of hours, catch up with someone — or just do nothing. Because Obregado was never just about what's on the plate. It's about how you feel while you're here."
                 </blockquote>
 
@@ -5618,7 +5627,7 @@ Kindly confirm availability. Looking forward to dining with you!`;
     </div>
 
     <!-- Script.js Engine: Complete Menu Interaction Controller -->
-    <script src="script.js?v=20261112_02"></script>
+    <script src="script.js?v=20261119_01"></script>
 
     <div id="custom-owl-cursor">
       <svg viewBox="0 0 500 500" width="36" height="36" xmlns="http://www.w3.org/2000/svg">

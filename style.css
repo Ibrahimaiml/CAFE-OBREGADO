@@ -875,3 +875,85 @@ body.is-loading .custom-cursor {
     padding-bottom: 80px !important;
   }
 }
+
+/* ============================================================
+   ABOUT US — CONTRAST FIX + 3-IMAGE GALLERY STACK
+   ============================================================ */
+
+/* Force dark readable text for every element inside About Us */
+#about h2,
+#about .section-title,
+#about strong {
+    color: #181310 !important;
+}
+
+#about p,
+#about .about-text p,
+#about .lead-text,
+#about .about-text .lead-text {
+    color: #3A322D !important;
+}
+
+/* Pull-quote / blockquote — crisp dark on cream */
+#about blockquote,
+#about blockquote p,
+#about .about-quote,
+#about .founder-quote {
+    color: #1E1815 !important;
+    font-style: italic !important;
+    font-size: 1.02rem !important;
+    line-height: 1.7 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* 3-image editorial gallery stack */
+.about-image-stack {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.75rem !important;
+    width: 100% !important;
+    position: relative !important;
+}
+
+.about-stack-card {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 14px 34px rgba(18, 13, 11, 0.12);
+    border: 1px solid rgba(197, 160, 89, 0.25);
+}
+
+.about-stack-card img {
+    width: 100% !important;
+    height: 340px !important;
+    object-fit: cover !important;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition: transform 0.6s ease;
+}
+
+.about-stack-card:hover img {
+    transform: scale(1.03);
+}
+
+/* Badge positioning inside the middle stack card */
+.about-stack-card .about-floating-badge {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+}
+
+@media (max-width: 768px) {
+    .about-image-stack {
+        gap: 1.25rem !important;
+    }
+    .about-stack-card img {
+        height: 260px !important;
+    }
+    .about-stack-card .about-floating-badge {
+        bottom: 12px;
+        right: 12px;
+    }
+}
