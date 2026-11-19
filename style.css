@@ -907,22 +907,29 @@ body.is-loading .custom-cursor {
     visibility: visible !important;
 }
 
-/* 5-image editorial gallery stack */
+/* 5-image editorial gallery stack — full column height distribution */
+#about .about-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1.15fr !important;
+    gap: 3.5rem !important;
+    align-items: stretch !important;
+}
+
 .about-image-stack {
     display: flex !important;
     flex-direction: column !important;
+    justify-content: space-between !important;
     gap: 1.5rem !important;
+    height: 100% !important;
     width: 100% !important;
     position: relative !important;
     margin-top: 0 !important;
 }
 
-#about .about-grid {
-    align-items: start !important;
-}
-
 .about-stack-card {
-    position: relative;
+    flex: 1 1 auto !important;
+    display: flex !important;
+    position: relative !important;
     border-radius: 18px;
     overflow: hidden;
     box-shadow: 0 14px 32px rgba(18, 13, 11, 0.12);
@@ -931,7 +938,9 @@ body.is-loading .custom-cursor {
 
 .about-stack-card img {
     width: 100% !important;
-    height: 290px !important;
+    height: 100% !important;
+    min-height: 260px !important;
+    max-height: 360px !important;
     object-fit: cover !important;
     border-radius: 18px !important;
     display: block !important;
@@ -949,16 +958,24 @@ body.is-loading .custom-cursor {
 /* Badge positioning inside the middle stack card */
 .about-stack-card .about-floating-badge {
     position: absolute;
-    bottom: 12px;
-    right: 12px;
+    bottom: -16px;
+    right: 20px;
+    z-index: 5;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+    #about .about-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
     .about-image-stack {
-        gap: 1.15rem !important;
+        height: auto !important;
+        justify-content: flex-start !important;
     }
     .about-stack-card img {
-        height: 230px !important;
+        height: 240px !important;
+        min-height: 240px !important;
+        max-height: 240px !important;
     }
     .about-stack-card .about-floating-badge {
         bottom: 12px;
