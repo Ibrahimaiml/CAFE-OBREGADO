@@ -764,6 +764,30 @@ body.is-loading .custom-cursor {
    9. MOBILE BREAKPOINTS (max-width: 768px)
    ========================================================================== */
 @media (max-width: 768px) {
+  .navbar {
+    padding: 0.75rem 0.85rem !important;
+  }
+
+  .nav-brand-title {
+    font-size: 0.95rem !important;
+    letter-spacing: 1px !important;
+  }
+
+  .nav-brand-sub {
+    font-size: 0.52rem !important;
+    letter-spacing: 0.75px !important;
+  }
+
+  .btn-reservation-nav {
+    padding: 0.45rem 0.75rem !important;
+    font-size: 0.72rem !important;
+  }
+
+  .mobile-menu-btn {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
   .hero-overlay {
     background: linear-gradient(180deg, rgba(18,13,11,0.25) 0%, rgba(18,13,11,0.55) 100%) !important;
   }
@@ -788,8 +812,8 @@ body.is-loading .custom-cursor {
   }
 
   .hero-title {
-    font-size: 1.75rem !important;
-    line-height: 1.2 !important;
+    font-size: clamp(2.1rem, 7.5vw, 4.5rem) !important;
+    line-height: 1.12 !important;
     text-align: center !important;
     margin: 0 !important;
     font-weight: 700 !important;
@@ -874,6 +898,14 @@ body.is-loading .custom-cursor {
   .irish-footer, footer {
     padding-bottom: 80px !important;
   }
+}
+
+/* ============================================================
+   HERO HEADLINE RESPONSIVE CLAMP
+   ============================================================ */
+.hero-title {
+  font-size: clamp(2.1rem, 7.5vw, 4.5rem) !important;
+  line-height: 1.12 !important;
 }
 
 /* ============================================================
