@@ -907,28 +907,36 @@ body.is-loading .custom-cursor {
     visibility: visible !important;
 }
 
-/* 3-image editorial gallery stack */
+/* 5-image editorial gallery stack */
 .about-image-stack {
     display: flex !important;
     flex-direction: column !important;
-    gap: 1.75rem !important;
+    gap: 1.5rem !important;
     width: 100% !important;
     position: relative !important;
+    margin-top: 0 !important;
+}
+
+#about .about-grid {
+    align-items: start !important;
 }
 
 .about-stack-card {
     position: relative;
     border-radius: 18px;
     overflow: hidden;
-    box-shadow: 0 14px 34px rgba(18, 13, 11, 0.12);
+    box-shadow: 0 14px 32px rgba(18, 13, 11, 0.12);
     border: 1px solid rgba(197, 160, 89, 0.25);
 }
 
 .about-stack-card img {
     width: 100% !important;
-    height: 340px !important;
+    height: 290px !important;
     object-fit: cover !important;
+    border-radius: 18px !important;
     display: block !important;
+    box-shadow: 0 14px 32px rgba(18, 13, 11, 0.12) !important;
+    border: 1px solid rgba(197, 160, 89, 0.25) !important;
     opacity: 1 !important;
     visibility: visible !important;
     transition: transform 0.6s ease;
@@ -941,16 +949,16 @@ body.is-loading .custom-cursor {
 /* Badge positioning inside the middle stack card */
 .about-stack-card .about-floating-badge {
     position: absolute;
-    bottom: -20px;
-    right: -20px;
+    bottom: 12px;
+    right: 12px;
 }
 
 @media (max-width: 768px) {
     .about-image-stack {
-        gap: 1.25rem !important;
+        gap: 1.15rem !important;
     }
     .about-stack-card img {
-        height: 260px !important;
+        height: 230px !important;
     }
     .about-stack-card .about-floating-badge {
         bottom: 12px;
