@@ -194,25 +194,26 @@ body.is-loading .custom-cursor {
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* Custom Owl Cursor — inline SVG, no external file dependency */
+/* Custom Owl Cursor — exact cursor.png artwork */
 #custom-owl-cursor {
   position: fixed;
   top: 0;
   left: 0;
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
   pointer-events: none !important;
   z-index: 9999;
   will-change: transform;
   transition: opacity 0.25s ease;
   opacity: 0;
-  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.45));
 }
 
-#custom-owl-cursor svg {
-  width: 100%;
-  height: 100%;
-  display: block;
+#custom-owl-cursor img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  display: block !important;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
 }
 
 /* On true-pointer desktop: hide native OS arrow so SVG acts as the pointer */
