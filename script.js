@@ -115,48 +115,19 @@
      * 2. ANIMATED OWL CURSOR (Desktop Real Pointer Only - Starts after preloader:done)
      */
     function initOwlCursor() {
-        if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-            return;
-        }
-
         const owlCursor = document.getElementById('custom-owl-cursor');
         if (!owlCursor) return;
 
-        let targetX = -100;
-        let targetY = -100;
-        let curX = -100;
-        let curY = -100;
+        const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+        let targetX = -100, targetY = -100;
+        let curX = -100, curY = -100;
         let cursorActive = false;
         let hasMoved = false;
-
-        window.addEventListener('mousemove', (e) => {
-            targetX = e.clientX;
-            targetY = e.clientY;
-            if (!hasMoved) {
-                hasMoved = true;
-                curX = targetX;
-                curY = targetY;
-                if (cursorActive) {
-                    owlCursor.style.display = 'block';
-                    owlCursor.style.opacity = '1';
-                }
-            }
-        }, { passive: true });
-
-        function animCursor() {
-            if (cursorActive && hasMoved) {
-                curX += (targetX - curX) * 0.22;
-                curY += (targetY - curY) * 0.22;
-                owlCursor.style.transform = `translate3d(${curX}px, ${curY}px, 0) translate(-50%, -50%)`;
-            }
-            requestAnimationFrame(animCursor);
-        }
-        animCursor();
 
         function startOwlCursor() {
             cursorActive = true;
             if (hasMoved) {
-                owlCursor.style.display = 'block';
                 owlCursor.style.opacity = '1';
             }
         }
@@ -165,6 +136,63 @@
         if (!document.body.classList.contains('is-loading')) {
             startOwlCursor();
         }
+
+        // ── Desktop: mousemove lerp ──────────────────────────
+        if (isDesktop) {
+            window.addEventListener('mousemove', (e) => {
+                targetX = e.clientX;
+                targetY = e.clientY;
+                if (!hasMoved) {
+                    hasMoved = true;
+                    curX = targetX;
+                    curY = targetY;
+                    if (cursorActive) owlCursor.style.opacity = '1';
+                }
+            }, { passive: true });
+
+            function animCursor() {
+                if (cursorActive && hasMoved) {
+                    curX += (targetX - curX) * 0.28;
+                    curY += (targetY - curY) * 0.28;
+                    owlCursor.style.transform = `translate3d(${curX}px,${curY}px,0) translate(-50%,-50%)`;
+                }
+                requestAnimationFrame(animCursor);
+            }
+            animCursor();
+        }
+
+        // ── Mobile: touchmove glide, fade-out after touchend ─
+        let touchFadeTimer = null;
+
+        window.addEventListener('touchstart', (e) => {
+            const t = e.touches[0];
+            curX = t.clientX;
+            curY = t.clientY;
+            hasMoved = true;
+            clearTimeout(touchFadeTimer);
+            if (cursorActive) {
+                owlCursor.style.transform = `translate3d(${curX}px,${curY}px,0) translate(-50%,-50%)`;
+                owlCursor.style.opacity = '1';
+            }
+        }, { passive: true });
+
+        window.addEventListener('touchmove', (e) => {
+            const t = e.touches[0];
+            curX = t.clientX;
+            curY = t.clientY;
+            clearTimeout(touchFadeTimer);
+            if (cursorActive) {
+                owlCursor.style.transform = `translate3d(${curX}px,${curY}px,0) translate(-50%,-50%)`;
+                owlCursor.style.opacity = '1';
+            }
+        }, { passive: true });
+
+        window.addEventListener('touchend', () => {
+            clearTimeout(touchFadeTimer);
+            touchFadeTimer = setTimeout(() => {
+                owlCursor.style.opacity = '0';
+            }, 800);
+        }, { passive: true });
     }
 
     /**

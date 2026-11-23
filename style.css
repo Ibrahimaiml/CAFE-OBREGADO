@@ -194,37 +194,32 @@ body.is-loading .custom-cursor {
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* Custom Owl Cursor */
-@media (hover: hover) and (pointer: fine) {
-  #custom-owl-cursor {
-    pointer-events: none !important;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 36px;
-    height: 36px;
-    z-index: 9999 !important;
-    will-change: transform;
-    filter: drop-shadow(0px 2px 8px rgba(212, 175, 55, 0.8));
-    display: none;
-    opacity: 0;
-  }
-
-  #custom-owl-cursor svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
+/* Custom Owl Cursor — cursor.png on desktop & mobile */
+#custom-owl-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 34px;
+  pointer-events: none !important;
+  z-index: 9999;
+  will-change: transform;
+  transition: opacity 0.25s ease;
+  opacity: 0;
 }
 
-@media (hover: none) or (pointer: coarse) {
-  #custom-owl-cursor,
-  .cursor,
-  [id*="cursor"],
-  [class*="cursor"] {
-    display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
+#custom-owl-cursor img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.45));
+}
+
+/* On true-pointer desktop: hide native OS arrow so cursor.png acts as the pointer */
+@media (hover: hover) and (pointer: fine) {
+  html, body, a, button, input, select, textarea, [role="button"] {
+    cursor: none !important;
   }
 }
 
